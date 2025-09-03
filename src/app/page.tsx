@@ -1,9 +1,33 @@
 import Link from "next/link";
+import Image from "next/image";
+import fs from "fs";
+import path from "path";
 import { SolutionFinder } from "@/components/SolutionFinder";
 import HeroVideo from "@/components/HeroVideo";
 import ChatBox from "@/components/ChatBox";
 
 export default function Home() {
+    const getPublicImages = (dir: string): string[] => {
+        try {
+            const abs = path.join(process.cwd(), "public", dir);
+            const files = fs.readdirSync(abs);
+            return files
+                .filter((f) => /\.(png|jpe?g|svg|webp)$/i.test(f))
+                .map((f) => `/${dir}/${f}`);
+        } catch {
+            return [];
+        }
+    };
+
+    const clientLogos = getPublicImages("clients_logos");
+    const techLogos = getPublicImages("tech_logos");
+
+    const toAlt = (src: string) => {
+        const base = src.split("/").pop() || "logo";
+        const name = base.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ");
+        return `${name} logo`;
+    };
+
 	return (
 		<div className="font-sans">
 			<HeroVideo />
@@ -11,7 +35,9 @@ export default function Home() {
 			{/* Flagship projects */}
 			<section id="projects" className="mx-auto max-w-[1280px] px-6 py-20 grid gap-10 md:grid-cols-2">
 				<div className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition">
-					<div className="aspect-video rounded bg-foreground/10 mb-5" />
+					<div className="aspect-square rounded bg-foreground/10 mb-5 relative overflow-hidden">
+						<Image src="/brand/ai-aflat_thumbnail.png" alt="ai-aflat thumbnail" fill className="object-contain" sizes="(min-width: 1280px) 600px, 100vw" />
+					</div>
 					<h3 className="text-xl font-semibold">ai-aflat.ro</h3>
 					<p className="text-foreground/70 mt-2">AI-powered legal assistant for Romanian legislation. Semantic search across ~500k texts with verifiable sources.</p>
 					<div className="mt-4 flex gap-4 text-sm">
@@ -20,7 +46,9 @@ export default function Home() {
 					</div>
 				</div>
 				<div className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition">
-					<div className="aspect-video rounded bg-foreground/10 mb-5" />
+					<div className="aspect-square rounded bg-foreground/10 mb-5 relative overflow-hidden">
+						<Image src="/brand/knowledge-assistant_thumbnail.png" alt="Knowledge Assistant thumbnail" fill className="object-contain" sizes="(min-width: 1280px) 600px, 100vw" />
+					</div>
 					<h3 className="text-xl font-semibold">Knowledge Assistant</h3>
 					<p className="text-foreground/70 mt-2">Configurable proprietary chatbot integrating business knowledge for instant answers and support.</p>
 					<div className="mt-4 flex gap-4 text-sm">
@@ -29,6 +57,37 @@ export default function Home() {
 					</div>
 				</div>
 			</section>
+
+			{/* Clients logos */}
+			{clientLogos.length > 0 && (
+				<section className="py-12">
+					<div className="mx-auto max-w-[1280px] px-6">
+						<div className="mb-3 text-xs uppercase tracking-wide text-foreground/60 text-center">Trusted by forward-thinking teams</div>
+						<div className="relative rounded-2xl bg-white/95 shadow-sm ring-1 ring-black/5 px-4 py-4 marquee-container">
+							<div className="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white to-transparent rounded-l-2xl" />
+							<div className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white to-transparent rounded-r-2xl" />
+							<div className="overflow-hidden">
+								<div className="marquee-track flex items-center gap-10 sm:gap-14" style={{ width: "max-content" }}>
+									<div className="flex items-center">
+										{clientLogos.map((src, i) => (
+											<a key={`client-a-${i}`} href="#clients" className="inline-flex items-center justify-center mr-10 sm:mr-14">
+												<Image src={src} alt={`Client: ${toAlt(src)}`} width={200} height={80} className="h-10 sm:h-14 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+											</a>
+										))}
+									</div>
+									<div className="flex items-center">
+										{clientLogos.map((src, i) => (
+											<a key={`client-b-${i}`} href="#clients" className="inline-flex items-center justify-center mr-10 sm:mr-14">
+												<Image src={src} alt={`Client: ${toAlt(src)}`} width={200} height={80} className="h-10 sm:h-14 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+											</a>
+										))}
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+					</section>
+			)}
 
 			{/* Capabilities */}
 			<section className="mx-auto max-w-[1280px] px-6 py-12">
@@ -46,23 +105,36 @@ export default function Home() {
 
 			<SolutionFinder />
 
-			{/* Social proof marquees (placeholder rows) */}
-			<section className="py-16 border-y border-black/10 dark:border-white/10 bg-background/60">
-				<div className="overflow-hidden">
-					<div className="flex gap-10 whitespace-nowrap animate-[marquee_30s_linear_infinite] px-6">
-						{Array.from({ length: 12 }).map((_, i) => (
-							<div key={i} className="h-8 w-28 bg-foreground/10 rounded" />
-						))}
-					</div>
-				</div>
-				<div className="overflow-hidden mt-6">
-					<div className="flex gap-10 whitespace-nowrap animate-[marqueeReverse_30s_linear_infinite] px-6">
-						{Array.from({ length: 14 }).map((_, i) => (
-							<div key={i} className="h-8 w-28 bg-foreground/10 rounded" />
-						))}
-					</div>
-				</div>
-			</section>
+			{/* Technologies logos */}
+			{techLogos.length > 0 && (
+				<section className="py-12">
+					<div className="mx-auto max-w-[1280px] px-6">
+						<div className="mb-3 text-xs uppercase tracking-wide text-foreground/60 text-center">Technologies we work with</div>
+						<div className="relative rounded-2xl bg-white/95 shadow-sm ring-1 ring-black/5 px-4 py-4 marquee-container">
+							<div className="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white to-transparent rounded-l-2xl" />
+							<div className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white to-transparent rounded-r-2xl" />
+							<div className="overflow-hidden">
+								<div className="marquee-track-reverse flex items-center gap-10 sm:gap-14" style={{ width: "max-content" }}>
+									<div className="flex items-center">
+										{techLogos.map((src, i) => (
+											<a key={`tech-a-${i}`} href="#tech" className="inline-flex items-center justify-center mr-10 sm:mr-14">
+												<Image src={src} alt={`Technology: ${toAlt(src)}`} width={200} height={80} className="h-10 sm:h-14 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+											</a>
+										))}
+									</div>
+									<div className="flex items-center">
+										{techLogos.map((src, i) => (
+											<a key={`tech-b-${i}`} href="#tech" className="inline-flex items-center justify-center mr-10 sm:mr-14">
+												<Image src={src} alt={`Technology: ${toAlt(src)}`} width={200} height={80} className="h-10 sm:h-14 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+											</a>
+										))}
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+					</section>
+			)}
 
 			{/* Chat demo */}
 			<section className="mx-auto max-w-[900px] px-6 py-20">

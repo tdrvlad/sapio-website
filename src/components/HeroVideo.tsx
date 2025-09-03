@@ -185,10 +185,10 @@ export default function HeroVideo() {
 
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/80" />
 
-      <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-24">
-        <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight max-w-3xl text-white">We’re in the business of problem-solving</h1>
-        <p className="mt-6 text-lg text-white/85 max-w-2xl">Transform your ideas into state-of-the art AI solutions.</p>
-        <div className="mt-10 flex items-center gap-4">
+      <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 text-center">
+        <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight max-w-3xl mx-auto text-white">We’re in the business of problem-solving</h1>
+        <p className="mt-6 text-lg text-white/85 max-w-2xl mx-auto">Transform your ideas into state-of-the art AI solutions.</p>
+        <div className="mt-10 flex items-center justify-center gap-4">
           <a href="#contact" className="rounded-full bg-white text-black px-5 py-3 text-sm font-medium">Start your project</a>
           <a href="#projects" className="text-sm underline underline-offset-4 text-white">See our work</a>
         </div>

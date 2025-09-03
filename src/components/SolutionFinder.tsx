@@ -22,7 +22,7 @@ export function SolutionFinder() {
 
 	return (
 		<section className="mx-auto max-w-[1280px] px-6 py-20">
-			<h2 className="text-2xl font-semibold mb-6">Find your AI solution</h2>
+			<h2 className="text-2xl font-semibold mb-6 text-center">Find your AI solution</h2>
 			{/* Step 1: Industry */}
 			<div className="rounded-lg border border-black/10 dark:border-white/10 p-5">
 				<div className="font-medium mb-3">1. Select your industry</div>

@@ -23,11 +23,11 @@ export function Navbar() {
 					"bg-transparent"
 			}`}
 		>
-			<div className="mx-auto max-w-[1280px] px-6 py-4 flex items-center justify-between">
+			<div className="mx-auto max-w-[1280px] px-6 py-6 flex items-center justify-between">
 				<Link href="/" className="flex items-center gap-3">
-					<span className="relative block h-8 w-8">
-						<Image src="/brand/logo_icon_light_background.png" alt="Sapio logo" fill className="object-contain dark:hidden" sizes="32px" />
-						<Image src="/brand/logo_icon_dark_background.png" alt="Sapio logo" fill className="object-contain hidden dark:block" sizes="32px" />
+					<span className="relative block h-12 w-12">
+						<Image src="/brand/logo_icon_light_background.png" alt="Sapio logo" fill className="object-contain dark:hidden" sizes="48px" />
+						<Image src="/brand/logo_icon_dark_background.png" alt="Sapio logo" fill className="object-contain hidden dark:block" sizes="48px" />
 					</span>
 					<span className="text-sm font-semibold tracking-wide">Sapio AI</span>
 				</Link>
