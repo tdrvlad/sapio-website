@@ -1,21 +1,12 @@
 import Link from "next/link";
 import { SolutionFinder } from "@/components/SolutionFinder";
+import HeroVideo from "@/components/HeroVideo";
+import ChatBox from "@/components/ChatBox";
 
 export default function Home() {
 	return (
 		<div className="font-sans">
-			{/* Hero */}
-			<section className="relative min-h-[80vh] flex items-center">
-				<div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(66,153,225,0.12),transparent_60%)]" aria-hidden />
-				<div className="mx-auto max-w-[1280px] px-6 py-24 relative z-10">
-					<h1 className="text-4xl sm:text-6xl font-semibold tracking-tight max-w-3xl">We’re in the business of problem-solving</h1>
-					<p className="mt-6 text-lg text-foreground/80 max-w-2xl">Transform your ideas into state-of-the art AI solutions.</p>
-					<div className="mt-10 flex items-center gap-4">
-						<Link href="/contact" className="rounded-full bg-foreground text-background px-5 py-3 text-sm font-medium">Start your project</Link>
-						<Link href="#projects" className="text-sm underline underline-offset-4">See our work</Link>
-					</div>
-				</div>
-			</section>
+			<HeroVideo />
 
 			{/* Flagship projects */}
 			<section id="projects" className="mx-auto max-w-[1280px] px-6 py-20 grid gap-10 md:grid-cols-2">
@@ -73,19 +64,10 @@ export default function Home() {
 				</div>
 			</section>
 
-			{/* Chat demo (placeholder) */}
+			{/* Chat demo */}
 			<section className="mx-auto max-w-[900px] px-6 py-20">
 				<h2 className="text-2xl font-semibold mb-6">Talk to our AI</h2>
-				<div className="rounded-xl border border-black/10 dark:border-white/10 p-4 h-[460px] flex flex-col">
-					<div className="flex-1 overflow-auto space-y-3">
-						<div className="self-start max-w-[75%] rounded-lg bg-foreground/10 px-3 py-2 text-sm">Hi, I’m Sapio’s assistant. Ask me about our services, projects, or process.</div>
-					</div>
-					<div className="mt-3 flex items-center gap-2">
-						<input className="flex-1 rounded border px-3 py-2 text-sm bg-transparent" placeholder="Ask about Sapio…" />
-						<button className="rounded bg-foreground text-background px-4 py-2 text-sm">Send</button>
-					</div>
-					<div className="mt-2 text-xs text-foreground/60">Prefer a full view? <Link href="/chatbot" className="underline underline-offset-4">Open the chatbot</Link></div>
-				</div>
+				<ChatBox />
 			</section>
 
 			{/* Process */}
