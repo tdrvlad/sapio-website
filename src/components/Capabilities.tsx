@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { ComponentType } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -8,7 +9,7 @@ type Capability = {
   id: string;
   title: string;
   description: string;
-  icon: () => JSX.Element;
+  icon: ComponentType;
 };
 
 const strokeProps = {
