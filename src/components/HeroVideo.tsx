@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { getHeroVideoMeta } from "@/constants/heroVideoMeta";
 
 type VideoSource = {
   mp4: string;
@@ -18,6 +20,11 @@ const ALL_VIDEOS: VideoSource[] = [
   { mp4: "/videos/processed/traffic_detection-1280.mp4", webm: "/videos/processed/traffic_detection-1280.webm", poster: "/videos/processed/traffic_detection-poster.jpg" },
   { mp4: "/videos/processed/turing_machine-1280.mp4", webm: "/videos/processed/turing_machine-1280.webm", poster: "/videos/processed/turing_machine-poster.jpg" },
   { mp4: "/videos/processed/writing_and_robot-1280.mp4", webm: "/videos/processed/writing_and_robot-1280.webm", poster: "/videos/processed/writing_and_robot-poster.jpg" },
+  { mp4: "/videos/processed/digit_neural_net-1280.mp4", webm: "/videos/processed/digit_neural_net-1280.webm", poster: "/videos/processed/digit_neural_net-poster.jpg" },
+  { mp4: "/videos/processed/eniac_1-1280.mp4", webm: "/videos/processed/eniac_1-1280.webm", poster: "/videos/processed/eniac_1-poster.jpg" },
+  { mp4: "/videos/processed/eniac_2-1280.mp4", webm: "/videos/processed/eniac_2-1280.webm", poster: "/videos/processed/eniac_2-poster.jpg" },
+  { mp4: "/videos/processed/retro_software_development-1280.mp4", webm: "/videos/processed/retro_software_development-1280.webm", poster: "/videos/processed/retro_software_development-poster.jpg" },
+  { mp4: "/videos/processed/gpt_agent-1280.mp4", webm: "/videos/processed/gpt_agent-1280.webm", poster: "/videos/processed/gpt_agent-poster.jpg" },
 ];
 
 function shuffle<T>(arr: T[]): T[] {
@@ -70,6 +77,7 @@ export default function HeroVideo() {
   }, []);
 
   const current = playlist[currentIndex];
+  const currentMeta = current ? getHeroVideoMeta(current.mp4) : undefined;
 
   const onEnded = () => {
     if (playlist.length === 0) return;
@@ -89,8 +97,7 @@ export default function HeroVideo() {
     preloadRefs.current.forEach((vid) => {
       try {
         vid.removeAttribute("src");
-        // @ts-ignore
-        vid.load?.();
+        vid.load();
       } catch {}
     });
     preloadRefs.current = [];
@@ -102,7 +109,8 @@ export default function HeroVideo() {
       const v = document.createElement("video");
       v.preload = "auto";
       v.muted = true;
-      v.playsInline = true as any;
+      // Use attribute to avoid TS lib compatibility issues
+      v.setAttribute("playsinline", "");
       v.src = src;
       try {
         v.load();
@@ -146,8 +154,7 @@ export default function HeroVideo() {
       preloadRefs.current.forEach((vid) => {
         try {
           vid.removeAttribute("src");
-          // @ts-ignore
-          vid.load?.();
+          vid.load();
         } catch {}
       });
       preloadRefs.current = [];
@@ -169,21 +176,48 @@ export default function HeroVideo() {
           preload="auto"
           poster={current.poster}
           onEnded={onEnded}
+          onLoadedData={() => {
+            try {
+              videoRef.current?.play().catch(() => {});
+            } catch {}
+          }}
         >
           {current.webm && <source src={current.webm} type="video/webm" />}
           <source src={current.mp4} type="video/mp4" />
         </video>
       ) : current ? (
-        <img
-          src={current.poster}
+        <Image
+          src={current.poster || "/videos/processed/alphago-poster.jpg"}
           alt="Historic to modern AI montage"
-          className="absolute inset-0 h-full w-full object-cover"
+          fill
+          className="object-cover"
+          priority={false}
         />
       ) : (
         <div className="absolute inset-0 bg-black" aria-hidden />
       )}
 
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/80" />
+
+      {/* Caption overlay (always visible) */}
+      {currentMeta && (
+        <div className="absolute bottom-3 left-3 z-30">
+          {currentMeta.sourceUrl ? (
+            <a
+              href={currentMeta.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pointer-events-auto inline-block max-w-[90vw] sm:max-w-md rounded-md bg-black/70 text-white px-3 py-2 backdrop-blur-sm shadow-md underline-offset-2 hover:underline text-xs sm:text-sm"
+            >
+              {currentMeta.title}
+            </a>
+          ) : (
+            <span className="pointer-events-auto inline-block max-w-[90vw] sm:max-w-md rounded-md bg-black/70 text-white px-3 py-2 backdrop-blur-sm shadow-md text-xs sm:text-sm">
+              {currentMeta.title}
+            </span>
+          )}
+        </div>
+      )}
 
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 text-center">
         <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight max-w-3xl mx-auto text-white">We’re in the business of problem-solving</h1>
