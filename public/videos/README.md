@@ -6,6 +6,8 @@ This project standardizes hero background clips to 1280px width with two formats
 - MP4 (H.264)
 - Poster JPEG
 
+All processed outputs are converted to grayscale (black & white) for visual consistency.
+
 All processed outputs live in `public/videos/processed/` and follow the naming pattern:
 
 - `<basename>-1280.webm`
@@ -25,7 +27,7 @@ Autoplay notes: videos must be muted and use `playsinline`. Reduced-motion users
 1) Convert to 1280-wide WebM (VP9):
 
 ```
-ffmpeg -y -i public/videos/<input> -vf scale=1280:-2:force_original_aspect_ratio=decrease \
+ffmpeg -y -i public/videos/<input> -vf scale=1280:-2:force_original_aspect_ratio=decrease,hue=s=0 \
   -c:v libvpx-vp9 -b:v 0 -crf 32 -row-mt 1 -pix_fmt yuv420p -an \
   public/videos/processed/<basename>-1280.webm
 ```
@@ -33,7 +35,7 @@ ffmpeg -y -i public/videos/<input> -vf scale=1280:-2:force_original_aspect_ratio
 2) Convert to 1280-wide MP4 (H.264):
 
 ```
-ffmpeg -y -i public/videos/<input> -vf scale=1280:-2:force_original_aspect_ratio=decrease \
+ffmpeg -y -i public/videos/<input> -vf scale=1280:-2:force_original_aspect_ratio=decrease,hue=s=0 \
   -c:v libx264 -crf 22 -preset slow -pix_fmt yuv420p -movflags +faststart -an \
   public/videos/processed/<basename>-1280.mp4
 ```
@@ -42,7 +44,7 @@ ffmpeg -y -i public/videos/<input> -vf scale=1280:-2:force_original_aspect_ratio
 
 ```
 ffmpeg -y -ss 00:00:01 -i public/videos/<input> -frames:v 1 \
-  -vf scale=1280:-2:force_original_aspect_ratio=decrease -q:v 3 -update 1 \
+  -vf scale=1280:-2:force_original_aspect_ratio=decrease,hue=s=0 -q:v 3 -update 1 \
   public/videos/processed/<basename>-poster.jpg
 ```
 

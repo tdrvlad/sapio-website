@@ -94,6 +94,14 @@ export default function Home() {
 
 			<SolutionFinder />
 
+			{/* Chat demo */}
+			<section className="mx-auto max-w-[900px] px-6 py-20">
+				<h2 className="text-3xl sm:text-4xl font-semibold mb-6 text-center leading-tight">Got a question?</h2>
+				<div className="mx-auto max-w-[800px]">
+					<ChatInvitation />
+				</div>
+			</section>
+
 			{/* Technologies logos */}
 			{techLogos.length > 0 && (
 				<section className="py-12">
@@ -121,19 +129,9 @@ export default function Home() {
 								</div>
 							</div>
 						</div>
-						</div>
-					</section>
+					</div>
+				</section>
 			)}
-
-			{/* Chat demo */}
-			<section className="mx-auto max-w-[900px] px-6 py-20">
-				<h2 className="text-3xl sm:text-4xl font-semibold mb-6 text-center leading-tight">Got a question?</h2>
-				<div className="mx-auto max-w-[800px]">
-					<ChatInvitation />
-				</div>
-			</section>
-
-
 
 			{/* Final CTA */}
 			<section className="mx-auto max-w-[1280px] px-6 py-24 text-center">
