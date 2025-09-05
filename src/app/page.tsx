@@ -3,8 +3,9 @@ import Image from "next/image";
 import fs from "fs";
 import path from "path";
 import { SolutionFinder } from "@/components/SolutionFinder";
+import { Capabilities } from "@/components/Capabilities";
 import HeroVideo from "@/components/HeroVideo";
-import ChatBox from "@/components/ChatBox";
+import ChatInvitation from "@/components/ChatInvitation";
 
 export default function Home() {
     const getPublicImages = (dir: string): string[] => {
@@ -62,7 +63,7 @@ export default function Home() {
 			{clientLogos.length > 0 && (
 				<section className="py-12">
 					<div className="mx-auto max-w-[1280px] px-6">
-						<div className="mb-3 text-xs uppercase tracking-wide text-foreground/60 text-center">Trusted by forward-thinking teams</div>
+						<div className="mb-3 text-sm uppercase tracking-wide text-foreground/60 text-center">Trusted by forward-thinking teams</div>
 						<div className="relative rounded-2xl bg-white/95 shadow-sm ring-1 ring-black/5 px-4 py-4 marquee-container">
 							<div className="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white to-transparent rounded-l-2xl" />
 							<div className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white to-transparent rounded-r-2xl" />
@@ -71,14 +72,14 @@ export default function Home() {
 									<div className="flex items-center">
 										{clientLogos.map((src, i) => (
 											<a key={`client-a-${i}`} href="#clients" className="inline-flex items-center justify-center mr-10 sm:mr-14">
-												<Image src={src} alt={`Client: ${toAlt(src)}`} width={200} height={80} className="h-10 sm:h-14 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+												<Image src={src} alt={`Client: ${toAlt(src)}`} width={200} height={80} className="h-20 sm:h-28 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
 											</a>
 										))}
 									</div>
 									<div className="flex items-center">
 										{clientLogos.map((src, i) => (
 											<a key={`client-b-${i}`} href="#clients" className="inline-flex items-center justify-center mr-10 sm:mr-14">
-												<Image src={src} alt={`Client: ${toAlt(src)}`} width={200} height={80} className="h-10 sm:h-14 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+												<Image src={src} alt={`Client: ${toAlt(src)}`} width={200} height={80} className="h-20 sm:h-28 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
 											</a>
 										))}
 									</div>
@@ -89,19 +90,7 @@ export default function Home() {
 					</section>
 			)}
 
-			{/* Capabilities */}
-			<section className="mx-auto max-w-[1280px] px-6 py-12">
-				<h2 className="text-2xl font-semibold mb-6">Capabilities</h2>
-				<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-					{["Computer Vision","Audio Processing","Natural Language","Data Science","System Agents","Training AI Models"].map((cap) => (
-						<div key={cap} className="rounded-lg border border-black/10 dark:border-white/10 p-5 hover:shadow-md transition">
-							<div className="h-10 w-10 rounded bg-foreground/10 mb-4" />
-							<div className="font-semibold">{cap}</div>
-							<p className="text-sm text-foreground/70 mt-1">Brief description about {cap.toLowerCase()} and typical use cases.</p>
-						</div>
-					))}
-				</div>
-			</section>
+			<Capabilities />
 
 			<SolutionFinder />
 
@@ -109,7 +98,7 @@ export default function Home() {
 			{techLogos.length > 0 && (
 				<section className="py-12">
 					<div className="mx-auto max-w-[1280px] px-6">
-						<div className="mb-3 text-xs uppercase tracking-wide text-foreground/60 text-center">Technologies we work with</div>
+						<div className="mb-3 text-sm uppercase tracking-wide text-foreground/60 text-center">Technologies we work with</div>
 						<div className="relative rounded-2xl bg-white/95 shadow-sm ring-1 ring-black/5 px-4 py-4 marquee-container">
 							<div className="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white to-transparent rounded-l-2xl" />
 							<div className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white to-transparent rounded-r-2xl" />
@@ -118,14 +107,14 @@ export default function Home() {
 									<div className="flex items-center">
 										{techLogos.map((src, i) => (
 											<a key={`tech-a-${i}`} href="#tech" className="inline-flex items-center justify-center mr-10 sm:mr-14">
-												<Image src={src} alt={`Technology: ${toAlt(src)}`} width={200} height={80} className="h-10 sm:h-14 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+												<Image src={src} alt={`Technology: ${toAlt(src)}`} width={200} height={80} className="h-20 sm:h-28 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
 											</a>
 										))}
 									</div>
 									<div className="flex items-center">
 										{techLogos.map((src, i) => (
 											<a key={`tech-b-${i}`} href="#tech" className="inline-flex items-center justify-center mr-10 sm:mr-14">
-												<Image src={src} alt={`Technology: ${toAlt(src)}`} width={200} height={80} className="h-10 sm:h-14 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+												<Image src={src} alt={`Technology: ${toAlt(src)}`} width={200} height={80} className="h-20 sm:h-28 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
 											</a>
 										))}
 									</div>
@@ -138,24 +127,13 @@ export default function Home() {
 
 			{/* Chat demo */}
 			<section className="mx-auto max-w-[900px] px-6 py-20">
-				<h2 className="text-2xl font-semibold mb-6">Talk to our AI</h2>
-				<ChatBox />
+				<h2 className="text-3xl sm:text-4xl font-semibold mb-6 text-center leading-tight">Got a question?</h2>
+				<div className="mx-auto max-w-[800px]">
+					<ChatInvitation />
+				</div>
 			</section>
 
-			{/* Process */}
-			<section className="mx-auto max-w-[1280px] px-6 py-20 grid gap-8 md:grid-cols-3">
-				{[
-					{ t: "Understanding the problem", d: "Define objectives, constraints, and solution architecture." },
-					{ t: "Iterative development", d: "Modular code, periodic deliverables, contextual validation." },
-					{ t: "Integration & support", d: "Smooth deploy, documentation, and long-term maintenance." }
-				].map((x) => (
-					<div key={x.t} className="rounded-lg border border-black/10 dark:border-white/10 p-6">
-						<div className="h-10 w-10 rounded bg-foreground/10 mb-4" />
-						<div className="font-semibold">{x.t}</div>
-						<p className="text-sm text-foreground/70 mt-1">{x.d}</p>
-					</div>
-				))}
-			</section>
+
 
 			{/* Final CTA */}
 			<section className="mx-auto max-w-[1280px] px-6 py-24 text-center">

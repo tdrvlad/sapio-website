@@ -37,8 +37,8 @@ body {
 
 /* Marquee utility classes */
 .marquee-container { position: relative; }
-.marquee-track { animation: marquee 25s linear infinite; }
-.marquee-track-reverse { animation: marqueeReverse 25s linear infinite; }
+.marquee-track { animation: marquee 30s linear infinite; }
+.marquee-track-reverse { animation: marqueeReverse 30s linear infinite; }
 .marquee-container:hover .marquee-track,
 .marquee-container:hover .marquee-track-reverse { animation-play-state: paused; }
 
