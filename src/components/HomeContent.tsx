@@ -32,7 +32,21 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 
 			{/* Flagship projects */}
 			<section id="projects" className="mx-auto max-w-[1280px] px-6 py-20 grid gap-10 md:grid-cols-2 ">
-				<div className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition">
+				<motion.div
+				initial={{
+					opacity: 0,
+					x: -30
+				}}
+				whileInView={{
+					opacity: 1,
+					x: 0
+				}}
+				transition={{
+					duration: 0.5
+				}}
+				viewport={{once: true}}>
+					<div
+				className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition">
 					<div className="aspect-square rounded bg-foreground/10 mb-5 relative overflow-hidden">
 						<Image src="/brand/ai-aflat_thumbnail.png" alt="ai-aflat thumbnail" fill className="object-contain" sizes="(min-width: 1280px) 600px, 100vw" />
 					</div>
@@ -43,7 +57,21 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 						<Link href="/projects/ai-aflat" className="underline underline-offset-4">{t("home.projects.aiAflat.caseStudy")}</Link>
 					</div>
 				</div>
-				<div className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition">
+				</motion.div>
+				<motion.div 
+				initial={{
+					opacity: 0,
+					x: 30
+				}}
+				whileInView={{
+					opacity: 1,
+					x: 0
+				}}
+				transition={{
+					duration: 0.5
+				}}
+				viewport={{once: true}}>
+					<div className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition">
 					<div className="aspect-square rounded bg-foreground/10 mb-5 relative overflow-hidden">
 						<Image src="/brand/knowledge-assistant_thumbnail.png" alt="Knowledge Assistant thumbnail" fill className="object-contain" sizes="(min-width: 1280px) 600px, 100vw" />
 					</div>
@@ -54,11 +82,15 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 						<Link href="/projects/knowledge-assistant" className="underline underline-offset-4">{t("home.projects.knowledgeAssistant.caseStudy")}</Link>
 					</div>
 				</div>
+				</motion.div>
+
+				
 			</section>
 
 			{/* Clients logos */}
 			{clientLogos.length > 0 && (
 				<section className="py-12">
+					<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.8}} viewport={{once: true}}>
 					<div className="mx-auto max-w-[1280px] px-6">
 						<div className="mb-3 text-sm uppercase tracking-wide text-foreground/60 text-center">{t("home.clients.heading")}</div>
 						<div className="relative rounded-2xl bg-white/95 shadow-sm ring-1 ring-black/5 px-4 py-4 marquee-container">
@@ -83,14 +115,17 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 								</div>
 							</div>
 						</div>
-						</div>
-					</section>
+					</div>
+					</motion.div>
+				</section>
 			)}
-
-			<Capabilities />
-
-			<SolutionFinder />
-
+			<Capabilities/>
+			{/*<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.8}} viewport={{once: true}}>
+				<Capabilities />
+			</motion.div>*/}
+			<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.5}} viewport={{once: true}}>
+				<SolutionFinder />
+			</motion.div>
 			{/* Chat demo */}
 			<section className="mx-auto max-w-[900px] px-6 py-20">
 				<h2 className="text-3xl sm:text-4xl font-semibold mb-6 text-center leading-tight">{t("home.chat.question")}</h2>

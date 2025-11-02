@@ -119,35 +119,37 @@ export function Capabilities() {
 
   return (
     <section className="mx-auto max-w-[1280px] px-6 py-20">
-      <h2 className="text-3xl sm:text-4xl font-semibold mb-6 text-center leading-tight">{t("home.capabilities.title")}</h2>
+      <motion.h2 initial={{opacity: 0, y: 25}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}} transition={{duration: 0.5}} className="text-3xl sm:text-4xl font-semibold mb-6 text-center leading-tight">{t("home.capabilities.title")}</motion.h2>
 
       <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {CAPABILITIES_TRANSLATED.map((cap) => {
           const Icon = cap.icon;
           const isOpen = expandedId === cap.id;
           return (
-            <motion.div
+            <div>
+            <motion.button
+              type="button"
+              aria-expanded={isOpen}
+              aria-controls={`cap-panel-${cap.id}`}
+              onClick={() => setExpandedId((prev) => (prev === cap.id ? null : cap.id))}
               key={cap.id}
               layout
-              transition={{ type: "spring", stiffness: 300, damping: 26 }}
-              className={`group rounded-lg border border-black/10 dark:border-white/10 p-5 bg-white/60 dark:bg-white/5 ${
-                isOpen ? "ring-1 ring-foreground/10 bg-white/90 dark:bg-white/10" : ""
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 380, damping: 22}}
+              className={`w-full group rounded-lg border border-black/10 dark:border-white/10 p-5 bg-white/60 dark:bg-white/3 ${
+                isOpen ? "ring-1 ring-foreground/10 bg-white/90 dark:bg-white/15" : ""
               }`}
             >
-              <motion.button
-                type="button"
-                aria-expanded={isOpen}
-                aria-controls={`cap-panel-${cap.id}`}
-                onClick={() => setExpandedId((prev) => (prev === cap.id ? null : cap.id))}
+              <motion.div
                 className="w-full text-left"
-                whileHover={{ y: -4, scale: 1.02 }}
+                whileHover={{ y: -4, scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 380, damping: 22 }}
               >
                 <div className="flex items-start gap-3">
                   <motion.div
                     aria-hidden
                     className="h-10 w-10 rounded-lg bg-foreground/10 flex items-center justify-center"
-                    whileHover={{ rotate: 3, scale: 1.05 }}
+                    whileHover={{ rotate: -10, scale: 1.05 }}
                     transition={{ type: "spring", stiffness: 380, damping: 20 }}
                   >
                     <Icon />
@@ -157,18 +159,16 @@ export function Capabilities() {
                     <div className="text-sm text-foreground/70">{t("home.capabilities.tapToLearn")}</div>
                   </div>
                 </div>
-              </motion.button>
-
-              <AnimatePresence initial={false}>
+              </motion.div>
+            </motion.button>
+            <AnimatePresence initial={false}>
                 {isOpen && (
                   <motion.div
                     id={`cap-panel-${cap.id}`}
                     key="content"
-                    initial={{ opacity: 0, y: -6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -6 }}
-                    transition={{ type: "spring", stiffness: 320, damping: 28 }}
-                    className="mt-4 text-base leading-relaxed text-foreground/80 max-w-prose"
+                    initial={{opacity: 0, height: 0}} animate={{opacity: 1,height: "auto"}} exit={{opacity: 0, height: 0}} 
+                    transition={{ type: "spring", stiffness: 320, damping: 28, delay: 0.25}}
+                    className="mt-4 text-base  leading-relaxed text-foreground/80 max-w-prose"
                   >
                     <p>{cap.description}</p>
                     <div className="mt-4">
@@ -182,7 +182,7 @@ export function Capabilities() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </div>
           );
         })}
       </motion.div>
