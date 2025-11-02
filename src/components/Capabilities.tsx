@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { ComponentType } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type Capability = {
   id: string;
@@ -72,60 +73,56 @@ const MicIcon = () => (
   </svg>
 );
 
-const CAPABILITIES: Capability[] = [
-  {
-    id: "vision",
-    title: "Computer Vision",
-    description:
-      "Image and video understanding: detection, segmentation, OCR, quality inspection, and medical imaging pipelines. From on-device to cloud-scale processing.",
-    icon: EyeIcon,
-  },
-  {
-    id: "audio",
-    title: "Audio & Speech",
-    description:
-      "ASR/TTS, call analytics, speaker diarization, and wake-word detection. Real-time and batch processing with multilingual support.",
-    icon: MicIcon,
-  },
-  {
-    id: "nlp",
-    title: "Natural Language",
-    description:
-      "RAG chat, summarization, document understanding, and information extraction — grounded answers with citations over your knowledge.",
-    icon: ChatIcon,
-  },
-  {
-    id: "data-science",
-    title: "Data Science",
-    description:
-      "Forecasting, anomaly detection, ranking, and personalization. Build interpretable models that drive tangible business outcomes.",
-    icon: ChartIcon,
-  },
-  {
-    id: "agents",
-    title: "System Agents",
-    description:
-      "Workflow agents that integrate with your stack: ticketing, CRMs, and ops tools. Guarded actions with human-in-the-loop.",
-    icon: AgentIcon,
-  },
-  {
-    id: "training",
-    title: "Model Training",
-    description:
-      "Fine-tuning and domain adaptation. Data pipelines, evaluation harnesses, and monitoring for reliable deployments.",
-    icon: WaveIcon,
-  },
-];
 
 export function Capabilities() {
+  const { t } = useLanguage();
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  
+  const CAPABILITIES_TRANSLATED = [
+    {
+      id: "vision",
+      title: t("capabilities.vision.title"),
+      description: t("capabilities.vision.description"),
+      icon: EyeIcon,
+    },
+    {
+      id: "audio",
+      title: t("capabilities.audio.title"),
+      description: t("capabilities.audio.description"),
+      icon: MicIcon,
+    },
+    {
+      id: "nlp",
+      title: t("capabilities.nlp.title"),
+      description: t("capabilities.nlp.description"),
+      icon: ChatIcon,
+    },
+    {
+      id: "data-science",
+      title: t("capabilities.dataScience.title"),
+      description: t("capabilities.dataScience.description"),
+      icon: ChartIcon,
+    },
+    {
+      id: "agents",
+      title: t("capabilities.agents.title"),
+      description: t("capabilities.agents.description"),
+      icon: AgentIcon,
+    },
+    {
+      id: "training",
+      title: t("capabilities.training.title"),
+      description: t("capabilities.training.description"),
+      icon: WaveIcon,
+    },
+  ];
 
   return (
     <section className="mx-auto max-w-[1280px] px-6 py-20">
-      <h2 className="text-3xl sm:text-4xl font-semibold mb-6 text-center leading-tight">What we can build</h2>
+      <h2 className="text-3xl sm:text-4xl font-semibold mb-6 text-center leading-tight">{t("home.capabilities.title")}</h2>
 
       <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {CAPABILITIES.map((cap) => {
+        {CAPABILITIES_TRANSLATED.map((cap) => {
           const Icon = cap.icon;
           const isOpen = expandedId === cap.id;
           return (
@@ -157,7 +154,7 @@ export function Capabilities() {
                   </motion.div>
                   <div>
                     <div className="text-xl font-semibold">{cap.title}</div>
-                    <div className="text-sm text-foreground/70">Tap to learn more</div>
+                    <div className="text-sm text-foreground/70">{t("home.capabilities.tapToLearn")}</div>
                   </div>
                 </div>
               </motion.button>
@@ -179,7 +176,7 @@ export function Capabilities() {
                         href="/projects"
                         className="rounded-full border px-5 py-2 text-base font-medium hover:bg-foreground/10"
                       >
-                        See projects using this capability
+                        {t("home.capabilities.seeProjects")}
                       </Link>
                     </div>
                   </motion.div>

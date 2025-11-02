@@ -1,0 +1,6 @@
+
+.section-divider{
+    background: linear-gradient(90deg, transparent,  rgb(82, 82 ,82), rgb(178, 178, 178), rgb(82, 82, 82), transparent);
+    height: 5px;
+    margin: 0.25rem 0;
+}

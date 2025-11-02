@@ -1,0 +1,146 @@
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import { SolutionFinder } from "@/components/SolutionFinder";
+import { Capabilities } from "@/components/Capabilities";
+import HeroVideo from "@/components/HeroVideo";
+import ChatInvitation from "@/components/ChatInvitation";
+import { useLanguage } from "@/contexts/LanguageContext";
+import './comp.css';
+import { motion } from 'framer-motion';
+
+type HomeContentProps = {
+	clientLogos: string[];
+	techLogos: string[];
+};
+
+export default function HomeContent({ clientLogos, techLogos }: HomeContentProps) {
+	const { t } = useLanguage();
+
+	const toAlt = (src: string) => {
+		const base = src.split("/").pop() || "logo";
+		const name = base.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ");
+		return `${name} logo`;
+	};
+
+	return (
+		<div className="font-sans">
+			<HeroVideo />
+
+			<motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.8, delay: 2.0}} className="section-divider"></motion.div>
+
+			{/* Flagship projects */}
+			<section id="projects" className="mx-auto max-w-[1280px] px-6 py-20 grid gap-10 md:grid-cols-2 ">
+				<div className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition">
+					<div className="aspect-square rounded bg-foreground/10 mb-5 relative overflow-hidden">
+						<Image src="/brand/ai-aflat_thumbnail.png" alt="ai-aflat thumbnail" fill className="object-contain" sizes="(min-width: 1280px) 600px, 100vw" />
+					</div>
+					<h3 className="text-xl font-semibold">{t("home.projects.aiAflat.title")}</h3>
+					<p className="text-foreground/70 mt-2">{t("home.projects.aiAflat.description")}</p>
+					<div className="mt-4 flex gap-4 text-sm">
+						<a href="https://ai-aflat.ro" target="_blank" rel="noreferrer" className="underline underline-offset-4">{t("home.projects.aiAflat.visit")}</a>
+						<Link href="/projects/ai-aflat" className="underline underline-offset-4">{t("home.projects.aiAflat.caseStudy")}</Link>
+					</div>
+				</div>
+				<div className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition">
+					<div className="aspect-square rounded bg-foreground/10 mb-5 relative overflow-hidden">
+						<Image src="/brand/knowledge-assistant_thumbnail.png" alt="Knowledge Assistant thumbnail" fill className="object-contain" sizes="(min-width: 1280px) 600px, 100vw" />
+					</div>
+					<h3 className="text-xl font-semibold">{t("home.projects.knowledgeAssistant.title")}</h3>
+					<p className="text-foreground/70 mt-2">{t("home.projects.knowledgeAssistant.description")}</p>
+					<div className="mt-4 flex gap-4 text-sm">
+						<a href="https://assistant.sapio.ro" target="_blank" rel="noreferrer" className="underline underline-offset-4">{t("home.projects.knowledgeAssistant.explore")}</a>
+						<Link href="/projects/knowledge-assistant" className="underline underline-offset-4">{t("home.projects.knowledgeAssistant.caseStudy")}</Link>
+					</div>
+				</div>
+			</section>
+
+			{/* Clients logos */}
+			{clientLogos.length > 0 && (
+				<section className="py-12">
+					<div className="mx-auto max-w-[1280px] px-6">
+						<div className="mb-3 text-sm uppercase tracking-wide text-foreground/60 text-center">{t("home.clients.heading")}</div>
+						<div className="relative rounded-2xl bg-white/95 shadow-sm ring-1 ring-black/5 px-4 py-4 marquee-container">
+							<div className="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white to-transparent rounded-l-2xl" />
+							<div className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white to-transparent rounded-r-2xl" />
+							<div className="overflow-hidden">
+								<div className="marquee-track flex items-center gap-10 sm:gap-14" style={{ width: "max-content" }}>
+									<div className="flex items-center">
+										{clientLogos.map((src, i) => (
+											<a key={`client-a-${i}`} href="#clients" className="inline-flex items-center justify-center mr-10 sm:mr-14">
+												<Image src={src} alt={`Client: ${toAlt(src)}`} width={200} height={80} className="h-20 sm:h-28 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+											</a>
+										))}
+									</div>
+									<div className="flex items-center">
+										{clientLogos.map((src, i) => (
+											<a key={`client-b-${i}`} href="#clients" className="inline-flex items-center justify-center mr-10 sm:mr-14">
+												<Image src={src} alt={`Client: ${toAlt(src)}`} width={200} height={80} className="h-20 sm:h-28 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+											</a>
+										))}
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+					</section>
+			)}
+
+			<Capabilities />
+
+			<SolutionFinder />
+
+			{/* Chat demo */}
+			<section className="mx-auto max-w-[900px] px-6 py-20">
+				<h2 className="text-3xl sm:text-4xl font-semibold mb-6 text-center leading-tight">{t("home.chat.question")}</h2>
+				<div className="mx-auto max-w-[800px]">
+					<ChatInvitation />
+				</div>
+			</section>
+
+			{/* Technologies logos */}
+			{techLogos.length > 0 && (
+				<section className="py-12">
+					<div className="mx-auto max-w-[1280px] px-6">
+						<div className="mb-3 text-sm uppercase tracking-wide text-foreground/60 text-center">{t("home.technologies.heading")}</div>
+						<div className="relative rounded-2xl bg-white/95 shadow-sm ring-1 ring-black/5 px-4 py-4 marquee-container">
+							<div className="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white to-transparent rounded-l-2xl" />
+							<div className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white to-transparent rounded-r-2xl" />
+							<div className="overflow-hidden">
+								<div className="marquee-track-reverse flex items-center gap-10 sm:gap-14" style={{ width: "max-content" }}>
+									<div className="flex items-center">
+										{techLogos.map((src, i) => (
+											<a key={`tech-a-${i}`} href="#tech" className="inline-flex items-center justify-center mr-10 sm:mr-14">
+												<Image src={src} alt={`Technology: ${toAlt(src)}`} width={200} height={80} className="h-20 sm:h-28 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+											</a>
+										))}
+									</div>
+									<div className="flex items-center">
+										{techLogos.map((src, i) => (
+											<a key={`tech-b-${i}`} href="#tech" className="inline-flex items-center justify-center mr-10 sm:mr-14">
+												<Image src={src} alt={`Technology: ${toAlt(src)}`} width={200} height={80} className="h-20 sm:h-28 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+											</a>
+										))}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			)}
+
+			{/* Final CTA */}
+			<section className="mx-auto max-w-[1280px] px-6 py-24 text-center">
+				<h2 className="text-3xl font-semibold">{t("home.cta.title")}</h2>
+				<p className="text-foreground/70 mt-3">{t("home.cta.description")}</p>
+				<div className="mt-6">
+					<Link href="/contact" className="rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium">{t("home.cta.button")}</Link>
+				</div>
+				<div className="mt-4 text-sm text-foreground/60">{t("home.cta.contact")}</div>
+			</section>
+		</div>
+	);
+}
+
+

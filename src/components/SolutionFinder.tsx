@@ -3,8 +3,10 @@
 import { useMemo, useState } from "react";
 import { getChallengesForIndustry, getIndustries, getSolution } from "@/constants/industrySolutions";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function SolutionFinder() {
+	const { t } = useLanguage();
 	const [selectedIndustry, setSelectedIndustry] = useState<string | undefined>(undefined);
 	const [selectedChallenge, setSelectedChallenge] = useState<string | undefined>(undefined);
 
@@ -26,11 +28,11 @@ export function SolutionFinder() {
 
 	return (
 		<section className="mx-auto max-w-[1280px] px-6 py-20">
-			<h2 className="text-3xl sm:text-4xl font-semibold mb-6 text-center leading-tight">Find your AI solution</h2>
+			<h2 className="text-3xl sm:text-4xl font-semibold mb-6 text-center leading-tight">{t("solutionFinder.title")}</h2>
 
 			{/* Stepper */}
 			<div className="mb-6 flex items-center justify-center gap-4 text-sm md:static sticky top-16 z-10 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-2 rounded">
-				{["Industry","Challenge","Solution"].map((label, idx) => {
+				{[t("solutionFinder.step1"), t("solutionFinder.step2"), t("solutionFinder.step3")].map((label, idx) => {
 					const step = idx + 1;
 					const active = (step === 1 && !selectedIndustry) || (step === 2 && selectedIndustry && !selectedChallenge) || (step === 3 && isStep3Enabled);
 					const done = (step === 1 && !!selectedIndustry) || (step === 2 && !!selectedChallenge);
@@ -48,7 +50,7 @@ export function SolutionFinder() {
 
 			{/* Step 1: Industry (always mounted) */}
 			<div aria-label="Step 1: Select industry" className="rounded-lg border border-black/10 dark:border-white/10 p-5">
-				<div className="font-medium mb-3 text-base">1. Select your industry</div>
+				<div className="font-medium mb-3 text-base">1. {t("solutionFinder.selectIndustry")}</div>
 				<div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
 					{industries.map((ind) => {
 						const active = ind === selectedIndustry;
@@ -75,7 +77,7 @@ export function SolutionFinder() {
 				animate={{ filter: isStep2Enabled ? "none" : "blur(2px)" }}
 				transition={{ duration: 0.25 }}
 			>
-				<div className="font-medium mb-3 text-base">2. Choose your challenge{selectedIndustry ? ` in ${selectedIndustry}` : ""}</div>
+				<div className="font-medium mb-3 text-base">2. {t("solutionFinder.chooseChallenge")}{selectedIndustry ? ` ${t("solutionFinder.inIndustry")} ${selectedIndustry}` : ""}</div>
 				<div className="flex flex-wrap gap-2">
 					{challenges.map((ch) => {
 						const active = ch === selectedChallenge;
@@ -118,13 +120,13 @@ export function SolutionFinder() {
 							<div className="text-xl sm:text-2xl font-semibold leading-snug">{selectedIndustry} → {selectedChallenge} → {solution?.type}</div>
 							<p className="text-base text-foreground/70 mt-2 leading-relaxed max-w-prose">{solution?.description}</p>
 							<div className="flex items-center gap-3">
-								<a href="/contact" className="rounded-full bg-foreground text-background px-5 py-2 text-base font-semibold">Talk to us</a>
+								<a href="/contact" className="rounded-full bg-foreground text-background px-5 py-2 text-base font-semibold">{t("solutionFinder.talkToUs")}</a>
 								<button
 									type="button"
 									onClick={() => setSelectedChallenge(undefined)}
 									className="rounded-full border px-5 py-2 text-base font-medium hover:bg-foreground/10"
 								>
-									See other challenges
+									{t("solutionFinder.seeOtherChallenges")}
 								</button>
 							</div>
 						</motion.div>
@@ -136,7 +138,7 @@ export function SolutionFinder() {
 							exit={{ opacity: 0 }}
 							className="flex h-full min-h-[108px] items-center justify-center text-sm text-foreground/60"
 						>
-							Select an industry and challenge to see the recommended solution
+							{t("solutionFinder.placeholder")}
 						</motion.div>
 					)}
 				</AnimatePresence>

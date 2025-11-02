@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { getHeroVideoMeta } from "@/constants/heroVideoMeta";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { motion } from "framer-motion";
+import './comp.css';
 
 type VideoSource = {
   mp4: string;
@@ -43,7 +46,7 @@ export default function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const preloadRefs = useRef<HTMLVideoElement[]>([]);
   const preloadLinksRef = useRef<HTMLLinkElement[]>([]);
-
+  const { t } = useLanguage();
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReducedMotion(mq.matches);
@@ -203,31 +206,36 @@ export default function HeroVideo() {
       {currentMeta && (
         <div className="absolute bottom-3 left-3 z-30">
           {currentMeta.sourceUrl ? (
-            <a
+            <motion.a
+              initial={{ opacity: 0, y: -10}} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 2.0 }}
               href={currentMeta.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="pointer-events-auto inline-block max-w-[90vw] sm:max-w-md rounded-md bg-black/70 text-white px-3 py-2 backdrop-blur-sm shadow-md underline-offset-2 hover:underline text-xs sm:text-sm"
             >
               {currentMeta.title}
-            </a>
+            </motion.a>
           ) : (
-            <span className="pointer-events-auto inline-block max-w-[90vw] sm:max-w-md rounded-md bg-black/70 text-white px-3 py-2 backdrop-blur-sm shadow-md text-xs sm:text-sm">
+            <motion.span 
+            initial={{ opacity: 0, y: -10}} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 2.0 }}
+            className="pointer-events-auto inline-block max-w-[90vw] sm:max-w-md rounded-md bg-black/70 text-white px-3 py-2 backdrop-blur-sm shadow-md text-xs sm:text-sm">
               {currentMeta.title}
-            </span>
+            </motion.span>
           )}
         </div>
       )}
 
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 text-center">
-        <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight max-w-3xl mx-auto text-white">We’re in the business of problem-solving</h1>
-        <p className="mt-6 text-lg text-white/85 max-w-2xl mx-auto">Transform your ideas into state-of-the art AI solutions.</p>
+        <motion.h1 className="text-4xl sm:text-6xl font-semibold tracking-tight max-w-3xl mx-auto text-white" initial={{ opacity: 0, y: -20}} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.5 }}>{t("heroVideo.title")}</motion.h1>
+        <motion.p className="mt-6 text-lg text-white/85 max-w-2xl mx-auto" initial={{ opacity: 0, y: 10}} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.35 }}>{t("heroVideo.description")}</motion.p>
         <div className="mt-10 flex items-center justify-center gap-4">
-          <a href="#contact" className="rounded-full bg-white text-black px-5 py-3 text-sm font-medium">Start your project</a>
-          <a href="#projects" className="text-sm underline underline-offset-4 text-white">See our work</a>
+          <motion.a href="#contact" className="rounded-full bg-white text-black px-5 py-3 text-sm font-medium" initial={{ opacity: 0, y: 10}} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 1.80 }}>{t("heroVideo.button")}</motion.a>
+          <motion.a href="#projects" className="text-sm underline underline-offset-4 text-white" initial={{ opacity: 0, y: 10}} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 1.80 }}>{t("heroVideo.see_work")}</motion.a>
         </div>
       </div>
+      <div className="section-divider"></div>
     </section>
+
   );
 }
 
