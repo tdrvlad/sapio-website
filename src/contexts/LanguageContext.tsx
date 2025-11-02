@@ -42,11 +42,11 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     // Use default language during SSR to prevent hydration mismatch
     const currentLanguage = isClient ? language : 'en'
     const keys = key.split('.')
-    let value: any = translations[currentLanguage]
+    let value: unknown = translations[currentLanguage]
     
     for (const k of keys) {
-      if (value && typeof value === 'object' && k in value) {
-        value = value[k]
+      if (value && typeof value === 'object' && value !== null && k in value) {
+        value = (value as Record<string, unknown>)[k]
       } else {
         return key // Return key if translation not found
       }
