@@ -6,12 +6,6 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-type Capability = {
-  id: string;
-  title: string;
-  description: string;
-  icon: ComponentType;
-};
 
 const strokeProps = {
   fill: "none",
@@ -126,13 +120,12 @@ export function Capabilities() {
           const Icon = cap.icon;
           const isOpen = expandedId === cap.id;
           return (
-            <div>
+            <div key={cap.id}>
             <motion.button
               type="button"
               aria-expanded={isOpen}
               aria-controls={`cap-panel-${cap.id}`}
               onClick={() => setExpandedId((prev) => (prev === cap.id ? null : cap.id))}
-              key={cap.id}
               layout
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 380, damping: 22}}
