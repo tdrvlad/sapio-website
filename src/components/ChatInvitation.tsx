@@ -3,12 +3,14 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import ChatBox from "@/components/ChatBox";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ChatInvitation() {
   const [open, setOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
-    <div className="rounded-2xl border border-black/10 dark:border-white/10 p-6">
+    <div className="hover:scale-105 rounded-2xl border border-black/10 dark:border-white/10 p-6 transition duration-300">
       <AnimatePresence initial={false} mode="wait">
         {!open ? (
           <motion.div
@@ -17,15 +19,15 @@ export default function ChatInvitation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ type: "spring", stiffness: 320, damping: 28 }}
-            className="text-center"
+            className="text-center hover:scale-105 transition duration-300"
           >
-            <div className="text-lg text-foreground/80">Our AI assistant can explain Sapio’s services, projects, and how to get started.</div>
+            <div className="text-lg text-foreground/80 ">{t("chatInvitation.title")}</div>
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="mt-4 rounded-full bg-foreground text-background px-6 py-2 text-base font-semibold hover:opacity-90"
+              className="mt-4 rounded-full bg-foreground text-background px-6 py-4 text-base font-semibold hover:opacity-90 hover:scale-110 transition duration-300"
             >
-              Ask the AI Assistant
+              {t("chatInvitation.ask")}
             </button>
           </motion.div>
         ) : (

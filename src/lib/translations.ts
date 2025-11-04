@@ -1,3 +1,5 @@
+import ChatInvitation from "@/components/ChatInvitation";
+
 export type Language = "en" | "ro";
 
 export const translations = {
@@ -117,6 +119,11 @@ export const translations = {
 			seeOtherChallenges: "Vezi alte provocări",
 			placeholder: "Selectează o industrie și o provocare pentru a vedea soluția recomandată",
 		},
+		// Chat
+		chatInvitation: {
+			title: "Our AI assistant can explain Sapio’s services, projects, and how to get started.",
+			ask: "Ask the AI assistant",
+		},
 	},
 	en: {
 		// Navigation
@@ -233,6 +240,10 @@ export const translations = {
 			talkToUs: "Talk to us",
 			seeOtherChallenges: "See other challenges",
 			placeholder: "Select an industry and challenge to see the recommended solution",
+		},
+		chatInvitation: {
+			title: "Our AI assistant can explain Sapio’s services, projects, and how to get started.",
+			ask: "Ask the AI assistant",
 		},
 	},
 };

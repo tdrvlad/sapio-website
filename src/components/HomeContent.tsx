@@ -42,9 +42,11 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 					x: 0
 				}}
 				transition={{
-					duration: 0.5
+					duration: 0.5,
+					scale: {type: "spring", stiffness: 280, damping: 24 }
 				}}
-				viewport={{once: true}}>
+				viewport={{once: true}}
+				whileHover={{scale: 1.04}}>
 					<div
 				className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition">
 					<div className="aspect-square rounded bg-foreground/10 mb-5 relative overflow-hidden">
@@ -68,9 +70,11 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 					x: 0
 				}}
 				transition={{
-					duration: 0.5
+					duration: 0.5,
+					scale: {type: "spring", stiffness: 280, damping: 24 }
 				}}
-				viewport={{once: true}}>
+				viewport={{once: true}}
+				whileHover={{scale: 1.04}}>
 					<div className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition">
 					<div className="aspect-square rounded bg-foreground/10 mb-5 relative overflow-hidden">
 						<Image src="/brand/knowledge-assistant_thumbnail.png" alt="Knowledge Assistant thumbnail" fill className="object-contain" sizes="(min-width: 1280px) 600px, 100vw" />
@@ -93,22 +97,22 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 					<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.8}} viewport={{once: true}}>
 					<div className="mx-auto max-w-[1280px] px-6">
 						<div className="mb-3 text-sm uppercase tracking-wide text-foreground/60 text-center">{t("home.clients.heading")}</div>
-						<div className="relative rounded-2xl bg-white/95 shadow-sm ring-1 ring-black/5 px-4 py-4 marquee-container">
-							<div className="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white to-transparent rounded-l-2xl" />
-							<div className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white to-transparent rounded-r-2xl" />
+						<div className="relative rounded-2xl bg-white/90 ring-1 ring-black/5 px-4 py-4">
+							<div className="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-gray to-transparent rounded-l-2xl" />
+							<div className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-gray to-transparent rounded-r-2xl" />
 							<div className="overflow-hidden">
 								<div className="marquee-track flex items-center gap-10 sm:gap-14" style={{ width: "max-content" }}>
 									<div className="flex items-center">
 										{clientLogos.map((src, i) => (
 											<a key={`client-a-${i}`} href="#clients" className="inline-flex items-center justify-center mr-10 sm:mr-14">
-												<Image src={src} alt={`Client: ${toAlt(src)}`} width={200} height={80} className="h-20 sm:h-28 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+												<Image src={src} alt={`Client: ${toAlt(src)}`} width={200} height={80} className="h-20 sm:h-28 w-auto grayscale hover:scale-110 hover:style-spring hover:daping-30 hover:stiffness-100 hover: hover:grayscale-0 transition duration-450"/>
 											</a>
 										))}
 									</div>
 									<div className="flex items-center">
 										{clientLogos.map((src, i) => (
 											<a key={`client-b-${i}`} href="#clients" className="inline-flex items-center justify-center mr-10 sm:mr-14">
-												<Image src={src} alt={`Client: ${toAlt(src)}`} width={200} height={80} className="h-20 sm:h-28 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+												<Image src={src} alt={`Client: ${toAlt(src)}`} width={200} height={80} className="h-20 sm:h-28 w-auto grayscale hover:scale-110 hover:style-spring hover:daping-30 hover:stiffness-100 hover: hover:grayscale-0 transition duration-450"/>
 											</a>
 										))}
 									</div>
@@ -123,23 +127,23 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 			{/*<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.8}} viewport={{once: true}}>
 				<Capabilities />
 			</motion.div>*/}
-			<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.5}} viewport={{once: true}}>
+			<motion.div initial={{opacity: 0, y: -25}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.5}} viewport={{once: true}}>
 				<SolutionFinder />
 			</motion.div>
 			{/* Chat demo */}
-			<section className="mx-auto max-w-[900px] px-6 py-20">
+			<motion.section initial={{opacity: 0, y: -25}} transition={{ duration: 0.5}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}}  className="mx-auto max-w-[900px] px-6 py-20">
 				<h2 className="text-3xl sm:text-4xl font-semibold mb-6 text-center leading-tight">{t("home.chat.question")}</h2>
 				<div className="mx-auto max-w-[800px]">
 					<ChatInvitation />
 				</div>
-			</section>
+			</motion.section>
 
 			{/* Technologies logos */}
 			{techLogos.length > 0 && (
 				<section className="py-12">
 					<div className="mx-auto max-w-[1280px] px-6">
 						<div className="mb-3 text-sm uppercase tracking-wide text-foreground/60 text-center">{t("home.technologies.heading")}</div>
-						<div className="relative rounded-2xl bg-white/95 shadow-sm ring-1 ring-black/5 px-4 py-4 marquee-container">
+						<div className="relative rounded-2xl bg-white/95 shadow-sm ring-1 ring-black/5 px-4 py-4">
 							<div className="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white to-transparent rounded-l-2xl" />
 							<div className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white to-transparent rounded-r-2xl" />
 							<div className="overflow-hidden">
@@ -167,12 +171,12 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 
 			{/* Final CTA */}
 			<section className="mx-auto max-w-[1280px] px-6 py-24 text-center">
-				<h2 className="text-3xl font-semibold">{t("home.cta.title")}</h2>
-				<p className="text-foreground/70 mt-3">{t("home.cta.description")}</p>
-				<div className="mt-6">
+				<motion.h2 initial={{opacity: 0, y: -20}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.8}} viewport={{once: true}} className="text-3xl font-semibold ">{t("home.cta.title")}</motion.h2>
+				<motion.p initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.30, duration: 0.8}} viewport={{once: true}} className="text-foreground/70 mt-3">{t("home.cta.description")}</motion.p>
+				<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.80, duration: 0.8}} viewport={{once: true}} className="mt-6">
 					<Link href="/contact" className="rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium">{t("home.cta.button")}</Link>
-				</div>
-				<div className="mt-4 text-sm text-foreground/60">{t("home.cta.contact")}</div>
+				</motion.div>
+				<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 1, duration: 0.8}} viewport={{once: true}} className="mt-4 text-sm text-foreground/60">{t("home.cta.contact")}</motion.div>
 			</section>
 		</div>
 	);

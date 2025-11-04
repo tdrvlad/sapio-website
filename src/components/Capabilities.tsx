@@ -115,7 +115,7 @@ export function Capabilities() {
     <section className="mx-auto max-w-[1280px] px-6 py-20">
       <motion.h2 initial={{opacity: 0, y: 25}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}} transition={{duration: 0.5}} className="text-3xl sm:text-4xl font-semibold mb-6 text-center leading-tight">{t("home.capabilities.title")}</motion.h2>
 
-      <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <motion.div layout className="grid h-auto gap-6 sm:grid-cols-2 lg:grid-cols-3" initial={{opacity: 0, y: 25}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}} transition={{duration: 1}} >
         {CAPABILITIES_TRANSLATED.map((cap) => {
           const Icon = cap.icon;
           const isOpen = expandedId === cap.id;
@@ -126,17 +126,16 @@ export function Capabilities() {
               aria-expanded={isOpen}
               aria-controls={`cap-panel-${cap.id}`}
               onClick={() => setExpandedId((prev) => (prev === cap.id ? null : cap.id))}
-              layout
               whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 380, damping: 22}}
-              className={`w-full group rounded-lg border border-black/10 dark:border-white/10 p-5 bg-white/60 dark:bg-white/3 ${
+              transition={{ type: "spring", stiffness: 280, damping: 36}}
+              className={`w-full h-auto group rounded-lg border border-black/10 dark:border-white/10 p-5 bg-white/60 dark:bg-white/3 ${
                 isOpen ? "ring-1 ring-foreground/10 bg-white/90 dark:bg-white/15" : ""
               }`}
             >
               <motion.div
-                className="w-full text-left"
+                className="w-full h-auto text-left"
                 whileHover={{ y: -4, scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 380, damping: 22 }}
+                transition={{ type: "spring", stiffness: 280, damping: 36 }}
               >
                 <div className="flex items-start gap-3">
                   <motion.div
@@ -159,15 +158,15 @@ export function Capabilities() {
                   <motion.div
                     id={`cap-panel-${cap.id}`}
                     key="content"
-                    initial={{opacity: 0, height: 0}} animate={{opacity: 1,height: "auto"}} exit={{opacity: 0, height: 0}} 
-                    transition={{ type: "spring", stiffness: 320, damping: 28, delay: 0.25}}
+                    initial={{opacity: 0, height: 0}} animate={{opacity: 1, height: 'auto'}} exit={{opacity: 0, height: 0}} 
+                    transition={{ duration: 0.20}}
                     className="mt-4 text-base  leading-relaxed text-foreground/80 max-w-prose"
                   >
                     <p>{cap.description}</p>
-                    <div className="mt-4">
+                    <div className="leading-relaxed h-auto mt-4">
                       <Link
                         href="/projects"
-                        className="rounded-full border px-5 py-2 text-base font-medium hover:bg-foreground/10"
+                        className="rounded-full border px-5 py-2 text-base font-medium hover:scale-110 hover:bg-foreground/10 transition duration-200"
                       >
                         {t("home.capabilities.seeProjects")}
                       </Link>

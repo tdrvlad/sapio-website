@@ -4,3 +4,8 @@
     height: 5px;
     margin: 0.25rem 0;
 }
+.marquee-track{
+    height: 110px;
+    width: 100%;
+}
+

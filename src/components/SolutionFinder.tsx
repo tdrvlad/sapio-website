@@ -51,7 +51,7 @@ export function SolutionFinder() {
 			{/* Step 1: Industry (always mounted) */}
 			<div aria-label="Step 1: Select industry" className="rounded-lg border border-black/10 dark:border-white/10 p-5">
 				<div className="font-medium mb-3 text-base">1. {t("solutionFinder.selectIndustry")}</div>
-				<div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+				<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 					{industries.map((ind) => {
 						const active = ind === selectedIndustry;
 						return (
@@ -59,7 +59,7 @@ export function SolutionFinder() {
 								key={ind}
 								type="button"
 								onClick={() => handleSelectIndustry(ind)}
-								className={`text-left rounded-lg border px-4 py-3 text-base transition focus:outline-none focus:ring-2 focus:ring-foreground/40 font-medium ${active ? "bg-foreground text-background" : "hover:bg-foreground/10"}`}
+								className={`text-left rounded-lg border px-4 py-3 text-base transition focus:outline-none focus:ring-2 focus:ring-foreground/40 font-medium ${active ? "bg-foreground text-background" : "hover:scale-105 hover:bg-foreground/10 transition duration-300"}`}
 								aria-pressed={active}
 							>
 								{ind}
@@ -74,11 +74,11 @@ export function SolutionFinder() {
 				aria-label="Step 2: Select challenge"
 				className={`mt-6 rounded-lg border border-black/10 dark:border-white/10 p-5 relative ${!isStep2Enabled ? "opacity-60" : ""}`}
 				initial={false}
-				animate={{ filter: isStep2Enabled ? "none" : "blur(2px)" }}
-				transition={{ duration: 0.25 }}
+				animate={{ filter: isStep2Enabled ? "none" : "opacity(0)" }}
+				transition={{ filter:{duration: 0.3} }}
 			>
 				<div className="font-medium mb-3 text-base">2. {t("solutionFinder.chooseChallenge")}{selectedIndustry ? ` ${t("solutionFinder.inIndustry")} ${selectedIndustry}` : ""}</div>
-				<div className="flex flex-wrap gap-2">
+				<div className="flex flex-wrap gap-4">
 					{challenges.map((ch) => {
 						const active = ch === selectedChallenge;
 						return (
@@ -87,7 +87,7 @@ export function SolutionFinder() {
 								type="button"
 								onClick={() => isStep2Enabled && handleSelectChallenge(ch)}
 								disabled={!isStep2Enabled}
-								className={`text-sm rounded-full border px-3 py-1.5 transition focus:outline-none focus:ring-2 focus:ring-foreground/40 disabled:cursor-not-allowed ${active ? "bg-foreground text-background" : "hover:bg-foreground/10"}`}
+								className={`text-sm rounded-full border px-5 py-3.5 transition focus:outline-none focus:ring-2 focus:ring-foreground/40 disabled:cursor-not-allowed ${active ? "bg-foreground text-background" : "hover:scale-105 hover:bg-foreground/10 transition duration-300"}`}
 								aria-pressed={active}
 							>
 								{ch}
@@ -100,16 +100,15 @@ export function SolutionFinder() {
 				)}
 			</motion.div>
 
-			{/* Step 3: Solution (always mounted, disabled until challenge selected) */}
 			<motion.div
 				aria-label="Step 3: See solution"
 				className={`mt-6 rounded-lg border border-black/10 dark:border-white/10 p-6 min-h-[140px] relative ${!isStep3Enabled ? "opacity-60" : ""}`}
 				initial={false}
-				animate={{ filter: isStep3Enabled ? "none" : "blur(3px)" }}
-				transition={{ duration: 0.25 }}
+				animate={{ filter: isStep3Enabled ? "none" : "opacity(0)" }}
+				transition={{ duration: 0.5}}
 			>
 				<AnimatePresence initial={false} mode="wait">
-					{isStep3Enabled ? (
+					(
 						<motion.div
 							key="solution"
 							initial={{ opacity: 0, y: 10 }}
@@ -120,27 +119,17 @@ export function SolutionFinder() {
 							<div className="text-xl sm:text-2xl font-semibold leading-snug">{selectedIndustry} → {selectedChallenge} → {solution?.type}</div>
 							<p className="text-base text-foreground/70 mt-2 leading-relaxed max-w-prose">{solution?.description}</p>
 							<div className="flex items-center gap-3">
-								<a href="/contact" className="rounded-full bg-foreground text-background px-5 py-2 text-base font-semibold">{t("solutionFinder.talkToUs")}</a>
+								<a href="/contact" className="rounded-full bg-foreground text-background px-5 py-2 text-base font-semibold hover:scale-105 transition duration-300">{t("solutionFinder.talkToUs")}</a>
 								<button
 									type="button"
-									onClick={() => setSelectedChallenge(undefined)}
-									className="rounded-full border px-5 py-2 text-base font-medium hover:bg-foreground/10"
+									onClick={() => setSelectedIndustry(undefined)}
+									className="rounded-full border px-5 py-2 text-base font-medium hover:bg-foreground/10 hover:scale-105 transition duration-300"
 								>
 									{t("solutionFinder.seeOtherChallenges")}
 								</button>
 							</div>
 						</motion.div>
-					) : (
-						<motion.div
-							key="placeholder"
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-							className="flex h-full min-h-[108px] items-center justify-center text-sm text-foreground/60"
-						>
-							{t("solutionFinder.placeholder")}
-						</motion.div>
-					)}
+					)
 				</AnimatePresence>
 			</motion.div>
 		</section>
