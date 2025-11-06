@@ -59,7 +59,7 @@ export function SolutionFinder() {
 								key={ind}
 								type="button"
 								onClick={() => handleSelectIndustry(ind)}
-								className={`text-left rounded-lg border px-4 py-3 text-base transition focus:outline-none focus:ring-2 focus:ring-foreground/40 font-medium ${active ? "bg-foreground text-background" : "hover:scale-105 hover:bg-foreground/10 transition duration-300"}`}
+								className={`text-left rounded-lg border px-4 py-3 text-base transition focus:outline-none focus:ring-2 focus:ring-foreground/40 font-medium ${active ? "bg-foreground text-background hover:scale-105 transition duration-300" : "hover:scale-105 hover:bg-foreground/10 transition duration-300"}`}
 								aria-pressed={active}
 							>
 								{ind}
@@ -87,7 +87,7 @@ export function SolutionFinder() {
 								type="button"
 								onClick={() => isStep2Enabled && handleSelectChallenge(ch)}
 								disabled={!isStep2Enabled}
-								className={`text-sm rounded-full border px-5 py-3.5 transition focus:outline-none focus:ring-2 focus:ring-foreground/40 disabled:cursor-not-allowed ${active ? "bg-foreground text-background" : "hover:scale-105 hover:bg-foreground/10 transition duration-300"}`}
+								className={`text-sm rounded-full border px-5 py-3.5 transition focus:outline-none focus:ring-2 focus:ring-foreground/40 disabled:cursor-not-allowed ${active ? "bg-foreground text-background hover:scale-105 transition duration-300" : "hover:scale-105 hover:bg-foreground/10 transition duration-300"}`}
 								aria-pressed={active}
 							>
 								{ch}

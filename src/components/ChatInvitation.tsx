@@ -34,9 +34,9 @@ export default function ChatInvitation() {
           <motion.div
             key="chat"
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
+            animate={{ opacity: 1, height: "auto"}}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ type: "spring", stiffness: 280, damping: 30 }}
+            transition={{}}
           >
             <div className="flex items-center justify-between mb-3">
               <div className="text-lg font-medium">Sapio AI Assistant</div>

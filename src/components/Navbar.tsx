@@ -42,7 +42,9 @@ export function Navbar() {
 				>
 					<Link href="/services" className="hover:underline underline-offset-4">{t("navbar.solutions")}</Link>
 					<Link href="/projects" className="hover:underline underline-offset-4">{t("navbar.projects")}</Link>
-					<Link href="/team" className="hover:underline underline-offset-4">{t("navbar.team")}</Link>
+					<Link href="/team" className="hover:underline underline-offset-4">{t("navbar.team")}
+					</Link>
+					
 					<Link href="/contact" className="hover:underline underline-offset-4">{t("navbar.contact")}</Link>
 				</nav>
 				<div className="flex items-center gap-3">

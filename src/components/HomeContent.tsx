@@ -172,11 +172,11 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 			{/* Final CTA */}
 			<section className="mx-auto max-w-[1280px] px-6 py-24 text-center">
 				<motion.h2 initial={{opacity: 0, y: -20}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.8}} viewport={{once: true}} className="text-3xl font-semibold ">{t("home.cta.title")}</motion.h2>
-				<motion.p initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.30, duration: 0.8}} viewport={{once: true}} className="text-foreground/70 mt-3">{t("home.cta.description")}</motion.p>
-				<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.80, duration: 0.8}} viewport={{once: true}} className="mt-6">
-					<Link href="/contact" className="rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium">{t("home.cta.button")}</Link>
+				<motion.p initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.30, duration: 0.8}} viewport={{once: true}} className="text-foreground/70  mt-3">{t("home.cta.description")}</motion.p>
+				<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.80, duration: 0.8}} viewport={{once: true}} className="mt-6 hover:scale-105 transition duration-300">
+					<Link href="/contact" className="rounded-full bg-foreground  text-background px-6 py-3 text-sm font-medium ">{t("home.cta.button")}</Link>
 				</motion.div>
-				<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 1, duration: 0.8}} viewport={{once: true}} className="mt-4 text-sm text-foreground/60">{t("home.cta.contact")}</motion.div>
+				<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 1, duration: 0.8}} viewport={{once: true}} className="mt-4 text-sm text-foreground/60 ">{t("home.cta.contact")}</motion.div>
 			</section>
 		</div>
 	);
