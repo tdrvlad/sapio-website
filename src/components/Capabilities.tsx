@@ -160,7 +160,7 @@ export function Capabilities() {
                     key="content"
                     initial={{opacity: 0, height: 0}} animate={{opacity: 1, height: 'auto'}} exit={{opacity: 0, height: 0}} 
                     transition={{ duration: 0.20}}
-                    className="mt-4 text-base  leading-relaxed text-foreground/80 max-w-prose"
+                    className="mt-4 text-base leading-relaxed text-foreground/80"
                   >
                     <p>{cap.description}</p>
                     <div className="leading-relaxed h-auto mt-4">

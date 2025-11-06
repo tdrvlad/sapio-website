@@ -26,10 +26,13 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 
 	return (
 		<div className="font-sans">
+			
 			<HeroVideo />
 
 			<motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.8, delay: 2.0}} className="section-divider"></motion.div>
-
+			<div className="px-100 p-10">
+				<ChatInvitation/>
+			</div>
 			{/* Flagship projects */}
 			<section id="projects" className="mx-auto max-w-[1280px] px-6 py-20 grid gap-10 md:grid-cols-2 ">
 				<motion.div
@@ -130,14 +133,6 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 			<motion.div initial={{opacity: 0, y: -25}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.5}} viewport={{once: true}}>
 				<SolutionFinder />
 			</motion.div>
-			{/* Chat demo */}
-			<motion.section initial={{opacity: 0, y: -25}} transition={{ duration: 0.5}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}}  className="mx-auto max-w-[900px] px-6 py-20">
-				<h2 className="text-3xl sm:text-4xl font-semibold mb-6 text-center leading-tight">{t("home.chat.question")}</h2>
-				<div className="mx-auto max-w-[800px]">
-					<ChatInvitation />
-				</div>
-			</motion.section>
-
 			{/* Technologies logos */}
 			{techLogos.length > 0 && (
 				<section className="py-12">
@@ -173,10 +168,10 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 			<section className="mx-auto max-w-[1280px] px-6 py-24 text-center">
 				<motion.h2 initial={{opacity: 0, y: -20}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.8}} viewport={{once: true}} className="text-3xl font-semibold ">{t("home.cta.title")}</motion.h2>
 				<motion.p initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.30, duration: 0.8}} viewport={{once: true}} className="text-foreground/70  mt-3">{t("home.cta.description")}</motion.p>
-				<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.80, duration: 0.8}} viewport={{once: true}} className="mt-6 hover:scale-105 transition duration-300">
-					<Link href="/contact" className="rounded-full bg-foreground  text-background px-6 py-3 text-sm font-medium ">{t("home.cta.button")}</Link>
+					<motion.div initial={{opacity: 0, y: 20}} whileHover={{scale: 1.10}}  whileInView={{opacity: 1, y: 0}} transition={{delay: 0.30 , duration: 0.3, scale:{duration: 0.3}}} viewport={{once: true}} className="mt-6">
+					<Link href="/contact" className="rounded-full bg-foreground text-background px-6 py-3   text-sm font-medium ">{t("home.cta.button")}</Link>
 				</motion.div>
-				<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 1, duration: 0.8}} viewport={{once: true}} className="mt-4 text-sm text-foreground/60 ">{t("home.cta.contact")}</motion.div>
+				<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 1.20, duration: 0.8}} viewport={{once: true}} className="mt-4 text-sm text-foreground/60 ">{t("home.cta.contact")}</motion.div>
 			</section>
 		</div>
 	);

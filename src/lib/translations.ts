@@ -1,3 +1,4 @@
+import Contact from "@/app/contact/page";
 import ChatInvitation from "@/components/ChatInvitation";
 
 export type Language = "en" | "ro";
@@ -126,6 +127,11 @@ export const translations = {
 		},
 	},
 	en: {
+		// Contact
+		Contact: {
+			heroTitle: "We are here if you need our help",
+
+		},
 		// Navigation
 		navbar: {
 			home: "Home",
@@ -242,8 +248,9 @@ export const translations = {
 			placeholder: "Select an industry and challenge to see the recommended solution",
 		},
 		chatInvitation: {
-			title: "Our AI assistant can explain Sapio’s services, projects, and how to get started.",
-			ask: "Ask the AI assistant",
+			title: "Converse with our newest AI model",
+			ask: "Talk with our AI assistant",
+			des: " We have our very own state-of-the-art AI assistant. If you have question, please use Sapio AI"
 		},
 	},
 };
