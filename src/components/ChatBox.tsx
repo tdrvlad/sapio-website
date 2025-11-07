@@ -2,6 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useChat } from "@/hooks/useChat";
+import ShinyText from "./ShinyText";
 
 type Props = {
   initialMessage?: string;
