@@ -20,7 +20,7 @@ export const useLanguage = () => {
 }
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('ro') // Default to Romanian
+  const [language, setLanguage] = useState<Language>('en') // Default to English
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {

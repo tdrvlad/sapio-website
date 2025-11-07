@@ -13,9 +13,9 @@ export default function ChatInvitation() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="mx-auto max-w-[1000px] px-6 py-8"
+      className="mx-auto max-w-[1000px] px-4 sm:px-6 py-6 sm:py-8"
     >
-      <div className="relative rounded-3xl border border-black/10 dark:border-white/10 bg-gradient-to-br from-background via-foreground/5 to-background shadow-lg overflow-hidden">
+      <div className="relative rounded-2xl sm:rounded-3xl border border-black/10 dark:border-white/10 bg-gradient-to-br from-background via-foreground/5 to-background shadow-lg overflow-hidden">
         {/* Subtle gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-foreground/5 via-transparent to-foreground/10 pointer-events-none" />
         

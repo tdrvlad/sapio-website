@@ -225,12 +225,12 @@ export default function HeroVideo() {
         </div>
       )}
 
-      <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 text-center">
-        <motion.h1 className="text-4xl sm:text-6xl font-semibold  tracking-tight max-w-3xl mx-auto text-white" initial={{ opacity: 0, y: -20}} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.5 }}>{t("heroVideo.title")}</motion.h1>
-        <motion.p className="mt-6 text-lg text-white/85 max-w-2xl  mx-auto" initial={{ opacity: 0, y: 10}} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.35 }}>{t("heroVideo.description")}</motion.p>
-        <div className="mt-10 flex items-center justify-center gap-4">
-          <motion.a href="#contact" className="rounded-full bg-white text-black hover:scale-110 transition duration-500 px-5 py-3 text-sm font-medium" initial={{ opacity: 0, y: 10}} animate={{ opacity: 1, y: 0, }} transition={{ duration: 0.6, delay: 1.80 }}>{t("heroVideo.button")}</motion.a>
-          <motion.a href="#projects" className="text-sm underline px-5 py-3 backdrop backdrop-blur-md border b-white rounded-full text-sm underline-offset-4 hover:scale-110 hover:style-spring  transition duration-500 text-white" initial={{ opacity: 0, y: 10}} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 1.80 }}>{t("heroVideo.see_work")}</motion.a>
+      <div className="relative z-10 mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24 text-center">
+        <motion.h1 className="text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight max-w-3xl mx-auto text-white leading-tight" initial={{ opacity: 0, y: -20}} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.5 }}>{t("heroVideo.title")}</motion.h1>
+        <motion.p className="mt-4 sm:mt-6 text-base sm:text-lg text-white/85 max-w-2xl mx-auto px-4" initial={{ opacity: 0, y: 10}} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.35 }}>{t("heroVideo.description")}</motion.p>
+        <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4">
+          <motion.a href="#contact" className="w-full sm:w-auto rounded-full bg-white text-black hover:scale-110 transition duration-500 px-6 py-3 text-sm font-medium text-center" initial={{ opacity: 0, y: 10}} animate={{ opacity: 1, y: 0, }} transition={{ duration: 0.6, delay: 1.80 }}>{t("heroVideo.button")}</motion.a>
+          <motion.a href="#projects" className="w-full sm:w-auto text-sm underline px-6 py-3 backdrop backdrop-blur-md border border-white rounded-full underline-offset-4 hover:scale-110 hover:style-spring transition duration-500 text-white text-center" initial={{ opacity: 0, y: 10}} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 1.80 }}>{t("heroVideo.see_work")}</motion.a>
         </div>
       </div>
       <div className="section-divider"></div>

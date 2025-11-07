@@ -30,11 +30,11 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 			<HeroVideo />
 
 			<motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.8, delay: 2.0}} className="section-divider"></motion.div>
-			<div className="px-100 p-10">
+			<div className="px-4 sm:px-6 lg:px-10 py-6 sm:py-10">
 				<ChatInvitation/>
 			</div>
 			{/* Flagship projects */}
-			<section id="projects" className="mx-auto max-w-[1280px] px-6 py-20 grid gap-10 md:grid-cols-2 ">
+			<section id="projects" className="mx-auto max-w-[1280px] px-4 sm:px-6 py-12 sm:py-20 grid gap-6 sm:gap-10 md:grid-cols-2">
 				<motion.div
 				initial={{
 					opacity: 0,
@@ -96,26 +96,26 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 
 			{/* Clients logos */}
 			{clientLogos.length > 0 && (
-				<section className="py-12">
+				<section className="py-8 sm:py-12">
 					<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.8}} viewport={{once: true}}>
-					<div className="mx-auto max-w-[1280px] px-6">
-						<div className="mb-3 text-sm uppercase tracking-wide text-foreground/60 text-center">{t("home.clients.heading")}</div>
-						<div className="relative rounded-2xl bg-white/90 ring-1 ring-black/5 px-4 py-4">
-							<div className="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-gray to-transparent rounded-l-2xl" />
-							<div className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-gray to-transparent rounded-r-2xl" />
+					<div className="mx-auto max-w-[1280px] px-4 sm:px-6">
+						<div className="mb-3 text-xs sm:text-sm uppercase tracking-wide text-foreground/60 text-center">{t("home.clients.heading")}</div>
+						<div className="relative rounded-2xl bg-white/90 ring-1 ring-black/5 px-2 sm:px-4 py-3 sm:py-4">
+							<div className="pointer-events-none absolute left-0 top-0 h-full w-8 sm:w-16 bg-gradient-to-r from-gray to-transparent rounded-l-2xl" />
+							<div className="pointer-events-none absolute right-0 top-0 h-full w-8 sm:w-16 bg-gradient-to-l from-gray to-transparent rounded-r-2xl" />
 							<div className="overflow-hidden">
-								<div className="marquee-track flex items-center gap-10 sm:gap-14" style={{ width: "max-content" }}>
+								<div className="marquee-track flex items-center gap-6 sm:gap-10 md:gap-14" style={{ width: "max-content" }}>
 									<div className="flex items-center">
 										{clientLogos.map((src, i) => (
-											<a key={`client-a-${i}`} href="#clients" className="inline-flex items-center justify-center mr-10 sm:mr-14">
-												<Image src={src} alt={`Client: ${toAlt(src)}`} width={200} height={80} className="h-20 sm:h-28 w-auto grayscale hover:scale-110 hover:style-spring hover:daping-30 hover:stiffness-100 hover: hover:grayscale-0 transition duration-450"/>
+											<a key={`client-a-${i}`} href="#clients" className="inline-flex items-center justify-center mr-6 sm:mr-10 md:mr-14">
+												<Image src={src} alt={`Client: ${toAlt(src)}`} width={200} height={80} className="h-16 sm:h-20 md:h-28 w-auto grayscale hover:scale-110 hover:style-spring hover:daping-30 hover:stiffness-100 hover: hover:grayscale-0 transition duration-450"/>
 											</a>
 										))}
 									</div>
 									<div className="flex items-center">
 										{clientLogos.map((src, i) => (
-											<a key={`client-b-${i}`} href="#clients" className="inline-flex items-center justify-center mr-10 sm:mr-14">
-												<Image src={src} alt={`Client: ${toAlt(src)}`} width={200} height={80} className="h-20 sm:h-28 w-auto grayscale hover:scale-110 hover:style-spring hover:daping-30 hover:stiffness-100 hover: hover:grayscale-0 transition duration-450"/>
+											<a key={`client-b-${i}`} href="#clients" className="inline-flex items-center justify-center mr-6 sm:mr-10 md:mr-14">
+												<Image src={src} alt={`Client: ${toAlt(src)}`} width={200} height={80} className="h-16 sm:h-20 md:h-28 w-auto grayscale hover:scale-110 hover:style-spring hover:daping-30 hover:stiffness-100 hover: hover:grayscale-0 transition duration-450"/>
 											</a>
 										))}
 									</div>
@@ -135,25 +135,25 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 			</motion.div>
 			{/* Technologies logos */}
 			{techLogos.length > 0 && (
-				<section className="py-12">
-					<div className="mx-auto max-w-[1280px] px-6">
-						<div className="mb-3 text-sm uppercase tracking-wide text-foreground/60 text-center">{t("home.technologies.heading")}</div>
-						<div className="relative rounded-2xl bg-white/95 shadow-sm ring-1 ring-black/5 px-4 py-4">
-							<div className="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white to-transparent rounded-l-2xl" />
-							<div className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white to-transparent rounded-r-2xl" />
+				<section className="py-8 sm:py-12">
+					<div className="mx-auto max-w-[1280px] px-4 sm:px-6">
+						<div className="mb-3 text-xs sm:text-sm uppercase tracking-wide text-foreground/60 text-center">{t("home.technologies.heading")}</div>
+						<div className="relative rounded-2xl bg-white/95 shadow-sm ring-1 ring-black/5 px-2 sm:px-4 py-3 sm:py-4">
+							<div className="pointer-events-none absolute left-0 top-0 h-full w-8 sm:w-16 bg-gradient-to-r from-white to-transparent rounded-l-2xl" />
+							<div className="pointer-events-none absolute right-0 top-0 h-full w-8 sm:w-16 bg-gradient-to-l from-white to-transparent rounded-r-2xl" />
 							<div className="overflow-hidden">
-								<div className="marquee-track-reverse flex items-center gap-10 sm:gap-14" style={{ width: "max-content" }}>
+								<div className="marquee-track-reverse flex items-center gap-6 sm:gap-10 md:gap-14" style={{ width: "max-content" }}>
 									<div className="flex items-center">
 										{techLogos.map((src, i) => (
-											<a key={`tech-a-${i}`} href="#tech" className="inline-flex items-center justify-center mr-10 sm:mr-14">
-												<Image src={src} alt={`Technology: ${toAlt(src)}`} width={200} height={80} className="h-20 sm:h-28 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+											<a key={`tech-a-${i}`} href="#tech" className="inline-flex items-center justify-center mr-6 sm:mr-10 md:mr-14">
+												<Image src={src} alt={`Technology: ${toAlt(src)}`} width={200} height={80} className="h-16 sm:h-20 md:h-28 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
 											</a>
 										))}
 									</div>
 									<div className="flex items-center">
 										{techLogos.map((src, i) => (
-											<a key={`tech-b-${i}`} href="#tech" className="inline-flex items-center justify-center mr-10 sm:mr-14">
-												<Image src={src} alt={`Technology: ${toAlt(src)}`} width={200} height={80} className="h-20 sm:h-28 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+											<a key={`tech-b-${i}`} href="#tech" className="inline-flex items-center justify-center mr-6 sm:mr-10 md:mr-14">
+												<Image src={src} alt={`Technology: ${toAlt(src)}`} width={200} height={80} className="h-16 sm:h-20 md:h-28 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
 											</a>
 										))}
 									</div>
@@ -165,13 +165,13 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 			)}
 
 			{/* Final CTA */}
-			<section className="mx-auto max-w-[1280px] px-6 py-24 text-center">
-				<motion.h2 initial={{opacity: 0, y: -20}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.8}} viewport={{once: true}} className="text-3xl font-semibold ">{t("home.cta.title")}</motion.h2>
-				<motion.p initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.30, duration: 0.8}} viewport={{once: true}} className="text-foreground/70  mt-3">{t("home.cta.description")}</motion.p>
+			<section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24 text-center">
+				<motion.h2 initial={{opacity: 0, y: -20}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.8}} viewport={{once: true}} className="text-2xl sm:text-3xl font-semibold px-4">{t("home.cta.title")}</motion.h2>
+				<motion.p initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.30, duration: 0.8}} viewport={{once: true}} className="text-foreground/70 mt-3 text-sm sm:text-base px-4">{t("home.cta.description")}</motion.p>
 					<motion.div initial={{opacity: 0, y: 20}} whileHover={{scale: 1.10}}  whileInView={{opacity: 1, y: 0}} transition={{delay: 0.30 , duration: 0.3, scale:{duration: 0.3}}} viewport={{once: true}} className="mt-6">
-					<Link href="/contact" className="rounded-full bg-foreground text-background px-6 py-3   text-sm font-medium ">{t("home.cta.button")}</Link>
+					<Link href="/contact" className="inline-block rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium">{t("home.cta.button")}</Link>
 				</motion.div>
-				<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 1.20, duration: 0.8}} viewport={{once: true}} className="mt-4 text-sm text-foreground/60 ">{t("home.cta.contact")}</motion.div>
+				<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 1.20, duration: 0.8}} viewport={{once: true}} className="mt-4 text-xs sm:text-sm text-foreground/60 px-4">{t("home.cta.contact")}</motion.div>
 			</section>
 		</div>
 	);

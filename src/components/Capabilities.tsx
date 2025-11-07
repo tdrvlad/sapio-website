@@ -112,10 +112,10 @@ export function Capabilities() {
   ];
 
   return (
-    <section className="mx-auto max-w-[1280px] px-6 py-20">
-      <motion.h2 initial={{opacity: 0, y: 25}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}} transition={{duration: 0.5}} className="text-3xl sm:text-4xl font-semibold mb-6 text-center leading-tight">{t("home.capabilities.title")}</motion.h2>
+    <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-12 sm:py-20">
+      <motion.h2 initial={{opacity: 0, y: 25}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}} transition={{duration: 0.5}} className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 text-center leading-tight">{t("home.capabilities.title")}</motion.h2>
 
-      <motion.div layout className="grid h-auto gap-6 sm:grid-cols-2 lg:grid-cols-3" initial={{opacity: 0, y: 25}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}} transition={{duration: 1}} >
+      <motion.div layout className="grid h-auto gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3" initial={{opacity: 0, y: 25}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}} transition={{duration: 1}} >
         {CAPABILITIES_TRANSLATED.map((cap) => {
           const Icon = cap.icon;
           const isOpen = expandedId === cap.id;
@@ -128,7 +128,7 @@ export function Capabilities() {
               onClick={() => setExpandedId((prev) => (prev === cap.id ? null : cap.id))}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 280, damping: 36}}
-              className={`w-full h-auto group rounded-lg border border-black/10 dark:border-white/10 p-5 bg-white/60 dark:bg-white/3 ${
+              className={`w-full h-auto group rounded-lg border border-black/10 dark:border-white/10 p-4 sm:p-5 bg-white/60 dark:bg-white/3 ${
                 isOpen ? "ring-1 ring-foreground/10 bg-white/90 dark:bg-white/15" : ""
               }`}
             >
@@ -137,18 +137,18 @@ export function Capabilities() {
                 whileHover={{ y: -4, scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 280, damping: 36 }}
               >
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-2 sm:gap-3">
                   <motion.div
                     aria-hidden
-                    className="h-10 w-10 rounded-lg bg-foreground/10 flex items-center justify-center"
+                    className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg bg-foreground/10 flex items-center justify-center flex-shrink-0"
                     whileHover={{ rotate: -10, scale: 1.05 }}
                     transition={{ type: "spring", stiffness: 380, damping: 20 }}
                   >
                     <Icon />
                   </motion.div>
                   <div>
-                    <div className="text-xl font-semibold">{cap.title}</div>
-                    <div className="text-sm text-foreground/70">{t("home.capabilities.tapToLearn")}</div>
+                    <div className="text-lg sm:text-xl font-semibold">{cap.title}</div>
+                    <div className="text-xs sm:text-sm text-foreground/70">{t("home.capabilities.tapToLearn")}</div>
                   </div>
                 </div>
               </motion.div>
@@ -160,13 +160,13 @@ export function Capabilities() {
                     key="content"
                     initial={{opacity: 0, height: 0}} animate={{opacity: 1, height: 'auto'}} exit={{opacity: 0, height: 0}} 
                     transition={{ duration: 0.20}}
-                    className="mt-4 text-base leading-relaxed text-foreground/80"
+                    className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-foreground/80"
                   >
                     <p>{cap.description}</p>
-                    <div className="leading-relaxed h-auto mt-4">
+                    <div className="leading-relaxed h-auto mt-3 sm:mt-4">
                       <Link
                         href="/projects"
-                        className="rounded-full border px-5 py-2 text-base font-medium hover:scale-110 hover:bg-foreground/10 transition duration-200"
+                        className="inline-block rounded-full border px-4 sm:px-5 py-2 text-sm sm:text-base font-medium hover:scale-110 hover:bg-foreground/10 transition duration-200"
                       >
                         {t("home.capabilities.seeProjects")}
                       </Link>
