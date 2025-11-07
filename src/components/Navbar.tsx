@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { LangToggle } from "@/components/LangToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
+import { DarkToggle } from "./DarkToggle";
 
 export function Navbar() {
 	const { t } = useLanguage();
@@ -26,19 +27,21 @@ export function Navbar() {
 					"bg-transparent"
 			}`}
 		>
-			<motion.div className="mx-auto max-w-[1280px] px-6 py-6 flex items-center justify-between"
+			<motion.div className="mx-auto max-w-[1280px] px-6 py-6 flex items-center gap-6"
 				initial={{opacity : 0, y : -20}} animate={{opacity : 1, y : 0}} transition={{duration : 0.8, delay : 2.0}}
 				>
-				<div className = "px-4 py-2 rounded-xl">
-				<Link href="/" className="flex items-center gap-3">
-					<span className="relative block h-12 w-12">
-						<Image src="/brand/logo_icon_light_background.png" alt="Sapio logo" fill className="object-contain dark:hidden" sizes="48px" />
-						<Image src="/brand/logo_icon_dark_background.png" alt="Sapio logo" fill className="object-contain hidden dark:block" sizes="48px" />
-					</span>	
-					<span className="text-sm font-semibold tracking-wide">Sapio AI</span>
-				</Link>
+				<div className="flex-1">
+					<div className="px-4 py-2 rounded-xl inline-flex">
+						<Link href="/" className="flex items-center gap-3">
+							<span className="relative block h-12 w-12">
+								<Image src="/brand/logo_icon_light_background.png" alt="Sapio logo" fill className="object-contain dark:hidden" sizes="48px" />
+								<Image src="/brand/logo_icon_dark_background.png" alt="Sapio logo" fill className="object-contain hidden dark:block" sizes="48px" />
+							</span>	
+							<span className="text-sm font-semibold tracking-wide">Sapio AI</span>
+						</Link>
+					</div>
 				</div>
-				<nav className="hidden md:flex items-center gap-6 text-sm"
+				<nav className="hidden md:flex flex-1 justify-center gap-6 text-sm"
 				>
 					<Link href="/services" className="hover:underline underline-offset-4">{t("navbar.solutions")}</Link>
 					<Link href="/projects" className="hover:underline underline-offset-4">{t("navbar.projects")}</Link>
@@ -47,7 +50,7 @@ export function Navbar() {
 					
 					<Link href="/contact" className="hover:underline underline-offset-4">{t("navbar.contact")}</Link>
 				</nav>
-				<div className="flex items-center gap-3">
+				<div className="flex-1 flex items-center justify-end gap-3">
 					<LangToggle />
 					<Link
 						href="/contact"
@@ -55,10 +58,9 @@ export function Navbar() {
 					>
 						{t("navbar.consultation")}
 					</Link>
+					<DarkToggle/>
 				</div>
 			</motion.div>
 		</motion.header>
 	);
 }
-
-
