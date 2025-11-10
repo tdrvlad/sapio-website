@@ -1,5 +1,3 @@
-import { m } from "framer-motion";
-
 export type Language = "en" | "ro";
 
 export const translations = {
@@ -127,50 +125,39 @@ export const translations = {
 		},
 		servicesPage: {
 			hero: {
-				eyebrow: "Servicii AI personalizate",
-				title: "Strategie, implementare și operațiuni — construite împreună cu echipa ta",
-				subtitle:
-					"Identificăm oportunitățile cu impact, proiectăm soluții AI scalabile și livrăm produse care generează rezultate măsurabile.",
+				eyebrow: "Ce facem",
+				title: "Soluții AI personalizate",
+				subtitle: "De la audit tehnic la software personalizat și training — construim soluții practice care rezolvă provocările tale specifice.",
 			},
-			highlightsTitle: "Cum colaborăm",
-			highlights: [
-				{
-					title: "Descoperire și strategie",
-					description: "Analizăm procesele, audităm datele și definim indicatorii de succes pentru inițiativa ta AI.",
+			services: {
+				audit: {
+					title: "Audit Tehnic",
+					description: "Brainstorm de idei și descoperă cum AI poate rezolva blocajele din pipeline-ul tău. Discutăm soluții practice și eficiente pentru piața și contextul tău specific sau oferim o evaluare a performanței setup-ului actual.",
 				},
-				{
-					title: "Produs și inginerie",
-					description: "Concepem fluxuri end-to-end, integrări și interfețe care funcționează în ecosistemul tău tehnic.",
+				software: {
+					title: "Software AI Personalizat",
+					description: "Dezvoltăm soluții personalizate pentru nevoile afacerii tale, acoperind o gamă largă de aplicații de la viziune computerizată la procesare limbaj natural și asistenți inteligenți.",
 				},
-				{
-					title: "Operațiuni și enablement",
-					description: "Pregătim echipa, monitorizăm performanța modelelor și iterăm în siguranță cu om în buclă.",
+				workshops: {
+					title: "Workshop-uri și Training",
+					description: "Ridică echipa ta în era AI cu workshop-uri practice care vor ajuta afacerea ta să crească și să se adapteze alături de tehnologia de ultimă oră. Învață cum să valorifici tehnologia cea mai recentă în avantajul tău.",
 				},
-			],
-			approach: {
-				title: "Abordarea noastră",
-				steps: [
-					{
-						title: "Săptămâna de fundație",
-						description:
-							"Workshop-uri executive, sesiuni cu stakeholderi și evaluarea datelor pentru a alinia obiectivele și constrângerile.",
-					},
-					{
-						title: "Sprint-uri de construire",
-						description:
-							"Livrăm incremental: prototip, integrare, testare și lansare controlată, cu feedback continuu de la utilizatori.",
-					},
-					{
-						title: "Transfer și scalare",
-						description:
-							"Documentație, training, monitorizare și roadmap pentru următoarele iterații astfel încât soluția să crească odată cu business-ul tău.",
-					},
+			},
+			industries: {
+				title: "Tipuri de produse și industrii",
+				items: [
+					"Agenți AI & Asistenți",
+					"Viziune Computerizată, Detectare Obiecte",
+					"Automatizări și Workflow-uri",
+					"Integrare cu Platforme Legacy",
+					"Baze de Date Semantice / RAG",
 				],
 			},
 			cta: {
-				title: "Hai să construim soluția ta AI",
-				description: "Spune-ne despre provocările tale și îți arătăm în câteva zile cum ar putea arăta un MVP funcțional.",
-				button: "Programează o discuție",
+				title: "Hai să discutăm despre proiectul tău",
+				description: "Contactează-ne pentru a afla cum putem ajuta afacerea ta cu soluții AI personalizate.",
+				button: "Contactează-ne",
+				linkedin: "Conectează-te pe LinkedIn",
 			},
 		},
 		teamPage: {
@@ -224,9 +211,44 @@ export const translations = {
 		projectsPage: {
 			hero: {
 				eyebrow: "Proiecte",
-				title: "Produse AI livrate în producție",
-				subtitle:
-					"Selectăm câteva proiecte care arată cum abordăm provocări diferite — de la legal tech la operațiuni industriale.",
+				title: "Studii de caz AI",
+				subtitle: "Soluții AI din lumea reală care oferă impact măsurabil",
+				featuredButton: "Proiect Recomandat",
+				startButton: "Începe Proiectul Tău",
+			},
+			caseStudies: {
+				title: "Studii de Caz",
+			},
+			modal: {
+				technologies: "Tehnologii",
+				metrics: "Metrici Cheie",
+				viewButton: "Vezi Studiul de Caz",
+				startButton: "Începe Proiect",
+			},
+			projects: {
+				aiAflat: {
+					subtitle: "Cel mai bun sistem de căutare juridică din România",
+					shortDescription: "Asistent juridic alimentat de AI cu căutare semantică în peste 500k documente legislative românești.",
+					fullDescription: "Am construit cea mai avansată platformă de căutare juridică din România, cu capabilități de căutare semantică în peste 500.000 de documente legislative. Sistemul folosește RAG (Retrieval-Augmented Generation) pentru a oferi răspunsuri precise și citate la întrebări juridice, reducând dramatic timpul de cercetare pentru profesioniștii din domeniul juridic. Actualizări automate zilnice asigură că baza de date rămâne actualizată cu noua legislație.",
+				},
+				healthcare: {
+					title: "AI pentru Sănătate",
+					subtitle: "Analiză și Insights din Date Medicale",
+					shortDescription: "Analiză avansată și extragere de insights din date complexe de sănătate folosind machine learning.",
+					fullDescription: "Am dezvoltat o platformă comprehensivă de analiză pentru sănătate care procesează și analizează dosare medicale, date despre pacienți și rezultate clinice. Sistemul folosește procesare limbaj natural pentru a extrage insights semnificative din notițe medicale nestructurate, identifică pattern-uri în îngrijirea pacienților și oferă recomandări acționabile pentru furnizorii de servicii medicale. Arhitectura conformă HIPAA asigură securitatea și confidențialitatea datelor.",
+				},
+				personalAssistant: {
+					title: "Asistent AI Personal",
+					subtitle: "Manager de Sarcini Adaptiv",
+					shortDescription: "Asistent personal inteligent care învață din comportamentul utilizatorului și se adaptează la workflow-uri individuale.",
+					fullDescription: "Am creat un asistent AI adaptiv alimentat de modele lingvistice mari care gestionează sarcini, programări și workflow-uri personale. Sistemul învață din interacțiunile utilizatorului pentru a oferi recomandări din ce în ce mai personalizate și automatizează sarcinile de rutină. Funcționalitățile includ crearea de sarcini în limbaj natural, programare inteligentă cu detectare conflicte și integrare cu instrumente populare de productivitate.",
+				},
+				publicTenders: {
+					title: "AI pentru Licitații Publice",
+					subtitle: "Monitorizare Automată Licitații",
+					shortDescription: "Sistem automat de monitorizare și raportare pentru licitații publice relevante pentru industrii specifice.",
+					fullDescription: "Am construit un sistem inteligent de monitorizare care urmărește oportunitățile de achiziții publice pe multiple platforme guvernamentale. AI-ul analizează documentele de licitație, extrage cerințele cheie și le potrivește cu profilurile clienților pentru a identifica oportunitățile relevante. Alertele automate și rapoartele detaliate ajută afacerile să rămână informate despre oportunitățile de licitare fără monitorizare manuală.",
+				},
 			},
 			featured: [
 				{
@@ -475,10 +497,33 @@ export const translations = {
 		},
 		servicesPage: {
 			hero: {
-				eyebrow: "Custom AI services",
-				title: "Strategy, build, and launch — delivered with your team",
-				subtitle:
-					"We identify high-impact opportunities, architect scalable AI systems, and ship products that move the business needle.",
+				eyebrow: "What We Do",
+				title: "What can we do",
+				subtitle: "and how we can help you",
+			},
+			services: {
+				audit: {
+					title: "Technical Audit",
+					description: "Brainstorm ideas and find out how AI can solve bottlenecks in your pipeline. We discuss solutions that are practical and efficient for your specific market and context or provide an assessment of the current setup's performance.",
+				},
+				software: {
+					title: "Custom AI Software",
+					description: "We develop tailor-made solutions for your business needs, spanning a wide range of applications from computer vision to natural language processing and intelligent assistants.",
+				},
+				workshops: {
+					title: "Workshops and Training",
+					description: "Elevate your team into the age of AI with practical workshops that will help your business grow and adapt alongside state-of-the-art technology. Learn how to leverage the latest technology to your advantage.",
+				},
+			},
+			industries: {
+				title: "Product Types & Industries",
+				items: [
+					"AI Agents & Assistants",
+					"Computer Vision, Object Detection",
+					"Automations and Workflows",
+					"Integration with Legacy Platforms",
+					"Semantic Databases / RAG",
+				],
 			},
 			highlightsTitle: "How we partner",
 			highlights: [
@@ -515,7 +560,8 @@ export const translations = {
 			cta: {
 				title: "Ready to build together?",
 				description: "Share your challenge and we’ll outline a functional MVP concept within days.",
-				button: "Book a call",
+				button: "Get in touch",
+				linkedin: "Connect on LinkedIn",
 			},
 		},
 		teamPage: {
@@ -569,9 +615,44 @@ export const translations = {
 		projectsPage: {
 			hero: {
 				eyebrow: "Projects",
-				title: "AI products shipped to production",
-				subtitle:
-					"A selection of engagements that showcase our approach across industries — from legal tech to customer experience.",
+				title: "Our AI Case Studies",
+				subtitle: "Real-world AI solutions delivering measurable impact",
+				featuredButton: "Featured Project",
+				startButton: "Start Your Project",
+			},
+			caseStudies: {
+				title: "Case Studies",
+			},
+			modal: {
+				technologies: "Technologies",
+				metrics: "Key Metrics",
+				viewButton: "View Case Study",
+				startButton: "Start Project",
+			},
+			projects: {
+				aiAflat: {
+					subtitle: "Romania's Best Legal Search System",
+					shortDescription: "AI-powered legal assistant with semantic search across 500k+ Romanian legislative documents.",
+					fullDescription: "We built Romania's most advanced legal search platform, featuring semantic search capabilities across over 500,000 legislative documents. The system uses RAG (Retrieval-Augmented Generation) to provide accurate, cited answers to legal queries, dramatically reducing research time for legal professionals. Daily automated updates ensure the database stays current with new legislation.",
+				},
+				healthcare: {
+					title: "Healthcare AI",
+					subtitle: "Medical Data Analysis & Insights",
+					shortDescription: "Advanced analysis and insights extraction from complex healthcare data using machine learning.",
+					fullDescription: "Developed a comprehensive healthcare analytics platform that processes and analyzes medical records, patient data, and clinical outcomes. The system employs natural language processing to extract meaningful insights from unstructured medical notes, identifies patterns in patient care, and provides actionable recommendations for healthcare providers. HIPAA-compliant architecture ensures data security and privacy.",
+				},
+				personalAssistant: {
+					title: "Personal AI Assistant",
+					subtitle: "Adaptive Task Manager",
+					shortDescription: "Intelligent personal assistant that learns from user behavior and adapts to individual workflows.",
+					fullDescription: "Created an adaptive AI assistant powered by large language models that manages tasks, schedules, and personal workflows. The system learns from user interactions to provide increasingly personalized recommendations and automates routine tasks. Features include natural language task creation, smart scheduling with conflict detection, and integration with popular productivity tools.",
+				},
+				publicTenders: {
+					title: "Public Tenders AI",
+					subtitle: "Automated Tender Monitoring",
+					shortDescription: "Automated monitoring and reporting system for public tenders relevant to specific industries.",
+					fullDescription: "Built an intelligent monitoring system that tracks public procurement opportunities across multiple government platforms. The AI analyzes tender documents, extracts key requirements, and matches them against client profiles to identify relevant opportunities. Automated alerts and detailed reports help businesses stay informed about bidding opportunities without manual monitoring.",
+				},
 			},
 			featured: [
 				{
