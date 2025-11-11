@@ -17,6 +17,7 @@ export function Navbar() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const pathname = usePathname();
 	const isHome = pathname === "/";
+	const isServices = pathname == "/services";
 
 	useEffect(() => {
 		const onScroll = () => setScrolled(window.scrollY > 100);
@@ -45,7 +46,7 @@ export function Navbar() {
 			}`}
 		>
 			<motion.div className="mx-auto max-w-[1280px] px-4 sm:px-6 py-4 sm:py-6 flex items-center gap-3 sm:gap-6"
-				initial={{opacity : 0, y : -20}} animate={{opacity : 1, y : 0}} transition={{duration : 0.8, delay : isHome ? 2.0 : 0}}
+				initial={{opacity : 0, y : -20}} animate={{opacity : 1, y : 0}} transition={{duration : 0.8, delay : isHome ? 2.0 : isServices ? 2.0 : 0}}
 				>
 				<div className="flex-1">
 					<div className="px-2 sm:px-4 py-2 rounded-xl">

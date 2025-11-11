@@ -82,7 +82,7 @@ export default function ServicesPage() {
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
 
                 {/* Navigation Buttons */}
-                <button
+                <motion.button
                     onClick={handlePrevious}
                     className="pointer-events-auto absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 h-12 w-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-white/20 hover:scale-110 transition-all group duration-450"
                     aria-label="Previous service"
@@ -90,8 +90,8 @@ export default function ServicesPage() {
                     <svg className="h-6 w-6 text-white group-hover:scale-130 transition-transform duratio-450" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                     onClick={handleNext}
                     className="pointer-events-auto absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 h-12 w-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-white/20 hover:scale-110 transition-all group duration-450"
                     aria-label="Next service"
@@ -99,7 +99,7 @@ export default function ServicesPage() {
                     <svg className="h-6 w-6 text-white group-hover:scale-130 transition-transform duration-450" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                </button>
+                </motion.button>
 
                 <div className="relative z-10 mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24 text-center w-full">
                     <motion.div
@@ -108,9 +108,13 @@ export default function ServicesPage() {
                         transition={{ duration: 0.8, delay: 0.3 }}
                         className="mb-4"
                     >
-                        <span className="text-xs sm:text-sm uppercase tracking-wider text-white/80">{t('servicesPage.hero.eyebrow')}</span>
+                        <span className="text-xs sm:text-[16px] uppercase font-semibold tracking-wider text-white/80">{t('servicesPage.hero.eyebrow')}</span>
                     </motion.div>
-                    <AnimatePresence mode="wait">
+                    <motion.div initial={{opacity: 0, scale: 0.60}}
+                    transition={{duration: 1.2, delay: 1.0}}
+                    whileInView={{opacity: 1, scale: 1.00}}
+                    viewport={{once: true}}>
+                        <AnimatePresence mode="wait">
                         <motion.h1
                             key={selectedService}
                             initial={{ opacity: 0, y: -20 }}
@@ -134,10 +138,11 @@ export default function ServicesPage() {
                             {currentService.description}
                         </motion.p>
                     </AnimatePresence>
+                    </motion.div>
                 </div>
             </section>
 
-            <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 0.8}} viewport={{once: true}} className="section-divider" />
+            <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 0.8, delay: 2.0}} viewport={{once: true}} className="section-divider" />
         
 
             {/* Service Selection Cards - Redesigned */}
@@ -212,8 +217,8 @@ export default function ServicesPage() {
                     {t('servicesPage.cta.title')}
                 </motion.h2>
                 <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 20, scale: 0.60 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1.00 }}
                     transition={{ duration: 0.6, delay: 0.15 }}
                     viewport={{ once: true }}
                     className="text-foreground/70 mt-3 text-sm sm:text-base"
@@ -229,7 +234,7 @@ export default function ServicesPage() {
                 >
                     <Link
                         href="/contact"
-                        className="inline-block rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:opacity-90 transition"
+                        className="inline-block rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:scale-110 hover:opacity-90 transition duration-300"
                     >
                         {t('servicesPage.cta.button')}
                     </Link>
@@ -237,7 +242,7 @@ export default function ServicesPage() {
                         href="https://linkedin.com/company/sapio-ai"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block rounded-full border border-foreground px-6 py-3 text-sm font-medium hover:bg-foreground/10 transition"
+                        className="inline-block rounded-full border border-foreground px-6 py-3 text-sm font-medium hover:scale-110 hover:bg-foreground/10 transition duration-300"
                     >
                         {t('servicesPage.cta.linkedin')}
                     </a>

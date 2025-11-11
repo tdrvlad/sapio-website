@@ -127,9 +127,6 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 				</section>
 			)}
 			<Capabilities/>
-			{/*<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.8}} viewport={{once: true}}>
-				<Capabilities />
-			</motion.div>*/}
 			<motion.div initial={{opacity: 0, y: -25}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.5}} viewport={{once: true}}>
 				<SolutionFinder />
 			</motion.div>

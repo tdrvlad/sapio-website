@@ -497,7 +497,7 @@ export const translations = {
 		},
 		servicesPage: {
 			hero: {
-				eyebrow: "What We Do",
+				eyebrow: "What can we do",
 				title: "What can we do",
 				subtitle: "and how we can help you",
 			},
@@ -682,6 +682,7 @@ export const translations = {
 				title: "Have a project brief?",
 				description: "Send a short overview and we’ll return with suggested next steps within 48 hours.",
 				button: "Contact us",
+				linkedin: "Connect on LinkedIn"
 			},
 		},
 		projectDetails: {

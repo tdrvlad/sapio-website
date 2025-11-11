@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import "@/components/comp.css"
 import { useState } from "react";
 import { X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -101,20 +102,20 @@ export default function ProjectsSection() {
                     >
                         <Link
                             href="/projects/ai-aflat"
-                            className="rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition-all"
+                            className="rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 text-sm font-medium hover:scale-110 hover:bg-white/20 transition-all duration-300"
                         >
                             {t('projectsPage.hero.featuredButton')}
                         </Link>
                         <Link
                             href="/contact"
-                            className="rounded-full bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-all"
+                            className="rounded-full bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 hover:scale-110 transition-all duration-300"
                         >
                             {t('projectsPage.hero.startButton')}
                         </Link>
                     </motion.div>
                 </div>
             </section>
-
+            <div className="section-divider"/>
             {/* Case Studies Section */}
             <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24">
                 <motion.h2
@@ -132,11 +133,11 @@ export default function ProjectsSection() {
                             key={project.id}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: idx * 0.1 }}
+                            transition={{ duration: 0.3}}
                             viewport={{ once: true }}
                             whileHover={{ scale: 1.03, y: -5 }}
                             onClick={() => setSelectedProject(project.id)}
-                            className="bg-white dark:bg-white/5 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-black/5 dark:border-white/10 text-left cursor-pointer"
+                            className="bg-white dark:bg-white/5 rounded-2xl shadow-lg  overflow-hidden border border-black/5 dark:border-white/10 text-left cursor-pointer"
                         >
                             <div className="relative h-48 bg-foreground/5">
                                 <Image
@@ -267,6 +268,52 @@ export default function ProjectsSection() {
                     </>
                 )}
             </AnimatePresence>
+            
+            <div className="section-divider"/>
+
+            {/* CTA */}
+            <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24 text-center">
+                <motion.h2
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                    className="text-2xl sm:text-3xl font-semibold"
+                >
+                    {t('projectsPage.cta.title')}
+                </motion.h2>
+                <motion.p
+                    initial={{ opacity: 0, y: 20, scale: 0.60 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1.00 }}
+                    transition={{ duration: 0.6, delay: 0.15 }}
+                    viewport={{ once: true }}
+                    className="text-foreground/70 mt-3 text-sm sm:text-base"
+                >
+                    {t('projectsPage.cta.description')}
+                </motion.p>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.25, duration: 0.3 }}
+                    viewport={{ once: true }}
+                    className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4"
+                >
+                    <Link
+                        href="/contact"
+                        className="inline-block rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:scale-110 hover:opacity-90 transition duration-300"
+                    >
+                        {t('projectsPage.cta.button')}
+                    </Link>
+                    <a
+                        href="https://linkedin.com/company/sapio-ai"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block rounded-full border border-foreground px-6 py-3 text-sm font-medium hover:scale-110 hover:bg-foreground/10 transition duration-300"
+                    >
+                        {t('projectsPage.cta.linkedin')}
+                    </a>
+                </motion.div>
+            </section>
         </div>
     );
 }
