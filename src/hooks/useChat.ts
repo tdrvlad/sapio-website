@@ -62,7 +62,7 @@ export const useChat = (): ChatHookReturn => {
       let recaptchaToken: string;
       try {
         recaptchaToken = await executeRecaptcha("chat_message");
-      } catch (error) {
+      } catch {
         throw new Error(
           "Failed to verify you are human. Please refresh the page and try again."
         );

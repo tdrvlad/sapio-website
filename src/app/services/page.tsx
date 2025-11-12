@@ -34,15 +34,6 @@ export default function ServicesPage() {
     });
 
     const currentService = getServiceData(selectedService);
-    
-    // Safely get industries array
-    let industries: string[] = [];
-    try {
-        const industriesData = t('servicesPage.industries.items');
-        industries = Array.isArray(industriesData) ? industriesData : [];
-    } catch (error) {
-        console.error('Error loading industries:', error);
-    }
 
     const handlePrevious = () => {
         const currentIndex = services.indexOf(selectedService);

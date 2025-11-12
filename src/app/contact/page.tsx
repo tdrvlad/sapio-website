@@ -2,7 +2,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import "@/components/comp.css";
 
 export default function ServicesPage() {

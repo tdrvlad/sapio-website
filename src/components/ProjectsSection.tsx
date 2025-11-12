@@ -8,7 +8,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const getProjects = (t: any) => [
+const getProjects = (t: (key: string) => string) => [
     {
         id: "ai-aflat",
         title: "ai-aflat.ro",
@@ -128,7 +128,7 @@ export default function ProjectsSection() {
                     {t('projectsPage.caseStudies.title')}
                 </motion.h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {PROJECTS.map((project, idx) => (
+                    {PROJECTS.map((project) => (
                         <motion.button
                             key={project.id}
                             initial={{ opacity: 0, y: 20 }}
