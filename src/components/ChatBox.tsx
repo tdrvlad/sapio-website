@@ -75,9 +75,9 @@ export default function ChatBox({ initialMessage, className, heightClass, greeti
           ))}
         </div>
       )}
-      <div className="mt-3 flex items-center gap-2">
+      <div className="mt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
         <input
-          className="flex-1 rounded border px-3 py-2 text-base bg-transparent"
+          className="flex-1 rounded border px-3 py-2 text-base bg-transparent min-w-0"
           placeholder="Ask about Sapio…"
           aria-label="Message input"
           value={inputValue}
@@ -86,7 +86,7 @@ export default function ChatBox({ initialMessage, className, heightClass, greeti
           disabled={isLoading}
         />
         <button
-          className="rounded bg-foreground text-background px-5 py-2 text-base font-semibold disabled:opacity-50"
+          className="rounded bg-foreground text-background px-5 py-2 text-base font-semibold disabled:opacity-50 whitespace-nowrap"
           onClick={sendMessage}
           disabled={isLoading}
         >
@@ -94,7 +94,7 @@ export default function ChatBox({ initialMessage, className, heightClass, greeti
         </button>
       </div>
       {footerCTA ? (
-        <div className="mt-2 text-sm text-foreground/60">{footerCTA}</div>
+        <div className="mt-2 text-xs sm:text-sm text-foreground/60">{footerCTA}</div>
       ) : (
         <div className="mt-2 text-xs text-foreground/60">
           Prefer a full view? <a href="/chatbot" className="underline underline-offset-4">Open the chatbot</a>
