@@ -66,15 +66,26 @@ export default function ProjectsSection() {
         <div className="font-sans">
             {/* Hero Section */}
             <section className="relative isolate min-h-[70vh] overflow-hidden flex items-center">
-                <div className="absolute inset-0">
+                <motion.div 
+                    className="absolute inset-0"
+                    initial={{ scale: 1.2 }}
+                    animate={{ scale: 1 }}
+                    transition={{ 
+                        duration: 3,
+                        ease: "easeOut",
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        repeatDelay: 0
+                    }}
+                >
                     <Image
-                        src="/videos/processed/eniac_1-poster.jpg"
+                        src="/projectHero.jpeg"
                         alt="AI Infrastructure"
                         fill
                         className="object-cover"
                         priority
                     />
-                </div>
+                </motion.div>
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
                 
                 <div className="relative z-10 mx-auto max-w-[1280px] px-4 sm:px-6 py-24 text-center w-full">

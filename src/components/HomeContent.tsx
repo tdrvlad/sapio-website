@@ -5,7 +5,7 @@ import Image from "next/image";
 import { SolutionFinder } from "@/components/SolutionFinder";
 import { Capabilities } from "@/components/Capabilities";
 import HeroVideo from "@/components/HeroVideo";
-import ChatInvitation from "@/components/ChatInvitation";
+import LandingChatbot from "@/components/LandingChatbot";
 import { useLanguage } from "@/contexts/LanguageContext";
 import './comp.css';
 import { motion } from 'framer-motion';
@@ -30,9 +30,8 @@ export default function HomeContent({ clientLogos, techLogos }: HomeContentProps
 			<HeroVideo />
 
 			<motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.8, delay: 2.0}} className="section-divider"></motion.div>
-			<div className="px-4 sm:px-6 lg:px-10 py-6 sm:py-10">
-				<ChatInvitation/>
-			</div>
+			
+			<LandingChatbot />
 			{/* Flagship projects */}
 			<section id="projects" className="mx-auto max-w-[1280px] px-4 sm:px-6 py-12 sm:py-20 grid gap-6 sm:gap-10 md:grid-cols-2">
 				<motion.div
