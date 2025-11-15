@@ -1,17 +1,16 @@
 "use client";
 
-import './comp.css';
+import "./comp.css";
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { SapioWidget } from "sapio-widget";
 
-import { Capabilities } from '@/components/Capabilities';
-import HeroVideo from '@/components/HeroVideo';
-import { SolutionFinder } from '@/components/SolutionFinder';
-import { useLanguage } from '@/contexts/LanguageContext';
-
-import { SapioWidgetWrapper } from './SapioWidgetWrapper';
+import { Capabilities } from "@/components/Capabilities";
+import HeroVideo from "@/components/HeroVideo";
+import { SolutionFinder } from "@/components/SolutionFinder";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type HomeContentProps = {
   clientLogos: string[];
@@ -42,7 +41,7 @@ export default function HomeContent({
       ></motion.div>
 
       {/* <LandingChatbot /> */}
-      <SapioWidgetWrapper apiKey={process.env.NEXT_PUBLIC_CHAT_API_KEY || ""} />
+      <SapioWidget apiKey={process.env.NEXT_PUBLIC_CHAT_API_KEY || ""} />
 
       {/* Flagship projects */}
       <section
