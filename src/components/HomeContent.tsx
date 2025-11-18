@@ -8,10 +8,9 @@ import Link from 'next/link';
 
 import { Capabilities } from '@/components/Capabilities';
 import HeroVideo from '@/components/HeroVideo';
+import { SapioConsoleSection } from '@/components/SapioConsoleSection';
 import { SolutionFinder } from '@/components/SolutionFinder';
 import { useLanguage } from '@/contexts/LanguageContext';
-
-import { SapioWidget } from 'sapio-widget';
 
 type HomeContentProps = {
   clientLogos: string[];
@@ -41,8 +40,7 @@ export default function HomeContent({
         className="section-divider"
       ></motion.div>
 
-      {/* <LandingChatbot /> */}
-      <SapioWidget apiKey={'ka_68a6e359_GteZDNNsc-Bcw8UTyuPZLB1veyJFI7Xe'} />
+      <SapioConsoleSection />
 
       {/* Flagship projects */}
       <section
