@@ -162,50 +162,52 @@ export const translations = {
 		},
 		teamPage: {
 			hero: {
-				eyebrow: "Echipă",
-				title: "Cunoaște oamenii din spatele Sapio",
-				subtitle:
-					"Suntem cercetători aplicați, ingineri și designeri care construiesc produse AI cu impact direct în business.",
+				title: "Cunoaște echipa",
+				subtitle: "Construim soluții AI care fac diferența",
 			},
-			membersTitle: "Leadership",
-			members: [
-				{
+			membersTitle: "Echipa noastră",
+			members: {
+				vlad: {
 					name: "Vlad Tudor",
-					role: "Managing Partner",
-					bio: "Coordonează strategia produselor și relația cu partenerii enterprise. 10+ ani în consultanță tehnologică și AI.",
+					role: "Fondator & CEO",
+					bio: "Cercetător AI și antreprenor cu peste 10 ani de experiență în construirea sistemelor AI de producție. Pasionat de a face AI accesibil și practic pentru afaceri.",
+					expertise: ["Machine Learning", "Strategie Produs", "Leadership Echipă"],
 				},
-				{
-					name: "Ioana Ionescu",
-					role: "Head of Delivery",
-					bio: "Conduce echipele cross-functionale și se asigură că soluțiile intră în producție în condiții de siguranță și conformitate.",
+				mihai: {
+					name: "Mihai Marinescu",
+					role: "Produs & Design",
+					bio: "Designer de produs cu experiență în crearea interfețelor intuitive pentru aplicații AI complexe. Specializat în UX research și design de sisteme.",
+					expertise: ["UX Design", "Design de Produs", "Prototipare"],
 				},
-				{
-					name: "Andrei Popescu",
-					role: "Lead Machine Learning Engineer",
-					bio: "Specialist în modele lingvistice și RAG pentru industrii reglementate, cu experiență în scalarea infrastructurii.",
+				andrei: {
+					name: "Andrei Pata",
+					role: "Frontend & Apps",
+					bio: "Dezvoltator frontend specializat în aplicații web moderne și mobile. Expert în React, Next.js și arhitecturi scalabile.",
+					expertise: ["React", "Next.js", "Mobile Development"],
 				},
-			],
-			values: {
-				title: "Cum lucrăm",
-				items: [
-					{
-						title: "Aplicat, nu teoretic",
-						description: "Prototipăm rapid și învățăm din date reale, punând accent pe rezultate măsurabile.",
-					},
-					{
-						title: "Transparență totală",
-						description: "Împărtășim fiecare ipoteză, limitare și decizie tehnică pentru ca partenerii să ia decizii informate.",
-					},
-					{
-						title: "Echipe integrate",
-						description: "Lucrăm cot la cot cu oamenii tăi, din prima zi, pentru a transfera know-how și autonomie.",
-					},
-				],
+				ana: {
+					name: "Ana-Maria Stanescu",
+					role: "Community Manager",
+					bio: "Specialist în comunicare și construirea comunității. Gestionează relațiile cu clienții și coordonează inițiativele de outreach.",
+					expertise: ["Comunicare", "Community Building", "Content Strategy"],
+				},
+				luminita: {
+					name: "Luminița Ștefan",
+					role: "UX Designer",
+					bio: "Designer UX cu focus pe accesibilitate și design centrat pe utilizator. Creează experiențe care simplifică tehnologia complexă.",
+					expertise: ["UX Design", "Accesibilitate", "User Research"],
+				},
+				flavius: {
+					name: "Flavius Moldovan",
+					role: "AI Engineer",
+					bio: "Inginer AI specializat în modele lingvistice și sisteme RAG. Experiență în implementarea soluțiilor AI la scară.",
+					expertise: ["NLP", "RAG", "Model Training"],
+				},
 			},
 			cta: {
-				title: "Vrei să ni te alături?",
-				description: "Căutăm colegi care iubesc să rezolve probleme complexe în mod responsabil. Spune-ne câteva lucruri despre tine.",
-				button: "Vezi rolurile deschise",
+				title: "Vrei să lucrezi cu noi?",
+				description: "Contactează-ne pentru a discuta despre proiectul tău AI",
+				button: "Contactează-ne",
 			},
 		},
 		projectsPage: {
@@ -356,20 +358,22 @@ export const translations = {
 		},
 		contactPage: {
 			hero: {
-				eyebrow: "Contact",
-				title: "Spune-ne despre provocarea ta",
-				subtitle: "Răspundem rapid și venim cu sugestii concrete în maximum 48 de ore.",
+				title: "Contactează-ne",
+				subtitle: "Hai să discutăm cum AI poate transforma afacerea ta",
 			},
-			details: {
-				email: "hello@sapio.ro",
-				phone: "+40 723 000 000",
-				location: "București & remote în UE",
-				availability: "Program: Luni-Vineri, 09:00 - 18:00 EET",
+			infoTitle: "Informații de contact",
+			linkedin: {
+				title: "LinkedIn",
+				description: "Conectează-te cu Vlad Tudor pe LinkedIn",
+				cta: "Click pentru a te conecta →",
+			},
+			email: {
+				title: "Email",
+				description: "Trimite-ne un email direct",
 			},
 			cta: {
-				title: "Preferi o întâlnire?",
-				description: "Rezervă un slot de 30 de minute și discutăm live despre ce dorești să construiești.",
-				button: "Rezervă o întâlnire",
+				title: "Pregătit să începi călătoria ta AI?",
+				description: "Fie că ai un proiect specific în minte sau doar vrei să explorezi posibilitățile, suntem aici să te ajutăm. Contactează-ne și hai să construim ceva extraordinar împreună.",
 			},
 		},
 	},
@@ -566,29 +570,45 @@ export const translations = {
 		},
 		teamPage: {
 			hero: {
-				eyebrow: "Team",
-				title: "Meet the builders behind Sapio",
-				subtitle:
-					"We are applied researchers, engineers, and designers focused on shipping AI products that create measurable outcomes.",
+				title: "Meet the Team",
+				subtitle: "Building AI solutions that make a difference",
 			},
-			membersTitle: "Leadership",
-			members: [
-				{
+			membersTitle: "Our Team",
+			members: {
+				vlad: {
 					name: "Vlad Tudor",
-					role: "Managing Partner",
-					bio: "Leads product strategy and enterprise partnerships. 10+ years delivering technology and AI programs.",
+					role: "Founder & CEO",
+					bio: "AI researcher and entrepreneur with 10+ years of experience building production AI systems. Passionate about making AI accessible and practical for businesses.",
+					expertise: ["Machine Learning", "Product Strategy", "Team Leadership"],
 				},
-				{
-					name: "Ioana Ionescu",
-					role: "Head of Delivery",
-					bio: "Orchestrates cross-functional teams and ensures solutions reach production safely and compliantly.",
+				mihai: {
+					name: "Mihai Marinescu",
+					role: "Product & Design",
+					bio: "Product designer with experience creating intuitive interfaces for complex AI applications. Specialized in UX research and systems design.",
+					expertise: ["UX Design", "Product Design", "Prototyping"],
 				},
-				{
-					name: "Andrei Popescu",
-					role: "Lead Machine Learning Engineer",
-					bio: "Specialises in language models and RAG for regulated industries, with experience scaling infrastructure.",
+				andrei: {
+					name: "Andrei Pata",
+					role: "Frontend & Apps",
+					bio: "Frontend developer specialized in modern web and mobile applications. Expert in React, Next.js, and scalable architectures.",
+					expertise: ["React", "Next.js", "Mobile Development"],
 				},
-			],
+				ana: {
+					name: "Ana-Maria Stanescu",
+					role: "Community Manager",
+					bio: "Communication specialist and community builder. Manages client relationships and coordinates outreach initiatives.",
+					expertise: ["Communication", "Community Building", "Content Strategy"],
+				},
+				luminita: {
+					name: "Luminița Ștefan",
+					role: "UX Designer",
+					bio: "UX designer focused on accessibility and user-centered design. Creates experiences that simplify complex technology.",
+					expertise: ["UX Design", "Accessibility", "User Research"],
+				},
+				flavius: {
+					name: "Flavius Moldovan",
+					role: "AI Engineer",
+			},
 			values: {
 				title: "How we work",
 				items: [
@@ -612,6 +632,7 @@ export const translations = {
 				button: "View open roles",
 			},
 		},
+	},
 		projectsPage: {
 			hero: {
 				eyebrow: "Projects",
@@ -759,22 +780,26 @@ export const translations = {
 				},
 			},
 		},
+		
 		contactPage: {
 			hero: {
-				eyebrow: "Contact",
-				title: "Tell us about your challenge",
-				subtitle: "We reply fast with clear next steps — usually within 48 hours.",
+				title: "Meet the Founder",
+				subtitle: "Let's discuss how AI can change your business",
 			},
-			details: {
-				email: "hello@sapio.ro",
-				phone: "+40 723 000 000",
-				location: "Bucharest & remote across the EU",
-				availability: "Availability: Monday–Friday, 09:00-18:00 EET",
+			infoTitle: "Contact Info",
+			linkedin: {
+				title: "LinkedIn",
+				description: "Talk to Vlad Tudor on LinkedIn",
+				cta: "Click to talk →",
+			},
+			email: {
+				title: "Email",
+				description: "Send us a direct Email",
 			},
 			cta: {
-				title: "Prefer a live session?",
-				description: "Book a 30-minute slot and we’ll walk through your current roadmap together.",
-				button: "Book a meeting",
+				title: "Ready to start your jorney with AI?",
+				description: "We are here to help you build what you have in mind",
+				button: "Get stared on your jorney"
 			},
 		},
 	},

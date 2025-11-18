@@ -1,27 +1,30 @@
-'use client'
+"use client";
+
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Linkedin } from "lucide-react";
-import "@/components/comp.css";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { Linkedin, Mail } from "lucide-react";
 
 const TEAM_MEMBERS = [
     {
         id: "vlad",
         name: "Vlad Tudor",
         role: "Founder & CEO",
-        image: "/team/vlad.png",
+        image: "/videos/processed/andrew_ng-poster.jpg", // placeholder
         bio: "AI researcher and entrepreneur with 10+ years of experience building production AI systems. Passionate about making AI accessible and practical for businesses.",
         linkedin: "https://www.linkedin.com/in/vlad-tudor-18090a1a2/",
         expertise: ["Machine Learning", "Product Strategy", "Team Leadership"],
     },
 ];
 
-export default function TeamPage() {
+export default function TeamSection() {
+    const { t } = useLanguage();
+
     return (
         <div className="font-sans">
             {/* Hero Section */}
-            <section className="relative isolate min-h-[80vh] overflow-hidden flex items-center">
+            <section className="relative isolate min-h-[70vh] overflow-hidden flex items-center">
                 <motion.div 
                     className="absolute inset-0"
                     initial={{ scale: 1.2 }}
@@ -51,7 +54,7 @@ export default function TeamPage() {
                         transition={{ duration: 0.8 }}
                         className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-tight mb-8"
                     >
-                        Meet the Team
+                        {t('teamPage.hero.title')}
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 10 }}
@@ -59,7 +62,7 @@ export default function TeamPage() {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="text-lg sm:text-xl text-white/85 max-w-2xl mx-auto"
                     >
-                        Building AI solutions that make a difference
+                        {t('teamPage.hero.subtitle')}
                     </motion.p>
                 </div>
             </section>
@@ -73,7 +76,7 @@ export default function TeamPage() {
                     viewport={{ once: true }}
                     className="text-3xl sm:text-4xl font-semibold mb-12 text-center"
                 >
-                    Our Team
+                    {t('teamPage.members.title')}
                 </motion.h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -92,8 +95,7 @@ export default function TeamPage() {
                                     src={member.image}
                                     alt={member.name}
                                     fill
-                                    className="object-cover object-center"
-                                    style={{ objectPosition: 'center 18%' }}
+                                    className="object-cover"
                                 />
                             </div>
                             
@@ -104,6 +106,7 @@ export default function TeamPage() {
                                     {member.bio}
                                 </p>
 
+                                {/* Expertise Tags */}
                                 <div className="flex flex-wrap gap-2 mb-4">
                                     {member.expertise.map((skill) => (
                                         <span
@@ -115,15 +118,18 @@ export default function TeamPage() {
                                     ))}
                                 </div>
 
-                                <a
-                                    href={member.linkedin}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-foreground text-background text-sm font-medium hover:opacity-90 transition"
-                                >
-                                    <Linkedin className="h-4 w-4" />
-                                    Connect on LinkedIn
-                                </a>
+                                {/* Social Links */}
+                                <div className="flex gap-3">
+                                    <a
+                                        href={member.linkedin}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-2 px-4 py-2 rounded-full bg-foreground text-background text-sm font-medium hover:opacity-90 transition"
+                                    >
+                                        <Linkedin className="h-4 w-4" />
+                                        Connect
+                                    </a>
+                                </div>
                             </div>
                         </motion.div>
                     ))}
@@ -141,7 +147,7 @@ export default function TeamPage() {
                     viewport={{ once: true }}
                     className="text-2xl sm:text-3xl font-semibold"
                 >
-                    Want to work with us?
+                    {t('teamPage.cta.title')}
                 </motion.h2>
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
@@ -150,7 +156,7 @@ export default function TeamPage() {
                     viewport={{ once: true }}
                     className="text-foreground/70 mt-3 text-sm sm:text-base"
                 >
-                    Get in touch to discuss your AI project
+                    {t('teamPage.cta.description')}
                 </motion.p>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -163,11 +169,10 @@ export default function TeamPage() {
                         href="/contact"
                         className="inline-block rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:opacity-90 transition"
                     >
-                        Contact Us
+                        {t('teamPage.cta.button')}
                     </Link>
                 </motion.div>
             </section>
         </div>
     );
 }
-

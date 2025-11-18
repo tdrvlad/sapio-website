@@ -62,7 +62,7 @@ export function Navbar() {
 				<nav className="hidden md:flex flex-1 justify-center gap-6 text-sm">
 					<Link href="/services" className="hover:underline underline-offset-4">{t("navbar.solutions")}</Link>
 					<Link href="/projects" className="hover:underline underline-offset-4">{t("navbar.projects")}</Link>
-					<Link href="/team" className="hover:underline underline-offset-4">{t("navbar.team")}</Link>
+					
 					<Link href="/contact" className="hover:underline underline-offset-4">{t("navbar.contact")}</Link>
 				</nav>
 				<div className="hidden md:flex flex-1 items-center justify-end gap-3">
@@ -113,13 +113,7 @@ export function Navbar() {
 							>
 								{t("navbar.projects")}
 							</Link>
-							<Link 
-								href="/team" 
-								className="text-base py-2 hover:underline underline-offset-4"
-								onClick={() => setMobileMenuOpen(false)}
-							>
-								{t("navbar.team")}
-							</Link>
+							
 							<Link 
 								href="/contact" 
 								className="text-base py-2 hover:underline underline-offset-4"
