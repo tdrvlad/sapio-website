@@ -3,11 +3,12 @@
  */
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
-import { useLanguage } from "@/contexts/LanguageContext";
-import { translations } from "@/lib/translations";
+import { useRecaptchaV3 } from '@/components/GoogleRecaptchaV3';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/lib/translations';
 
 type ConsoleMessage = {
   id: string;
@@ -36,9 +37,8 @@ const SUGGESTIONS: Record<string, string[]> = {
 const SAPIO_API_URL =
   process.env.NEXT_PUBLIC_SAPIO_ASSISTANT_URL?.replace(/\/$/, "") ||
   "https://assistant.sapio.ro/api";
-const SAPIO_API_KEY =
-  process.env.NEXT_PUBLIC_SAPIO_WIDGET_API_KEY ||
-  "ka_68a6e359_GteZDNNsc-Bcw8UTyuPZLB1veyJFI7Xe";
+const SAPIO_WIDGET_API_KEY = process.env.NEXT_PUBLIC_WIDGET_API_KEY;
+const SAPIO_RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_WIDGET_RECAPTCHA_KEY;
 
 const createId = () =>
   typeof crypto !== "undefined" && crypto.randomUUID
@@ -50,6 +50,10 @@ export function SapioConsoleSection() {
   const accentHex = "#006beb";
   const eyebrowText = t("home.sapioConsole.eyebrow");
   const subtitleText = t("home.sapioConsole.subtitle");
+
+  const { executeRecaptcha, isLoaded: isRecaptchaLoaded } = useRecaptchaV3(
+    SAPIO_RECAPTCHA_SITE_KEY || ""
+  );
 
   const [messages, setMessages] = useState<ConsoleMessage[]>(() => [
     {
@@ -227,6 +231,28 @@ export function SapioConsoleSection() {
       return;
     }
 
+    if (!SAPIO_RECAPTCHA_SITE_KEY) {
+      const errorMessage: ConsoleMessage = {
+        id: createId(),
+        role: "assistant",
+        content: "reCAPTCHA not configured. Please contact support.",
+        tone: "error",
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+      return;
+    }
+
+    if (!isRecaptchaLoaded) {
+      const errorMessage: ConsoleMessage = {
+        id: createId(),
+        role: "assistant",
+        content: "Security verification loading. Please wait a moment.",
+        tone: "error",
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+      return;
+    }
+
     const text = inputValue.trim();
     setInputValue("");
 
@@ -239,16 +265,25 @@ export function SapioConsoleSection() {
     setIsThinking(true);
 
     try {
+      let recaptchaToken: string;
+      try {
+        recaptchaToken = await executeRecaptcha("sapio_console_chat");
+      } catch {
+        throw new Error(
+          "Failed to verify you are human. Please refresh the page and try again."
+        );
+      }
+
       const response = await fetch(`${SAPIO_API_URL}/widget/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${SAPIO_API_KEY}`,
+          Authorization: `Bearer ${SAPIO_WIDGET_API_KEY}`,
         },
         body: JSON.stringify({
-          client_id: SAPIO_API_KEY,
           message: text,
           conversation_id: conversationId,
+          recaptcha_token: recaptchaToken,
         }),
       });
 
