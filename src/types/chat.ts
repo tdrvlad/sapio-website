@@ -26,3 +26,10 @@ export type ChatWidgetState = {
 };
 
 
+export type ConsoleMessage = {
+    id: string;
+    role: "user" | "assistant";
+    content: string;
+    tone?: "system" | "error";
+};
+
