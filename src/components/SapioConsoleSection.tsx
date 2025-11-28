@@ -10,6 +10,8 @@ import { useRecaptchaV3 } from '@/components/GoogleRecaptchaV3';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/lib/translations';
 import SapioConfig from "@/lib/sapioConfig";
+import {ConsoleBootLoader} from "@/components/ConsoleBootLoader";
+import {useAutoScroll} from "@/hooks/useAutoScroll";
 
 type ConsoleMessage = {
   id: string;
@@ -58,10 +60,13 @@ export function SapioConsoleSection() {
       tone: "system",
     },
   ]);
-  const [bootLogs, setBootLogs] = useState<string[]>([]);
-  const [bootComplete, setBootComplete] = useState(false);
-  const [conversationId, setConversationId] = useState<string | undefined>();
+
+
+
+    const [conversationId, setConversationId] = useState<string | undefined>();
+
   const [inputValue, setInputValue] = useState("");
+
   const [isThinking, setIsThinking] = useState(false);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [typewriterText, setTypewriterText] = useState("");
@@ -70,8 +75,7 @@ export function SapioConsoleSection() {
   const [ghostPhase, setGhostPhase] = useState<"typing" | "hold" | "fade">(
     "typing"
   );
-  const [hasScrolledPast, setHasScrolledPast] = useState(false);
-  const [isSectionVisible, setIsSectionVisible] = useState(true);
+
   const [pendingAnimationId, setPendingAnimationId] = useState<string | null>(null);
   const [animatedLine, setAnimatedLine] = useState<{ id: string; text: string }>({
     id: "",
@@ -79,6 +83,8 @@ export function SapioConsoleSection() {
   });
 
   const messageContainerRef = useRef<HTMLDivElement>(null);
+  useAutoScroll(messageContainerRef, !isInputFocused);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -96,26 +102,6 @@ export function SapioConsoleSection() {
       )
     );
   }, [t]);
-
-  useEffect(() => {
-    const sequence = translations[language].home.sapioConsole.bootLogs || [];
-    setBootLogs([]);
-    if (!sequence.length) {
-      setBootComplete(true);
-      return;
-    }
-    setBootComplete(false);
-    let index = 0;
-    const timer = setInterval(() => {
-      setBootLogs((prev) => [...prev, sequence[index]]);
-      index += 1;
-      if (index >= sequence.length) {
-        clearInterval(timer);
-        setTimeout(() => setBootComplete(true), 220);
-      }
-    }, 240);
-    return () => clearInterval(timer);
-  }, [language]);
 
   useEffect(() => {
     if (isInputFocused) {
@@ -158,34 +144,24 @@ export function SapioConsoleSection() {
     isInputFocused,
   ]);
 
-  useEffect(() => {
-    const container = messageContainerRef.current;
-    if (!container) return;
-    container.scrollTo({
-      top: container.scrollHeight,
-      behavior: "smooth",
-    });
-  }, [messages, isThinking, bootLogs]);
+    useEffect(() => {
+        const observer = new MutationObserver(() => {
+            const node = document.querySelector("[data-boot-status]");
+            const ready = node?.getAttribute("data-boot-status") === "complete";
 
-  useEffect(() => {
-    const sectionEl = sectionRef.current;
-    if (!sectionEl || typeof IntersectionObserver === "undefined") {
-      return;
-    }
+            const el = document.getElementById("boot-status-text");
+            if (el) el.textContent = ready ? "ready" : "booting";
+        });
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsSectionVisible(entry.isIntersecting);
-        if (entry.boundingClientRect.top < -120) {
-          setHasScrolledPast(true);
-        }
-      },
-      { threshold: 0.25 }
-    );
+        observer.observe(document.body, {
+            subtree: true,
+            attributes: true,
+            attributeFilter: ["data-boot-status"],
+        });
 
-    observer.observe(sectionEl);
-    return () => observer.disconnect();
-  }, []);
+        return () => observer.disconnect();
+    }, []);
+
 
   useEffect(() => {
     setTypewriterText("");
@@ -318,7 +294,6 @@ export function SapioConsoleSection() {
     setTimeout(() => inputRef.current?.focus(), 520);
   };
 
-  const showStickyPrompt = hasScrolledPast && !isSectionVisible;
 
   const statusLine = `${t("home.sapioConsole.systemPrefix")} ${t("home.sapioConsole.statusLinePrefix")} ${t("home.sapioConsole.statusLine")}`;
 
@@ -360,9 +335,11 @@ export function SapioConsoleSection() {
             className="terminal-shell scanline-overlay relative w-full bg-[#050506] font-mono text-[15px] tracking-[0.02em] text-white"
           >
             <div className="flex items-center justify-between border-b border-white/5 bg-[#040405] px-6 py-3 text-[11px] uppercase tracking-[0.4em] text-white/70">
-              <span>{t("home.sapioConsole.consoleLabel")}</span>
-              <span className="tracking-[0.2em] text-white/40">
-                {bootComplete ? "ready" : "booting"}
+                <span>{t("home.sapioConsole.consoleLabel")}</span>
+                <span className="tracking-[0.2em] text-white/40">
+                <span id="boot-status-text">
+                    booting
+                </span>
               </span>
             </div>
 
@@ -379,15 +356,9 @@ export function SapioConsoleSection() {
               aria-live="polite"
               className="custom-scrollbar max-h-[640px] min-h-[520px] overflow-y-auto px-6 py-6 text-left text-[15px] leading-7"
             >
-              <div className="space-y-2 text-xs text-[#006beb]/70">
-                {bootLogs.map((log, index) => (
-                  <div key={`boot-${index}`} className="text-xs">
-                    {log}
-                  </div>
-                ))}
-              </div>
+                <ConsoleBootLoader language={language} translations={translations}/>
 
-              <div className="mt-4 space-y-3 text-white">
+                <div className="mt-4 space-y-3 text-white">
                 {messages.map((message) => (
                   <ConsoleLine
                     key={message.id}
@@ -442,7 +413,6 @@ export function SapioConsoleSection() {
       </section>
 
       <AnimatePresence>
-        {showStickyPrompt && (
           <motion.button
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -453,7 +423,6 @@ export function SapioConsoleSection() {
             <span>{t("home.sapioConsole.stickyPrompt")}</span>
             <span className="text-[#006beb]">⮐</span>
           </motion.button>
-        )}
       </AnimatePresence>
     </>
   );
