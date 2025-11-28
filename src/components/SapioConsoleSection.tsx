@@ -9,6 +9,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRecaptchaV3 } from '@/components/GoogleRecaptchaV3';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/lib/translations';
+import SapioConfig from "@/lib/sapioConfig";
 
 type ConsoleMessage = {
   id: string;
@@ -34,11 +35,7 @@ const SUGGESTIONS: Record<string, string[]> = {
   ],
 };
 
-const SAPIO_API_URL =
-  process.env.NEXT_PUBLIC_SAPIO_ASSISTANT_URL?.replace(/\/$/, "") ||
-  "https://assistant.sapio.ro/api";
-const SAPIO_WIDGET_API_KEY = process.env.NEXT_PUBLIC_WIDGET_API_KEY;
-const SAPIO_RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_WIDGET_RECAPTCHA_KEY;
+
 
 const createId = () =>
   typeof crypto !== "undefined" && crypto.randomUUID
@@ -51,9 +48,7 @@ export function SapioConsoleSection() {
   const eyebrowText = t("home.sapioConsole.eyebrow");
   const subtitleText = t("home.sapioConsole.subtitle");
 
-  const { executeRecaptcha, isLoaded: isRecaptchaLoaded } = useRecaptchaV3(
-    SAPIO_RECAPTCHA_SITE_KEY || ""
-  );
+  const { executeRecaptcha, isLoaded: isRecaptchaLoaded } = useRecaptchaV3(SapioConfig.SAPIO_RECAPTCHA_SITE_KEY);
 
   const [messages, setMessages] = useState<ConsoleMessage[]>(() => [
     {
@@ -231,17 +226,6 @@ export function SapioConsoleSection() {
       return;
     }
 
-    if (!SAPIO_RECAPTCHA_SITE_KEY) {
-      const errorMessage: ConsoleMessage = {
-        id: createId(),
-        role: "assistant",
-        content: "reCAPTCHA not configured. Please contact support.",
-        tone: "error",
-      };
-      setMessages((prev) => [...prev, errorMessage]);
-      return;
-    }
-
     if (!isRecaptchaLoaded) {
       const errorMessage: ConsoleMessage = {
         id: createId(),
@@ -274,11 +258,11 @@ export function SapioConsoleSection() {
         );
       }
 
-      const response = await fetch(`${SAPIO_API_URL}/widget/chat`, {
+      const response = await fetch(`${SapioConfig.SAPIO_API_URL}/widget/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${SAPIO_WIDGET_API_KEY}`,
+          Authorization: `Bearer ${SapioConfig.SAPIO_WIDGET_API_KEY}`,
         },
         body: JSON.stringify({
           message: text,
