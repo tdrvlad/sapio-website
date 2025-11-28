@@ -12,6 +12,8 @@ import { translations } from '@/lib/translations';
 import SapioConfig from "@/lib/sapioConfig";
 import {ConsoleBootLoader} from "@/components/ConsoleBootLoader";
 import {useAutoScroll} from "@/hooks/useAutoScroll";
+import ThinkingLine from "@/components/ThinkingLine";
+import GhostLine from "@/components/GhostLine";
 
 type ConsoleMessage = {
   id: string;
@@ -472,59 +474,3 @@ function ConsoleLine({
     </div>
   );
 }
-
-type GhostLineProps = {
-  text: string;
-  phase: "typing" | "hold" | "fade";
-  userLabel: string;
-};
-
-function GhostLine({ text, phase, userLabel }: GhostLineProps) {
-  const opacityClass =
-    phase === "typing" ? "opacity-70" : phase === "hold" ? "opacity-50" : "opacity-30";
-  const normalizedUserLabel = userLabel.toLowerCase();
-
-  return (
-    <div className={`text-[15px] leading-7 text-slate-300 ${opacityClass}`}>
-      <span className="mr-3 text-slate-500">[{normalizedUserLabel}]</span>
-      <span className="border-r border-white/40 pr-1">{text || " "}</span>
-    </div>
-  );
-}
-
-type ThinkingLineProps = {
-  label: string;
-  text: string;
-  accentColor: string;
-};
-
-function ThinkingLine({ label, text, accentColor }: ThinkingLineProps) {
-  const normalizedLabel = label.toLowerCase();
-  return (
-    <div className="text-[15px] leading-7 text-white/85">
-      <span className="mr-3" style={{ color: accentColor }}>
-        [{normalizedLabel}]
-      </span>
-      <span className="flex items-center gap-2 text-white/85">
-        <span>{text}</span>
-        <span className="flex gap-1">
-          <span
-            className="h-1.5 w-1.5 animate-pulse rounded-full"
-            style={{ backgroundColor: accentColor }}
-          />
-          <span
-            className="h-1.5 w-1.5 animate-pulse rounded-full [animation-delay:120ms]"
-            style={{ backgroundColor: accentColor }}
-          />
-          <span
-            className="h-1.5 w-1.5 animate-pulse rounded-full [animation-delay:240ms]"
-            style={{ backgroundColor: accentColor }}
-          />
-        </span>
-      </span>
-    </div>
-  );
-}
-
-
-
