@@ -2,11 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { useRecaptchaV3 } from "@/components/GoogleRecaptchaV3";
 import SapioConfig from "@/lib/sapioConfig";
 import { ConsoleMessage } from "@/types/chat";
+import createId from "@/lib/IdGenerator";
 
-const createId = () =>
-    typeof crypto !== "undefined" && crypto.randomUUID
-        ? crypto.randomUUID()
-        : Math.random().toString(36).slice(2);
 
 interface UseSendMessageParams {
     conversationId: string | undefined;
@@ -30,6 +27,7 @@ export function useSendMessage({
     const { executeRecaptcha, isLoaded: isRecaptchaLoaded } = useRecaptchaV3(SapioConfig.SAPIO_RECAPTCHA_SITE_KEY);
 
     const sendMessage = async (text: string) => {
+
         if (!text.trim() || isThinking) return;
 
         setIsThinking(true);
