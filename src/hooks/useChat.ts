@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { useRecaptchaV3 } from "@/components/GoogleRecaptchaV3";
+import { useRecaptchaV3 } from "@/hooks/GoogleRecaptchaV3";
 import { Message, ChatHookReturn } from "@/types/chat";
 import { API_ENDPOINTS } from "@/constants/app";
 import { generateMessageId } from "@/utils/formatters";

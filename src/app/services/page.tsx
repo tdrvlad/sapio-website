@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import "@/components/comp.css";
 import { useState } from "react";
-import AIProductsSection from "@/components/AIProductsSection";
+import AIProductsSection from "@/components/sections/AIProductsSection";
 
 type ServiceType = 'audit' | 'software' | 'workshops';
 

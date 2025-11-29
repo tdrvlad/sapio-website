@@ -1,5 +1,5 @@
 import {useState, useRef} from "react";
-import {useRecaptchaV3} from "@/components/GoogleRecaptchaV3";
+import {useRecaptchaV3} from "@/hooks/GoogleRecaptchaV3";
 import SapioConfig from "@/lib/sapioConfig";
 import {ConsoleMessage, ConsoleRequest} from "@/types/chat";
 import createId from "@/lib/IdGenerator";

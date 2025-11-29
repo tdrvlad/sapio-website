@@ -6,10 +6,10 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Capabilities } from '@/components/Capabilities';
+import { Capabilities } from '@/components/sections/Capabilities';
 import HeroVideo from '@/components/HeroVideo';
-import { SapioConsoleSection } from '@/components/SapioConsoleSection';
-import { SolutionFinder } from '@/components/SolutionFinder';
+import { SapioConsoleSection } from '@/components/sections/console/SapioConsoleSection';
+import { SolutionFinder } from '@/components/sections/SolutionFinder';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 type HomeContentProps = {

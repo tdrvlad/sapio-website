@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import GhostLine from "@/components/GhostLine";
+import GhostLine from "@/components/sections/console/GhostLine";
 
 type TypewriterProps = {
     suggestions: string[];
