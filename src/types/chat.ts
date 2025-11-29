@@ -33,3 +33,9 @@ export type ConsoleMessage = {
     tone?: "system" | "error";
 };
 
+
+export type ConsoleRequest = {
+    message: string,
+    conversation_id: string,
+    recaptcha_token: string,
+}

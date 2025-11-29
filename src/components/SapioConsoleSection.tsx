@@ -6,10 +6,8 @@
 import {AnimatePresence, motion} from 'framer-motion';
 import {useEffect, useMemo, useRef, useState} from 'react';
 
-import {useRecaptchaV3} from '@/components/GoogleRecaptchaV3';
 import {useLanguage} from '@/contexts/LanguageContext';
 import {translations} from '@/lib/translations';
-import SapioConfig from "@/lib/sapioConfig";
 import {ConsoleBootLoader} from "@/components/ConsoleBootLoader";
 import {useAutoScroll} from "@/hooks/useAutoScroll";
 import ThinkingLine from "@/components/ThinkingLine";
