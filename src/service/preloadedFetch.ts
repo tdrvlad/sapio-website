@@ -1,5 +1,5 @@
 import {ConsoleMessage, ConsoleRequest} from "@/types/chat";
-import SapioConfig from "@/lib/sapioConfig";
+import SapioConfig from "@/config/sapioConfig";
 
 
 async function prepareFetch() {

@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import SapioConfig from "@/lib/sapioConfig";
+import SapioConfig from "@/config/sapioConfig";
 
 
 const missingKeys = Object.entries(SapioConfig)

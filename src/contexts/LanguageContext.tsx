@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { Language, translations } from '@/lib/translations'
+import ERROR_MESSAGE from "@/lib/errorMessage";
 
 interface LanguageContextType {
   language: Language
@@ -14,7 +15,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const useLanguage = () => {
   const context = useContext(LanguageContext)
   if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider')
+    throw new Error(ERROR_MESSAGE.USE_LANGUAGE_ERROR)
   }
   return context
 }

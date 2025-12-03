@@ -1,9 +1,9 @@
 import {useState, useRef, RefObject} from "react";
 import {useRecaptchaV3} from "@/hooks/GoogleRecaptchaV3";
-import SapioConfig from "@/lib/sapioConfig";
+import SapioConfig from "@/config/sapioConfig";
 import {ConsoleMessage, ConsoleRequest} from "@/types/chat";
 import createId from "@/lib/IdGenerator";
-import ERROR_MESSAGE, {ErrorMessage} from "@/lib/Errors";
+import ERROR_MESSAGE, {ErrorMessage} from "@/lib/errorMessage";
 import prepareFetch from "@/service/preloadedFetch";
 import catchError from "@/lib/catchError";
 
