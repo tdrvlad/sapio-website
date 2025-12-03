@@ -15,6 +15,7 @@ import Typewriter from "@/components/sections/console/Typewriter";
 import {ConsoleMessage} from "@/types/chat"
 import ConsoleLine from "@/components/sections/console/ConsoleLine";
 import {useSendMessage} from "@/hooks/useSendMessage";
+import {nothing} from "@/utils/formatters";
 
 const SUGGESTIONS: Record<string, string[]> = {
     en: [
@@ -145,7 +146,7 @@ export function SapioConsoleSection() {
     const handleSend = () => {
         if (!inputValue.trim()) return;
         sendMessage(inputValue);
-        setInputValue("");
+        setInputValue(nothing);
     };
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {

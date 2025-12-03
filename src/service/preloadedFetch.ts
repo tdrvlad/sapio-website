@@ -5,6 +5,7 @@ import SapioConfig from "@/lib/sapioConfig";
 async function prepareFetch() {
 
     if (SapioConfig.isLocal()) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         return async (_message: string, _conversationId: string, _recaptchaToken: string) => {
             const mockResponse: ConsoleMessage = {
                 id: "mock_id",

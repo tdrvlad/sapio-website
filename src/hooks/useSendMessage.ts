@@ -1,10 +1,11 @@
-import {useState, useRef} from "react";
+import {useState, useRef, RefObject} from "react";
 import {useRecaptchaV3} from "@/hooks/GoogleRecaptchaV3";
 import SapioConfig from "@/lib/sapioConfig";
 import {ConsoleMessage, ConsoleRequest} from "@/types/chat";
 import createId from "@/lib/IdGenerator";
 import ERROR_MESSAGE, {ErrorMessage} from "@/lib/Errors";
 import prepareFetch from "@/service/preloadedFetch";
+import catchError from "@/lib/catchError";
 
 
 interface UseSendMessageParams {
@@ -16,7 +17,9 @@ interface UseSendMessageParams {
 }
 
 interface UseSendMessageResponse {
-
+    sendMessage: (text: string) => Promise<void>;
+    isThinking: boolean;
+    inputRef: RefObject<HTMLInputElement | null>;
 }
 
 export function useSendMessage({
@@ -25,9 +28,9 @@ export function useSendMessage({
                                    t,
                                    setMessages,
                                    setPendingAnimationId,
-                               }: UseSendMessageParams) {
+                               }: UseSendMessageParams): UseSendMessageResponse {
 
-    const onSuccess = (data:ConsoleMessage) => {
+    const onSuccess = (data: ConsoleMessage) => {
         const assistantMessage: ConsoleMessage = {
             id: createId(),
             role: "assistant",
@@ -78,18 +81,13 @@ export function useSendMessage({
             return
         }
 
-        let recaptchaToken: string;
-        try {
-            recaptchaToken = await executeRecaptcha("sapio_console_chat");
-        } catch {
+        const [error, recaptchaToken] = await catchError(executeRecaptcha("sapio_console_chat"))
+        if (error) {
             onError(ERROR_MESSAGE.FAILED_RECAPTCHA_VALIDATION)
             return
         }
 
-
-        //todo fix me radu remove !
-        debugger
-        return preloadedFetch(trimmed, conversationId!, recaptchaToken)
+        return preloadedFetch(trimmed, conversationId!, recaptchaToken!)
             .then(async response => {
                 if (!response.ok) {
                     throw new Error(`${ERROR_MESSAGE.SAPIO_API_ERROR} ${response.status}`);
@@ -98,7 +96,7 @@ export function useSendMessage({
                 onSuccess(data);
             })
             .catch(err => {
-                onError(err instanceof Error ? err.message : String(err));
+                onError(err instanceof Error ? err.message : String(err))
             })
             .finally(() => {
                 setIsThinking(false);
