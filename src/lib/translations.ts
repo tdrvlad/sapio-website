@@ -1,5 +1,7 @@
 export type Language = "en" | "ro";
 
+const currentYear = new Date().getFullYear()
+
 export const translations = {
 	ro: {
 		// Navigation
@@ -23,7 +25,7 @@ export const translations = {
 			connect: "Conectează-te",
 			linkedin: "LinkedIn",
 			github: "GitHub",
-			copyright: "© 2025 Sapio AI Systems. Toate drepturile rezervate.",
+            copyright: `© ${currentYear} Sapio AI Systems. Toate drepturile rezervate.`,
 			privacy: "Politica de confidențialitate",
 		},
 		// Hero Video Section
@@ -31,7 +33,7 @@ export const translations = {
 			title: "Suntem în afacerea rezolvării problemelor",
 			description: "Transformă-ți ideile în soluții de ultimă oră de inteligență artificială.",
 			button: "Începe-ți proiectul",
-			see_work: "Vezi lucrările noastre",
+			see_work: "Vezi proiectele noastre",
 		},
 		// Home Page
 		home: {
@@ -426,7 +428,7 @@ export const translations = {
 			connect: "Connect",
 			linkedin: "LinkedIn",
 			github: "GitHub",
-			copyright: "© 2025 Sapio AI Systems. All rights reserved.",
+            copyright: `© ${currentYear} Sapio AI Systems. All rights reserved.`,
 			privacy: "Privacy Policy",
 		},
 		// Hero Video Section

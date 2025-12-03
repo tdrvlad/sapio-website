@@ -2,10 +2,9 @@ import type { NextConfig } from "next";
 import SapioConfig from "@/lib/sapioConfig";
 
 
-const invalidValues = [undefined, null, '']
-
 const missingKeys = Object.entries(SapioConfig)
-    .filter(([_, value]) => invalidValues.includes(value))
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    .filter(([_, value]) => value == null || value === '')
     .map(([key]) => key);
 
 if (missingKeys.length > 0) {

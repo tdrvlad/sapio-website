@@ -153,7 +153,7 @@ export default function ContactPage() {
                 >
                     {cta.title}
                 </motion.h2>
-                <motion.p
+                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.15 }}
@@ -174,7 +174,7 @@ export default function ContactPage() {
             {t("contactPage.cta.button")}
           </Link>
                 </motion.div>
-                </motion.p>
+                </motion.div>
                 
             </section>  
         </div>

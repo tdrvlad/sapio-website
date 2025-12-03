@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 type ConsoleBootLoaderProps = {
     language: string;
-    translations: any;
+    translations: unknown;
 };
 
 export function ConsoleBootLoader({ language, translations }: ConsoleBootLoaderProps) {
@@ -12,6 +12,8 @@ export function ConsoleBootLoader({ language, translations }: ConsoleBootLoaderP
     const [bootComplete, setBootComplete] = useState(false);
 
     useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         const sequence = translations[language].home.sapioConsole.bootLogs || [];
         setBootLogs([]);
 

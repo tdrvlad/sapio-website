@@ -2,7 +2,6 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { useChat } from "@/hooks/useChat";
 import { MessageCircle, Send, Sparkles } from "lucide-react";
 
@@ -15,7 +14,6 @@ const CONVERSATION_STARTERS = [
 ];
 
 export default function LandingChatbot() {
-    const { t } = useLanguage();
     const [showPrompt, setShowPrompt] = useState(false);
     const [selectedStarter, setSelectedStarter] = useState<string | null>(null);
     const { messages, inputValue, setInputValue, isLoading, recaptchaError, sendMessage, handleKeyPress } = useChat();
