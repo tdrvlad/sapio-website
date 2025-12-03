@@ -15,6 +15,9 @@ interface UseSendMessageParams {
     setPendingAnimationId: (id: string | null) => void;
 }
 
+interface UseSendMessageResponse {
+
+}
 
 export function useSendMessage({
                                    conversationId,
@@ -85,6 +88,7 @@ export function useSendMessage({
 
 
         //todo fix me radu remove !
+        debugger
         return preloadedFetch(trimmed, conversationId!, recaptchaToken)
             .then(async response => {
                 if (!response.ok) {

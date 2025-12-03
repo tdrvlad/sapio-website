@@ -7,7 +7,7 @@ async function prepareFetch() {
     if (SapioConfig.isLocal()) {
         return async (_message: string, _conversationId: string, _recaptchaToken: string) => {
             const mockResponse: ConsoleMessage = {
-                id: "id",
+                id: "mock_id",
                 role: "assistant",
                 content: "Mock content for development",
                 tone: "system"
