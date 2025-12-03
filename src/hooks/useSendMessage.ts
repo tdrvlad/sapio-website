@@ -4,6 +4,7 @@ import SapioConfig from "@/lib/sapioConfig";
 import {ConsoleMessage, ConsoleRequest} from "@/types/chat";
 import createId from "@/lib/IdGenerator";
 import ERROR_MESSAGE, {ErrorMessage} from "@/lib/Errors";
+import prepareFetch from "@/service/preloadedFetch";
 
 
 interface UseSendMessageParams {
@@ -12,26 +13,6 @@ interface UseSendMessageParams {
     t: (key: string) => string;
     setMessages: React.Dispatch<React.SetStateAction<ConsoleMessage[]>>;
     setPendingAnimationId: (id: string | null) => void;
-}
-
-async function prepareFetch() {
-
-    const endpoint = SapioConfig.SAPIO_API_URL
-    const key = SapioConfig.SAPIO_WIDGET_API_KEY
-
-    return async (message: string, conversationId: string, recaptchaToken: string) =>
-        await fetch(`${endpoint}/widget/chat`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${key}`,
-            },
-            body: JSON.stringify({
-                message: message,
-                conversation_id: conversationId,
-                recaptcha_token: recaptchaToken,
-            } as ConsoleRequest),
-        });
 }
 
 
@@ -43,15 +24,15 @@ export function useSendMessage({
                                    setPendingAnimationId,
                                }: UseSendMessageParams) {
 
-    const onSuccess = (data) => {
+    const onSuccess = (data:ConsoleMessage) => {
         const assistantMessage: ConsoleMessage = {
             id: createId(),
             role: "assistant",
-            content: data.response,
+            content: data.content,
         };
 
         setMessages(prev => [...prev, assistantMessage]);
-        setConversationId(data.conversation_id);
+        setConversationId(data.id);
         setPendingAnimationId(assistantMessage.id);
     }
     const onError = (message?: string) => {
