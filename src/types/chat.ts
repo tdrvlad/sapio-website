@@ -33,6 +33,12 @@ export type ConsoleMessage = {
     tone?: "system" | "error";
 };
 
+export type ConsoleResponse = {
+    response: string;
+    conversation_id:string
+};
+
+
 
 export type ConsoleRequest = {
     message: string,

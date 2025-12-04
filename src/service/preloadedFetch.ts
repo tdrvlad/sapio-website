@@ -1,4 +1,4 @@
-import {ConsoleMessage, ConsoleRequest} from "@/types/chat";
+import { ConsoleRequest, ConsoleResponse } from "@/types/chat";
 import SapioConfig from "@/config/sapioConfig";
 
 
@@ -7,11 +7,9 @@ async function prepareFetch() {
     if (SapioConfig.isLocal()) {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         return async (_message: string, _conversationId: string, _recaptchaToken: string) => {
-            const mockResponse: ConsoleMessage = {
-                id: "mock_id",
-                role: "assistant",
-                content: "Mock content for development",
-                tone: "system"
+            const mockResponse: ConsoleResponse = {
+                conversation_id: _conversationId,
+                response: "Mock content for development.",
             };
 
             return new Response(JSON.stringify(mockResponse), {

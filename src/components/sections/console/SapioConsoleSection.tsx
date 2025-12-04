@@ -3,19 +3,19 @@
  */
 "use client";
 
-import {AnimatePresence, motion} from 'framer-motion';
-import {useEffect, useMemo, useRef, useState} from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
-import {useLanguage} from '@/contexts/LanguageContext';
-import {translations} from '@/lib/translations';
-import {ConsoleBootLoader} from "@/components/sections/console/ConsoleBootLoader";
-import {useAutoScroll} from "@/hooks/useAutoScroll";
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/lib/translations';
+import { ConsoleBootLoader } from "@/components/sections/console/ConsoleBootLoader";
+import { useAutoScroll } from "@/hooks/useAutoScroll";
 import ThinkingLine from "@/components/sections/console/ThinkingLine";
 import Typewriter from "@/components/sections/console/Typewriter";
-import {ConsoleMessage} from "@/types/chat"
+import { ConsoleMessage } from "@/types/chat"
 import ConsoleLine from "@/components/sections/console/ConsoleLine";
-import {useSendMessage} from "@/hooks/useSendMessage";
-import {nothing} from "@/utils/formatters";
+import { useSendMessage } from "@/hooks/useSendMessage";
+import { nothing } from "@/utils/formatters";
 
 const SUGGESTIONS: Record<string, string[]> = {
     en: [
@@ -118,7 +118,7 @@ export function SapioConsoleSection() {
         if (!pendingAnimationId) {
             return;
         }
-        debugger
+
         const target = messages.find((message) => message.id === pendingAnimationId);
         if (!target) {
             return;

@@ -1,9 +1,9 @@
-import {useState, useRef, RefObject} from "react";
-import {useRecaptchaV3} from "@/hooks/GoogleRecaptchaV3";
+import { useState, useRef, RefObject } from "react";
+import { useRecaptchaV3 } from "@/hooks/GoogleRecaptchaV3";
 import SapioConfig from "@/config/sapioConfig";
-import {ConsoleMessage, ConsoleRequest} from "@/types/chat";
+import { ConsoleMessage, ConsoleResponse } from "@/types/chat";
 import createId from "@/lib/IdGenerator";
-import ERROR_MESSAGE, {ErrorMessage} from "@/lib/errorMessage";
+import ERROR_MESSAGE from "@/lib/errorMessage";
 import prepareFetch from "@/service/preloadedFetch";
 import catchError from "@/lib/catchError";
 
@@ -30,15 +30,15 @@ export function useSendMessage({
                                    setPendingAnimationId,
                                }: UseSendMessageParams): UseSendMessageResponse {
 
-    const onSuccess = (data: ConsoleMessage) => {
+    const onSuccess = (data: ConsoleResponse) => {
         const assistantMessage: ConsoleMessage = {
             id: createId(),
             role: "assistant",
-            content: data.content,
+            content: data.response,
         };
 
         setMessages(prev => [...prev, assistantMessage]);
-        setConversationId(data.id);
+        setConversationId(data.conversation_id);
         setPendingAnimationId(assistantMessage.id);
     }
     const onError = (message?: string) => {
