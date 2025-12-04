@@ -22,7 +22,7 @@ type CLIProps = {
 export function CLI({
   messages = [],
   prompt = "$",
-  accentColor = "#0066cc",
+  accentColor = "#006beb",
   showTimestamp = false,
   maxHeight = "600px",
   suggestions = [
@@ -40,7 +40,81 @@ export function CLI({
   const [ghostIndex, setGhostIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [ghostPhase, setGhostPhase] = useState<"typing" | "hold" | "fade">("typing");
+  const [isLoading, setIsLoading] = useState(() => {
+    // Check if loading animation has already been shown in this session
+    if (typeof window !== 'undefined') {
+      const hasShownLoading = sessionStorage.getItem('sapio-cli-loaded');
+      return !hasShownLoading;
+    }
+    return true;
+  });
+  const [ghostTypingText, setGhostTypingText] = useState("");
+  const [showLoading, setShowLoading] = useState(false);
+  const [showLogo, setShowLogo] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [loadingMessage, setLoadingMessage] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Initial sequence: typing "sapio . " -> loading bar -> logo -> ghost writer
+  useEffect(() => {
+    // Skip if it's already been shown
+    if (typeof window !== 'undefined' && sessionStorage.getItem('sapio-cli-loaded')) {
+      setIsLoading(false);
+      return;
+    }
+
+    const targetText = "sapio . ";
+    let currentIndex = 0;
+
+    // Phase 1: Ghost typing "sapio . "
+    const typingInterval = setInterval(() => {
+      if (currentIndex < targetText.length) {
+        setGhostTypingText(targetText.slice(0, currentIndex + 1));
+        currentIndex++;
+      } else {
+        clearInterval(typingInterval);
+        // Wait a bit, then show loading bar
+        setTimeout(() => {
+          setShowLoading(true);
+          
+          // Phase 2: Loading bar with stars
+          const loadingSteps = [
+            { message: "Initializing terminal...", progress: 20 },
+            { message: "Loading system modules...", progress: 40 },
+            { message: "Connecting to Sapio AI...", progress: 60 },
+            { message: "Loading language models...", progress: 80 },
+            { message: "Preparing interface...", progress: 95 },
+            { message: "Ready", progress: 100 },
+          ];
+
+          let currentStep = 0;
+          const loadingInterval = setInterval(() => {
+            if (currentStep < loadingSteps.length) {
+              setLoadingMessage(loadingSteps[currentStep].message);
+              setLoadingProgress(loadingSteps[currentStep].progress);
+              currentStep++;
+            } else {
+              clearInterval(loadingInterval);
+              // Phase 3: Show logo
+              setTimeout(() => {
+                setShowLogo(true);
+                // Mark as loaded in sessionStorage
+                if (typeof window !== 'undefined') {
+                  sessionStorage.setItem('sapio-cli-loaded', 'true');
+                }
+                // Phase 4: Show main interface with ghost writer
+                setTimeout(() => {
+                  setIsLoading(false);
+                }, 1000);
+              }, 500);
+            }
+          }, 400);
+        }, 800);
+      }
+    }, 100);
+
+    return () => clearInterval(typingInterval);
+  }, []);
 
   // Ghost typing effect
   useEffect(() => {
@@ -128,8 +202,85 @@ export function CLI({
         className="custom-scrollbar overflow-y-auto px-6 py-4 text-left font-mono"
         style={{ maxHeight, backgroundColor: "#1e1e1e", color: "#d4d4d4" }}
       >
-        <div className="space-y-3">
-          {displayMessages.map((message, index) => (
+        {isLoading ? (
+          /* Loading Screen */
+          <div className="space-y-4 py-8">
+            {/* Phase 1: Ghost typing "sapio . " */}
+            {!showLoading && (
+              <div className="flex items-center gap-2 text-sm">
+                <span style={{ color: accentColor }} className="select-none font-medium">
+                  {prompt}
+                </span>
+                <span className="text-green-400">
+                  {ghostTypingText}
+                  <span className="border-r border-green-400 pr-1 animate-blink" />
+                </span>
+              </div>
+            )}
+
+            {/* Phase 2: Loading bar with stars */}
+            {showLoading && !showLogo && (
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <span className="text-sm" style={{ color: accentColor }}>{loadingMessage}</span>
+                  <span className="text-gray-500 text-sm">[{loadingProgress}%]</span>
+                </div>
+                {/* Progress Bar with Stars */}
+                <div className="w-full font-mono text-sm">
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: 50 }).map((_, i) => {
+                      const filled = i < (loadingProgress / 2);
+                      return (
+                        <span
+                          key={i}
+                          style={{ color: filled ? accentColor : "#4a5568" }}
+                        >
+                          {filled ? "★" : "☆"}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div className="text-gray-500 text-xs mt-2">
+                  {loadingProgress < 100 ? "Please wait..." : "Initialization complete"}
+                </div>
+              </div>
+            )}
+
+            {/* Phase 3: Logo appears */}
+            {showLogo && (
+              <div className="flex items-center gap-6 mb-8">
+                <pre className="text-xs leading-tight whitespace-pre flex-shrink-0" style={{ color: accentColor }}>
+{`╔═══════════════════════════════════════════════════════════╗
+║                                                           ║
+║     ███████╗ █████╗ ██████╗ ██╗ ██████╗                  ║
+║     ██╔════╝██╔══██╗██╔══██╗██║██╔═══██╗                 ║
+║     ███████╗███████║██████╔╝██║██║   ██║                 ║
+║     ╚════██║██╔══██║██╔═══╝ ██║██║   ██║                 ║
+║     ███████║██║  ██║██║     ██║╚██████╔╝                 ║
+║     ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝                  ║
+║                                                           ║
+║              █████╗ ██╗                                   ║
+║             ██╔══██╗██║                                   ║
+║             ███████║██║                                   ║
+║             ██╔══██║██║                                   ║
+║             ██║  ██║██║                                   ║
+║             ╚═╝  ╚═╝╚═╝                                   ║
+║                                                           ║
+╚═══════════════════════════════════════════════════════════╝`}
+                </pre>
+                <div className="flex-1">
+                  <div className="text-2xl font-bold mb-1" style={{ color: accentColor }}>
+                    SAPIO AI
+                  </div>
+                  <div className="text-gray-400 text-sm">Custom AI Solutions</div>
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {displayMessages.map((message, index) => (
             <div key={index} className="message-block">
               {/* Timestamp */}
               {showTimestamp && message.timestamp && (
@@ -164,13 +315,14 @@ export function CLI({
 
               {/* Info */}
               {message.type === "info" && (
-                <div className="text-cyan-400 italic text-sm">{message.content}</div>
+                <div className="italic text-sm" style={{ color: accentColor }}>{message.content}</div>
               )}
 
-              {/* Banner - Retro ASCII Art */}
+              {/* Banner - Retro ASCII Art on Left */}
               {message.type === "banner" && (
                 <div className="my-6 py-6 border-b border-gray-700">
-                  <pre className="text-center text-xs leading-tight text-cyan-400 whitespace-pre">
+                  <div className="flex items-center gap-6">
+                    <pre className="text-xs leading-tight whitespace-pre flex-shrink-0" style={{ color: accentColor }}>
 {`╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
 ║     ███████╗ █████╗ ██████╗ ██╗ ██████╗                  ║
@@ -187,16 +339,24 @@ export function CLI({
 ║             ██║  ██║██║                                   ║
 ║             ╚═╝  ╚═╝╚═╝                                   ║
 ║                                                           ║
-╚═══════════════════════════════════════════════════════════╝
-              Custom AI Solutions`}
-                  </pre>
+╚═══════════════════════════════════════════════════════════╝`}
+                    </pre>
+                    <div className="flex-1">
+                      <div className="text-3xl font-bold mb-2" style={{ color: accentColor }}>
+                        SAPIO AI
+                      </div>
+                      <div className="text-gray-400 text-sm">Custom AI Solutions</div>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
           ))}
-        </div>
+          </div>
+        )}
 
-        {/* Input Area */}
+        {/* Input Area - Only show when not loading */}
+        {!isLoading && (
         <div className="relative flex items-center gap-2 mt-4 text-sm border-t border-gray-700 pt-4">
           <span style={{ color: accentColor }} className="select-none font-medium">
             {prompt}
@@ -229,6 +389,7 @@ export function CLI({
             <span className="w-2 h-4 bg-green-400 animate-blink" />
           )}
         </div>
+        )}
       </div>
     </div>
   );
