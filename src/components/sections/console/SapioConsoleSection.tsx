@@ -118,7 +118,7 @@ export function SapioConsoleSection() {
         if (!pendingAnimationId) {
             return;
         }
-        debugger
+
         const target = messages.find((message) => message.id === pendingAnimationId);
         if (!target) {
             return;
