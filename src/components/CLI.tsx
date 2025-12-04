@@ -249,8 +249,8 @@ export function CLI({
 
             {/* Phase 3: Logo appears */}
             {showLogo && (
-              <div className="flex items-center gap-6 mb-8">
-                <pre className="text-xs leading-tight whitespace-pre flex-shrink-0" style={{ color: accentColor }}>
+              <div className="mb-8">
+                <pre className="text-xs leading-tight whitespace-pre" style={{ color: accentColor }}>
 {`╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
 ║     ███████╗ █████╗ ██████╗ ██╗ ██████╗                  ║
@@ -269,12 +269,6 @@ export function CLI({
 ║                                                           ║
 ╚═══════════════════════════════════════════════════════════╝`}
                 </pre>
-                <div className="flex-1">
-                  <div className="text-2xl font-bold mb-1" style={{ color: accentColor }}>
-                    SAPIO AI
-                  </div>
-                  <div className="text-gray-400 text-sm">Custom AI Solutions</div>
-                </div>
               </div>
             )}
           </div>
@@ -318,11 +312,10 @@ export function CLI({
                 <div className="italic text-sm" style={{ color: accentColor }}>{message.content}</div>
               )}
 
-              {/* Banner - Retro ASCII Art on Left */}
+              {/* Banner - Retro ASCII Art */}
               {message.type === "banner" && (
                 <div className="my-6 py-6 border-b border-gray-700">
-                  <div className="flex items-center gap-6">
-                    <pre className="text-xs leading-tight whitespace-pre flex-shrink-0" style={{ color: accentColor }}>
+                  <pre className="text-xs leading-tight whitespace-pre" style={{ color: accentColor }}>
 {`╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
 ║     ███████╗ █████╗ ██████╗ ██╗ ██████╗                  ║
@@ -340,14 +333,7 @@ export function CLI({
 ║             ╚═╝  ╚═╝╚═╝                                   ║
 ║                                                           ║
 ╚═══════════════════════════════════════════════════════════╝`}
-                    </pre>
-                    <div className="flex-1">
-                      <div className="text-3xl font-bold mb-2" style={{ color: accentColor }}>
-                        SAPIO AI
-                      </div>
-                      <div className="text-gray-400 text-sm">Custom AI Solutions</div>
-                    </div>
-                  </div>
+                  </pre>
                 </div>
               )}
             </div>
