@@ -50,7 +50,7 @@ export function Navbar() {
 				>
 				<div className="flex-1">
 					<div className="px-2 sm:px-4 py-2 rounded-xl">
-						<Link href="/public" className="flex items-center gap-2 sm:gap-3">
+						<Link href="/" className="flex items-center gap-2 sm:gap-3">
 							<span className="relative block h-10 w-10 sm:h-12 sm:w-12">
 								<Image src="/brand/logo_icon_light_background.png" alt="Sapio logo" fill className="object-contain dark:hidden" sizes="48px" />
 								<Image src="/brand/logo_icon_dark_background.png" alt="Sapio logo" fill className="object-contain hidden dark:block" sizes="48px" />
