@@ -1,4 +1,4 @@
-import {ConsoleMessage, ConsoleRequest, ConsoleResponse} from "@/types/chat";
+import { ConsoleRequest, ConsoleResponse } from "@/types/chat";
 import SapioConfig from "@/config/sapioConfig";
 
 
