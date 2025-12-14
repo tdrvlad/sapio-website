@@ -182,9 +182,31 @@ export function CLI({
   };
 
   return (
-    <div className="relative w-full bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-700 shadow-2xl">
+    <div 
+      className="relative w-full rounded-lg overflow-hidden border-2 border-gray-800 shadow-2xl"
+      style={{
+        background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%)',
+        boxShadow: '0 0 30px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+        position: 'relative',
+      }}
+    >
+      {/* Shine overlay effect */}
+      <div 
+        className="absolute inset-0 pointer-events-none rounded-lg"
+        style={{
+          background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.3) 100%)',
+          zIndex: 1,
+        }}
+      />
       {/* Terminal Window Title Bar */}
-      <div className="flex items-center justify-between bg-gray-800 border-b border-gray-700 px-4 py-2">
+      <div 
+        className="flex items-center justify-between border-b px-4 py-2 relative z-10"
+        style={{
+          background: 'linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%)',
+          borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+          boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 2px rgba(0, 0, 0, 0.5)',
+        }}
+      >
         <div className="flex items-center gap-2">
           {/* Window Controls */}
           <div className="flex gap-1.5">
@@ -199,8 +221,13 @@ export function CLI({
 
       {/* Messages Container */}
       <div
-        className="custom-scrollbar overflow-y-auto px-6 py-4 text-left font-mono"
-        style={{ maxHeight, backgroundColor: "#1e1e1e", color: "#d4d4d4" }}
+        className="custom-scrollbar overflow-y-auto px-6 py-4 text-left font-mono relative z-10"
+        style={{ 
+          maxHeight, 
+          background: 'linear-gradient(180deg, #0f0f0f 0%, #0a0a0a 100%)',
+          color: "#d4d4d4",
+          position: 'relative',
+        }}
       >
         {isLoading ? (
           /* Loading Screen */
@@ -251,23 +278,21 @@ export function CLI({
             {showLogo && (
               <div className="mb-8">
                 <pre className="text-xs leading-tight whitespace-pre" style={{ color: accentColor }}>
-{`╔═══════════════════════════════════════════════════════════╗
-║                                                           ║
-║     ███████╗ █████╗ ██████╗ ██╗ ██████╗                  ║
-║     ██╔════╝██╔══██╗██╔══██╗██║██╔═══██╗                 ║
-║     ███████╗███████║██████╔╝██║██║   ██║                 ║
-║     ╚════██║██╔══██║██╔═══╝ ██║██║   ██║                 ║
-║     ███████║██║  ██║██║     ██║╚██████╔╝                 ║
-║     ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝                  ║
-║                                                           ║
-║              █████╗ ██╗                                   ║
-║             ██╔══██╗██║                                   ║
-║             ███████║██║                                   ║
-║             ██╔══██║██║                                   ║
-║             ██║  ██║██║                                   ║
-║             ╚═╝  ╚═╝╚═╝                                   ║
-║                                                           ║
-╚═══════════════════════════════════════════════════════════╝`}
+{`╔════════════════════════════════════════════════════════════════════╗
+║            XXX                ███████╗ █████╗ ██████╗ ██╗ ██████╗  ║                 
+║           X   X               ██╔════╝██╔══██╗██╔══██╗██║██╔═══██╗ ║                 
+║  XXX       XXX       XXX      ███████╗███████║██████╔╝██║██║   ██║ ║                 
+║ X   X               X   X     ╚════██║██╔══██║██╔═══╝ ██║██║   ██║ ║                 
+║  XXX                 XXX      ███████║██║  ██║██║     ██║╚██████╔╝ ║                 
+║            XXX                ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝  ║                 
+║           X   X                                                    ║                 
+║            XXX                         █████╗ ██╗                  ║                 
+║  XXX                 XXX              ██╔══██╗██║                  ║                 
+║ X   X               X   X             ███████║██║                  ║                 
+║  XXX       XXX       XXX              ██╔══██║██║                  ║                 
+║           X   X                       ██║  ██║██║                  ║                 
+║            XXX                        ╚═╝  ╚═╝╚═╝                  ║                 
+╚════════════════════════════════════════════════════════════════════╝`}
                 </pre>
               </div>
             )}
@@ -316,23 +341,21 @@ export function CLI({
               {message.type === "banner" && (
                 <div className="my-6 py-6 border-b border-gray-700">
                   <pre className="text-xs leading-tight whitespace-pre" style={{ color: accentColor }}>
-{`╔═══════════════════════════════════════════════════════════╗
-║                                                           ║
-║     ███████╗ █████╗ ██████╗ ██╗ ██████╗                  ║
-║     ██╔════╝██╔══██╗██╔══██╗██║██╔═══██╗                 ║
-║     ███████╗███████║██████╔╝██║██║   ██║                 ║
-║     ╚════██║██╔══██║██╔═══╝ ██║██║   ██║                 ║
-║     ███████║██║  ██║██║     ██║╚██████╔╝                 ║
-║     ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝                  ║
-║                                                           ║
-║              █████╗ ██╗                                   ║
-║             ██╔══██╗██║                                   ║
-║             ███████║██║                                   ║
-║             ██╔══██║██║                                   ║
-║             ██║  ██║██║                                   ║
-║             ╚═╝  ╚═╝╚═╝                                   ║
-║                                                           ║
-╚═══════════════════════════════════════════════════════════╝`}
+{`╔════════════════════════════════════════════════════════════════════╗
+║            XXX                ███████╗ █████╗ ██████╗ ██╗ ██████╗  ║                 
+║           X   X               ██╔════╝██╔══██╗██╔══██╗██║██╔═══██╗ ║                 
+║  XXX       XXX       XXX      ███████╗███████║██████╔╝██║██║   ██║ ║                 
+║ X   X               X   X     ╚════██║██╔══██║██╔═══╝ ██║██║   ██║ ║                 
+║  XXX                 XXX      ███████║██║  ██║██║     ██║╚██████╔╝ ║                 
+║            XXX                ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝  ║                 
+║           X   X                                                    ║                 
+║            XXX                         █████╗ ██╗                  ║                 
+║  XXX                 XXX              ██╔══██╗██║                  ║                 
+║ X   X               X   X             ███████║██║                  ║                 
+║  XXX       XXX       XXX              ██╔══██║██║                  ║                 
+║           X   X                       ██║  ██║██║                  ║                 
+║            XXX                        ╚═╝  ╚═╝╚═╝                  ║                 
+╚════════════════════════════════════════════════════════════════════╝`}
                   </pre>
                 </div>
               )}
