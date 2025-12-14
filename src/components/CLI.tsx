@@ -384,19 +384,16 @@ export function CLI({
             {/* Ghost typing overlay */}
             {!isInputFocused && inputValue.length === 0 && ghostText.length > 0 && (
               <div
-                className="absolute inset-0 pointer-events-none text-gray-500 text-sm"
+                className="absolute inset-0 pointer-events-none text-gray-400 text-sm"
                 style={{
-                  opacity: ghostPhase === "typing" ? 0.6 : ghostPhase === "hold" ? 0.5 : 0.4,
+                  opacity: ghostPhase === "typing" ? 0.8 : ghostPhase === "hold" ? 0.7 : 0.6,
                 }}
               >
                 {ghostText}
-                <span className="border-r border-gray-500 pr-1 animate-blink" />
+                <span className="border-r border-gray-400 pr-1 animate-blink" />
               </div>
             )}
           </div>
-          {!inputValue && !ghostText && (
-            <span className="w-2 h-4 bg-green-400 animate-blink" />
-          )}
         </div>
         )}
       </div>
