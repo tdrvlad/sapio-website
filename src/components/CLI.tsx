@@ -40,33 +40,37 @@ export function CLI({
   const [ghostIndex, setGhostIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [ghostPhase, setGhostPhase] = useState<"typing" | "hold" | "fade">("typing");
-  const [isLoading, setIsLoading] = useState(() => {
-    // Check if loading animation has already been shown in this session
-    if (typeof window !== 'undefined') {
-      const hasShownLoading = sessionStorage.getItem('sapio-cli-loaded');
-      return !hasShownLoading;
-    }
-    return true;
-  });
+  const [isLoading, setIsLoading] = useState(true);
   const [ghostTypingText, setGhostTypingText] = useState("");
   const [showLoading, setShowLoading] = useState(false);
   const [showLogo, setShowLogo] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [loadingMessage, setLoadingMessage] = useState("");
+  const [isMounted, setIsMounted] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Mark as mounted (client-side only)
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Check sessionStorage after mount
+  useEffect(() => {
+    if (typeof window !== 'undefined' && sessionStorage.getItem('sapio-cli-loaded')) {
+      setIsLoading(false);
+    }
+  }, []);
 
   // Initial sequence: typing "sapio . " -> loading bar -> logo -> ghost writer
   useEffect(() => {
     // Skip if it's already been shown
-    if (typeof window !== 'undefined' && sessionStorage.getItem('sapio-cli-loaded')) {
-      setIsLoading(false);
+    if (!isMounted || (typeof window !== 'undefined' && sessionStorage.getItem('sapio-cli-loaded'))) {
       return;
     }
 
     const targetText = "sapio . ";
     let currentIndex = 0;
 
-    // Phase 1: Ghost typing "sapio . "
     const typingInterval = setInterval(() => {
       if (currentIndex < targetText.length) {
         setGhostTypingText(targetText.slice(0, currentIndex + 1));
@@ -114,7 +118,7 @@ export function CLI({
     }, 100);
 
     return () => clearInterval(typingInterval);
-  }, []);
+  }, [isMounted]);
 
   // Ghost typing effect
   useEffect(() => {
@@ -299,7 +303,7 @@ export function CLI({
           </div>
         ) : (
           <div className="space-y-3">
-            {displayMessages.map((message, index) => (
+            {isMounted && displayMessages.map((message, index) => (
             <div key={index} className="message-block">
               {/* Timestamp */}
               {showTimestamp && message.timestamp && (
@@ -364,8 +368,8 @@ export function CLI({
           </div>
         )}
 
-        {/* Input Area - Only show when not loading */}
-        {!isLoading && (
+        {/* Input Area - Only show when not loading and mounted */}
+        {!isLoading && isMounted && (
         <div className="relative flex items-center gap-2 mt-4 text-sm border-t border-gray-700 pt-4">
           <span style={{ color: accentColor }} className="select-none font-medium">
             {prompt}

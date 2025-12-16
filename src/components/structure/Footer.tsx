@@ -44,7 +44,7 @@ export function Footer() {
 					</ul>
 				</div>
 			</div>
-	<div className="border-t border-black/10 dark:border-white/10">
+	<div>
   <div className="mx-auto max-w-[1280px] px-4 sm:px-6 py-4 sm:py-6 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-xs text-foreground/60">
     
     <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-center sm:text-left">
