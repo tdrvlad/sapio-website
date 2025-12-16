@@ -39,13 +39,11 @@ export function Navbar() {
 
 	return (
 		<motion.header
-			className={`fixed top-[-15px] inset-x-0 z-50 transition-all duration-425 ${
-				scrolled ?
-					"backdrop-blur-md top-[0px]" :
-					"bg-transparent"
+			className={`fixed inset-x-0 z-50 transition-all duration-300 border-b border-border/40 bg-background ${
+				scrolled ? "top-[0px] shadow-sm" : "top-[-15px]"
 			}`}
 		>
-			<motion.div className="mx-auto max-w-[1280px] px-4 sm:px-6 py-4 sm:py-6 flex items-center gap-3 sm:gap-6"
+			<motion.div className="mx-auto max-w-[1280px] px-4 sm:px-6 py-2.5 sm:py-3.5 flex items-center gap-3 sm:gap-6"
 				initial={{opacity : 0, y : -20}} animate={{opacity : 1, y : 0}} transition={{duration : 0.8, delay : isHome ? 2.0 : isServices ? 2.0 : 0}}
 				>
 				<div className="flex-1">
@@ -96,7 +94,7 @@ export function Navbar() {
 						animate={{ opacity: 1, height: "auto" }}
 						exit={{ opacity: 0, height: 0 }}
 						transition={{ duration: 0.3 }}
-						className="md:hidden backdrop-blur-lg"
+						className="md:hidden bg-background border-t border-border/60"
 					>
 						<nav className="mx-auto max-w-[1280px] px-6 py-6 flex flex-col gap-4">
 							<Link 

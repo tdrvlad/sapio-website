@@ -284,19 +284,6 @@ export function SapioConsoleSection() {
                     </motion.div>
                 </div>
             </section>
-
-            <AnimatePresence>
-                <motion.button
-                    initial={{opacity: 0, y: 30}}
-                    animate={{opacity: 1, y: 0}}
-                    exit={{opacity: 0, y: 30}}
-                    onClick={scrollToConsole}
-                    className="fixed bottom-5 left-1/2 z-40 flex w-[92vw] max-w-3xl -translate-x-1/2 items-center justify-between border border-white/10 bg-[#030306]/95 px-4 py-3 font-mono text-xs uppercase tracking-[0.3em] text-white/70 shadow-[0_15px_30px_rgba(3,4,20,0.65)] sm:left-auto sm:right-8 sm:translate-x-0"
-                >
-                    <span>{t("home.sapioConsole.stickyPrompt")}</span>
-                    <span className="text-[#006beb]">⮐</span>
-                </motion.button>
-            </AnimatePresence>
         </>
     );
 }

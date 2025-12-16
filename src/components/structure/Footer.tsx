@@ -44,12 +44,41 @@ export function Footer() {
 					</ul>
 				</div>
 			</div>
-			<div className="border-t border-black/10 dark:border-white/10">
-				<div className="mx-auto max-w-[1280px] px-4 sm:px-6 py-4 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-xs text-foreground/60 text-center sm:text-left">
-					<p>{t("footer.copyright")}</p>
-					<Link href="/privacy" className="hover:underline">{t("footer.privacy")}</Link>
-				</div>
-			</div>
+	<div className="border-t border-black/10 dark:border-white/10">
+  <div className="mx-auto max-w-[1280px] px-4 sm:px-6 py-4 sm:py-6 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-xs text-foreground/60">
+    
+    <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-center sm:text-left">
+      <p>{t("footer.copyright")}</p>
+      <Link href="/privacy" className="hover:underline">
+        {t("footer.privacy")}
+      </Link>
+    </div>
+
+    <p className="sm:ml-auto text-center sm:text-right max-w-xs">
+      This site is protected by reCAPTCHA and the Google{" "}
+      <a
+        href="https://policies.google.com/privacy"
+        className="hover:underline"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Privacy Policy
+      </a>{" "}
+      and{" "}
+      <a
+        href="https://policies.google.com/terms"
+        className="hover:underline"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Terms of Service
+      </a>{" "}
+      apply.
+    </p>
+
+  </div>
+</div>
+
 		</footer>
 	);
 }
