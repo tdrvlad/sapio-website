@@ -233,7 +233,9 @@ export default function HeroVideo() {
           <motion.a href="#projects" className="w-full sm:w-auto text-sm underline px-6 py-3 backdrop backdrop-blur-md border border-white rounded-full underline-offset-4 hover:scale-110 hover:style-spring transition duration-500 text-white text-center" initial={{ opacity: 0, y: 10}} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 1.80 }}>{t("heroVideo.see_work")}</motion.a>
         </div>
       </div>
-      <div className="section-divider"></div>
+
+      {/* Blur transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-20"></div>
     </section>
 
   );

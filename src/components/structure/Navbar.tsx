@@ -14,17 +14,40 @@ import { Menu, X } from "lucide-react";
 export function Navbar() {
 	const { t } = useLanguage();
 	const [scrolled, setScrolled] = useState(false);
+	const [visible, setVisible] = useState(true);
+	const [lastScrollY, setLastScrollY] = useState(0);
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const pathname = usePathname();
 	const isHome = pathname === "/";
 	const isServices = pathname == "/services";
 
 	useEffect(() => {
-		const onScroll = () => setScrolled(window.scrollY > 100);
+		const onScroll = () => {
+			const currentScrollY = window.scrollY;
+			
+			// Update scrolled state for styling
+			setScrolled(currentScrollY > 100);
+			
+			// Show navbar if at top of page
+			if (currentScrollY < 10) {
+				setVisible(true);
+			}
+			// Hide when scrolling down, show when scrolling up
+			else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+				// Scrolling down
+				setVisible(false);
+			} else if (currentScrollY < lastScrollY) {
+				// Scrolling up
+				setVisible(true);
+			}
+			
+			setLastScrollY(currentScrollY);
+		};
+		
 		onScroll();
 		window.addEventListener("scroll", onScroll, { passive: true });
 		return () => window.removeEventListener("scroll", onScroll);
-	}, []);
+	}, [lastScrollY]);
 
 	useEffect(() => {
 		if (mobileMenuOpen) {
@@ -39,13 +62,15 @@ export function Navbar() {
 
 	return (
 		<motion.header
-			className={`fixed top-[-15px] inset-x-0 z-50 transition-all duration-425 ${
-				scrolled ?
-					"backdrop-blur-md top-[0px]" :
-					"bg-transparent"
+			className={`fixed inset-x-0 z-50 transition-all duration-300 border-b border-border/40 bg-background ${
+				scrolled ? "top-[0px] shadow-sm" : "top-[-15px]"
 			}`}
+			style={{
+				transform: visible ? "translateY(0)" : "translateY(-100%)",
+				transition: "transform 0.3s ease-in-out"
+			}}
 		>
-			<motion.div className="mx-auto max-w-[1280px] px-4 sm:px-6 py-4 sm:py-6 flex items-center gap-3 sm:gap-6"
+			<motion.div className="mx-auto max-w-[1280px] px-4 sm:px-6 py-2.5 sm:py-3.5 flex items-center gap-3 sm:gap-6"
 				initial={{opacity : 0, y : -20}} animate={{opacity : 1, y : 0}} transition={{duration : 0.8, delay : isHome ? 2.0 : isServices ? 2.0 : 0}}
 				>
 				<div className="flex-1">
@@ -60,10 +85,19 @@ export function Navbar() {
 					</div>
 				</div>
 				<nav className="hidden md:flex flex-1 justify-center gap-6 text-sm">
-					<Link href="/services" className="hover:underline underline-offset-4">{t("navbar.solutions")}</Link>
-					<Link href="/projects" className="hover:underline underline-offset-4">{t("navbar.projects")}</Link>
+					<Link href="/services" className="relative group transition-colors">
+						<span>{t("navbar.solutions")}</span>
+						<span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#006beb] group-hover:w-full transition-all duration-300 ease-out" style={{ transform: 'translateY(4px)' }}></span>
+					</Link>
+					<Link href="/projects" className="relative group transition-colors">
+						<span>{t("navbar.projects")}</span>
+						<span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#006beb] group-hover:w-full transition-all duration-300 ease-out" style={{ transform: 'translateY(4px)' }}></span>
+					</Link>
 					
-					<Link href="/contact" className="hover:underline underline-offset-4">{t("navbar.contact")}</Link>
+					<Link href="/contact" className="relative group transition-colors">
+						<span>{t("navbar.contact")}</span>
+						<span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#006beb] group-hover:w-full transition-all duration-300 ease-out" style={{ transform: 'translateY(4px)' }}></span>
+					</Link>
 				</nav>
 				<div className="hidden md:flex flex-1 items-center justify-end gap-3">
 					<LangToggle />
@@ -96,30 +130,33 @@ export function Navbar() {
 						animate={{ opacity: 1, height: "auto" }}
 						exit={{ opacity: 0, height: 0 }}
 						transition={{ duration: 0.3 }}
-						className="md:hidden backdrop-blur-lg"
+						className="md:hidden bg-background border-t border-border/60"
 					>
 						<nav className="mx-auto max-w-[1280px] px-6 py-6 flex flex-col gap-4">
 							<Link 
 								href="/services" 
-								className="text-base py-2 hover:underline underline-offset-4"
+								className="relative group text-base py-2 transition-colors inline-block"
 								onClick={() => setMobileMenuOpen(false)}
 							>
-								{t("navbar.solutions")}
+								<span>{t("navbar.solutions")}</span>
+								<span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#006beb] group-hover:w-full transition-all duration-300 ease-out" style={{ transform: 'translateY(4px)' }}></span>
 							</Link>
 							<Link 
 								href="/projects" 
-								className="text-base py-2 hover:underline underline-offset-4"
+								className="relative group text-base py-2 transition-colors inline-block"
 								onClick={() => setMobileMenuOpen(false)}
 							>
-								{t("navbar.projects")}
+								<span>{t("navbar.projects")}</span>
+								<span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#006beb] group-hover:w-full transition-all duration-300 ease-out" style={{ transform: 'translateY(4px)' }}></span>
 							</Link>
 							
 							<Link 
 								href="/contact" 
-								className="text-base py-2 hover:underline underline-offset-4"
+								className="relative group text-base py-2 transition-colors inline-block"
 								onClick={() => setMobileMenuOpen(false)}
 							>
-								{t("navbar.contact")}
+								<span>{t("navbar.contact")}</span>
+								<span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#006beb] group-hover:w-full transition-all duration-300 ease-out" style={{ transform: 'translateY(4px)' }}></span>
 							</Link>
 							<Link
 								href="/contact"

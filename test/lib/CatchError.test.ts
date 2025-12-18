@@ -52,7 +52,6 @@ describe("catchError (table-driven)", () => {
         }
     });
 
-    // For cases that *should throw*
     it.each([
         {
             name: "does NOT catch error not in errorsToCatch",
