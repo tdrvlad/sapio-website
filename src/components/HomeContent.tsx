@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 
 import HeroVideo from '@/components/HeroVideo';
-import { CLI } from '@/components/CLI';
+import { CLI } from '@/components/mac_cli';
 import { SolutionFinder } from '@/components/sections/SolutionFinder';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useSendMessage } from '@/hooks/useSendMessage';
@@ -411,6 +411,7 @@ export default function HomeContent({
             type: "output",
             content: lastMessage.content,
             timestamp: new Date().toLocaleTimeString(),
+            animated: true,
           }];
         });
       }
