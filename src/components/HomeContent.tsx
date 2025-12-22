@@ -11,18 +11,11 @@ import HeroVideo from '@/components/HeroVideo';
 import { CLI } from '@/components/mac_cli';
 import { SolutionFinder } from '@/components/sections/SolutionFinder';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useSendMessage } from '@/hooks/useSendMessage';
 import Transition from './Transition';
 
 type HomeContentProps = {
   clientLogos: string[];
   techLogos: string[];
-};
-
-type CLIMessage = {
-  type: "command" | "output" | "error" | "info" | "banner";
-  content: string;
-  timestamp?: string;
 };
 
 // Horizontal Scroll Projects Component
@@ -327,96 +320,12 @@ export default function HomeContent({
   techLogos,
 }: HomeContentProps) {
   const { t, language } = useLanguage();
-  const [chatMessages, setChatMessages] = useState<any[]>([]);
-  const [cliMessages, setCliMessages] = useState<CLIMessage[]>([]);
-  const [conversationId, setConversationId] = useState<string | undefined>();
-  const [pendingAnimationId, setPendingAnimationId] = useState<string | null>(null);
-
-  // Initialize CLI messages on client side only to avoid hydration errors
-  useEffect(() => {
-    setCliMessages([
-      {
-        type: "banner",
-        content: "Sapio AI",
-        timestamp: new Date().toLocaleTimeString(),
-      },
-      {
-        type: "info",
-        content: t("home.sapioConsole.systemMessage"),
-        timestamp: new Date().toLocaleTimeString(),
-      },
-    ]);
-  }, [t]);
 
   const toAlt = (src: string) => {
     const base = src.split("/").pop() || "logo";
     const name = base.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ");
     return `${name} logo`;
   };
-
-  const { sendMessage } = useSendMessage({
-    conversationId,
-    setConversationId,
-    t,
-    setMessages: setChatMessages,
-    setPendingAnimationId,
-  });
-
-  const suggestions = language === 'ro' ? [
-    "Cu ce tipuri de soluții AI lucrați?",
-    "Puteți integra soluții on-premise, fără cloud?",
-    "Arată-mi un proiect Sapio din zona legal tech.",
-    "Cât de repede poate fi dezvoltat un MVP?",
-    "Cum decurge un audit tehnic?",
-  ] : [
-    "What kind of AI solutions do you build?",
-    "Can you integrate with on-premise systems?",
-    "Show me a Sapio project in legal tech.",
-    "How fast can an MVP be developed?",
-    "How does a technical audit work?",
-  ];
-
-  const handleCommand = async (command: string) => {
-    // Add command to CLI messages
-    setCliMessages(prev => [...prev, {
-      type: "command",
-      content: command,
-      timestamp: new Date().toLocaleTimeString(),
-    }]);
-
-    try {
-      await sendMessage(command);
-    } catch (error) {
-      setCliMessages(prev => [...prev, {
-        type: "error",
-        content: t("home.sapioConsole.errorMessage"),
-        timestamp: new Date().toLocaleTimeString(),
-      }]);
-    }
-  };
-
-  // Update CLI messages when chat messages change
-  useEffect(() => {
-    if (chatMessages.length > 0) {
-      const lastMessage = chatMessages[chatMessages.length - 1];
-      if (lastMessage.role === 'assistant' && lastMessage.id !== 'sapio-system') {
-        setCliMessages(prev => {
-          // Check if this message is already added
-          const alreadyExists = prev.some(msg => 
-            msg.type === 'output' && msg.content === lastMessage.content
-          );
-          if (alreadyExists) return prev;
-          
-          return [...prev, {
-            type: "output",
-            content: lastMessage.content,
-            timestamp: new Date().toLocaleTimeString(),
-            animated: true,
-          }];
-        });
-      }
-    }
-  }, [chatMessages]);
 
   return (
     <div className="font-sans">
@@ -435,13 +344,7 @@ export default function HomeContent({
               {t("home.sapioConsole.subtitle") || "Get instant answers about our services, pricing, and technical capabilities"}
             </p>
           </div>
-          <CLI
-            messages={cliMessages}
-            suggestions={suggestions}
-            onCommand={handleCommand}
-            maxHeight="640px"
-            accentColor="#006beb"
-          />
+          <CLI />
         </div>
       </section>
 

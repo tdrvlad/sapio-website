@@ -1,30 +1,76 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { TitleBar } from "./components/TitleBar";
 import { MessageItem } from "./components/MessageItem";
 import { InputArea } from "./components/InputArea";
 import { useClientMount } from "./hooks/useClientMount";
 import { useGhostTyping } from "./hooks/useGhostTyping";
-import { createDefaultMessages } from "./utils/messages.utils";
 import { STYLES } from "./styles";
+import { useSendMessage } from '@/hooks/useSendMessage';
+
 import {
   DEFAULT_PROMPT,
   DEFAULT_ACCENT_COLOR,
-  DEFAULT_MAX_HEIGHT,
-  DEFAULT_SUGGESTIONS,
 } from "./constants";
-import type { CLIProps, InputState } from "./types";
+import type { InputState, CLIMessage } from "./types";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-export function CLI({
-  messages = [],
-  prompt = DEFAULT_PROMPT,
-  accentColor = DEFAULT_ACCENT_COLOR,
-  showTimestamp = false,
-  maxHeight = DEFAULT_MAX_HEIGHT,
-  suggestions = DEFAULT_SUGGESTIONS as unknown as string[],
-  onCommand,
-}: CLIProps) {
+export function CLI() {
+  const { t, language } = useLanguage();
+  
+  // Configuration
+  const prompt = DEFAULT_PROMPT;
+  const accentColor = DEFAULT_ACCENT_COLOR;
+  const showTimestamp = false;
+  const maxHeight = "640px";
+
+  // Suggestions based on language (memoized to prevent reset on every render)
+  const suggestions = useMemo(() => language === 'ro' ? [
+    "Cu ce tipuri de soluții AI lucrați?",
+    "Puteți integra soluții on-premise, fără cloud?",
+    "Arată-mi un proiect Sapio din zona legal tech.",
+    "Cât de repede poate fi dezvoltat un MVP?",
+    "Cum decurge un audit tehnic?",
+  ] : [
+    "What kind of AI solutions do you build?",
+    "Can you integrate with on-premise systems?",
+    "Show me a Sapio project in legal tech.",
+    "How fast can an MVP be developed?",
+    "How does a technical audit work?",
+  ], [language]);
+
+  // State management - Single array for all conversation messages
+  const [conversationMessages, setConversationMessages] = useState<any[]>([]);
+  const [conversationId, setConversationId] = useState<string | undefined>();
+  const [pendingAnimationId, setPendingAnimationId] = useState<string | null>(null);
+
+  // Initialize welcome messages once on mount
+  useEffect(() => {
+    setConversationMessages([
+      {
+        id: 'banner',
+        role: 'system',
+        content: "Sapio AI",
+      },
+      {
+        id: 'welcome',
+        role: 'system',
+        content: t("home.sapioConsole.systemMessage"),
+      },
+    ]);
+  }, []); // Empty deps - only run once
+
+  // Send message hook
+  const { sendMessage, isThinking } = useSendMessage({
+    conversationId,
+    setConversationId,
+    t,
+    setMessages: setConversationMessages,
+    setPendingAnimationId,
+  });
+
+  // Input state
   const [inputState, setInputState] = useState<InputState>({
     value: "",
     isFocused: false,
@@ -36,14 +82,58 @@ export function CLI({
     inputState
   );
 
-  const displayMessages = useMemo(() => {
-    return messages.length > 0 && isMounted 
-      ? messages 
-      : isMounted 
-        ? createDefaultMessages() 
-        : [];
-  }, [messages, isMounted]);
+  // Convert conversation messages to CLI display format
+  const cliMessages = useMemo<CLIMessage[]>(() => {
+    return conversationMessages.map((msg) => {
+      // System messages (banner/welcome)
+      if (msg.role === 'system') {
+        return {
+          type: msg.id === 'banner' ? 'banner' : 'info',
+          content: msg.content,
+          timestamp: msg.timestamp,
+        };
+      }
+      
+      // User messages
+      if (msg.role === 'user') {
+        return {
+          type: 'command',
+          content: msg.content,
+          timestamp: msg.timestamp || new Date().toLocaleTimeString(),
+        };
+      }
+      
+      // Assistant messages
+      if (msg.role === 'assistant') {
+        return {
+          type: msg.tone === 'error' ? 'error' : 'output',
+          content: msg.content,
+          timestamp: msg.timestamp || new Date().toLocaleTimeString(),
+          animated: msg.id === pendingAnimationId,
+        };
+      }
+      
+      // Fallback
+      return {
+        type: 'info',
+        content: msg.content,
+        timestamp: msg.timestamp,
+      };
+    });
+  }, [conversationMessages, pendingAnimationId]);
 
+  // Handle send command
+  const handleCommand = useCallback(async (command: string) => {
+    if (!command.trim() || isThinking) return;
+    
+    try {
+      await sendMessage(command);
+    } catch (error) {
+      console.error('Failed to send message:', error);
+    }
+  }, [sendMessage, isThinking]);
+
+  // Input handlers
   const updateInputState = useCallback((updates: Partial<InputState>) => {
     setInputState(prev => ({ ...prev, ...updates }));
   }, []);
@@ -66,13 +156,13 @@ export function CLI({
         event.preventDefault();
         const trimmedValue = inputState.value.trim();
         
-        if (trimmedValue && onCommand) {
-          onCommand(trimmedValue);
+        if (trimmedValue) {
+          handleCommand(trimmedValue);
           updateInputState({ value: "" });
         }
       }
     },
-    [inputState.value, onCommand, updateInputState]
+    [inputState.value, handleCommand, updateInputState]
   );
 
   return (
@@ -98,7 +188,7 @@ export function CLI({
         aria-relevant="additions"
       >
         <div className={STYLES.cli.classes.messagesList}>
-          {isMounted && displayMessages.map((message, index) => (
+          {isMounted && cliMessages.map((message, index) => (
             <MessageItem
               key={`${message.type}-${index}`}
               message={message}
@@ -127,4 +217,3 @@ export function CLI({
 }
 
 CLI.displayName = "CLI";
-
