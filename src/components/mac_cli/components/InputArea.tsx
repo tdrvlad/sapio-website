@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, forwardRef } from "react";
 import { GhostTextOverlay } from "./GhostTextOverlay";
 import { STYLES } from "../styles";
 import type { InputState, GhostTypingState } from "../types";
@@ -14,7 +14,7 @@ interface InputAreaProps {
   onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-export const InputArea = memo(({
+export const InputArea = memo(forwardRef<HTMLInputElement, InputAreaProps>(({
   inputState,
   prompt,
   accentColor,
@@ -23,7 +23,7 @@ export const InputArea = memo(({
   onFocus,
   onBlur,
   onKeyDown,
-}: InputAreaProps) => (
+}, ref) => (
   <div className={STYLES.inputArea.classes.container}>
     <span
       style={STYLES.inputArea.inline.prompt(accentColor)}
@@ -34,6 +34,7 @@ export const InputArea = memo(({
     </span>
     <div className={STYLES.inputArea.classes.inputWrapper}>
       <input
+        ref={ref}
         type="text"
         value={inputState.value}
         onChange={(e) => onInputChange(e.target.value)}
@@ -51,7 +52,7 @@ export const InputArea = memo(({
       )}
     </div>
   </div>
-));
+)));
 
 InputArea.displayName = "InputArea";
 
