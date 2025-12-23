@@ -5,7 +5,7 @@ import createId from "@/lib/IdGenerator";
 import ERROR_MESSAGE from "@/lib/errorMessage";
 import prepareFetch, { PreloadedFetch } from "@/service/preloadedFetch";
 import catchError from "@/lib/catchError";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 
 interface UseSendMessageParams { onSuccess: (data: ConsoleResponse) => void, onError: (message: string) => void }
@@ -23,30 +23,15 @@ export function useSendMessage({ onSuccess, onError }: UseSendMessageParams): Us
     }, []);
 
     const sendMessage = async (text: string) => {
+        const prepared = await validateAndPrepareRequest(text);
+        if (!prepared) return;
+        const { payload, recaptchaToken } = prepared;
 
-        if (!fetchRef.current) {
-            onError("Chat service is not ready yet.");
-            return;
-        }
-
-        if (!text || !text.trim()) return;
-        const payload = text.trim()
-
-        if (!isLoaded) {
-            onError(ERROR_MESSAGE.RECAPTCHA_NOT_READY)
-            return
-        }
-
-        const [error, recaptchaToken] = await catchError(executeRecaptcha("sapio_console_chat"))
-        if (error) {
-            onError(ERROR_MESSAGE.FAILED_RECAPTCHA_VALIDATION)
-            return
-        }
-
-        return fetchRef.current(payload, createId(), recaptchaToken!)
+        return fetchRef.current!(payload, createId(), recaptchaToken!)
             .then(async response => {
                 if (!response.ok) {
-                    throw new Error(`${ERROR_MESSAGE.SAPIO_API_ERROR} ${response.status}`);
+                    onError(`${ERROR_MESSAGE.SAPIO_API_ERROR} ${response.status}`)
+                    return
                 }
                 const data = await response.json();
                 onSuccess(data);
@@ -57,4 +42,35 @@ export function useSendMessage({ onSuccess, onError }: UseSendMessageParams): Us
     };
 
     return { sendMessage };
+
+
+    async function validateAndPrepareRequest(text: string) {
+        if (!fetchRef.current) {
+            onError("Chat service is not ready yet.");
+            return null;
+        }
+
+        if (!text || !text.trim()) {
+            return null;
+        }
+
+        if (!isLoaded) {
+            onError(ERROR_MESSAGE.RECAPTCHA_NOT_READY);
+            return null;
+        }
+
+        const [error, recaptchaToken] = await catchError(
+            executeRecaptcha("sapio_console_chat")
+        );
+
+        if (error || !recaptchaToken) {
+            onError(ERROR_MESSAGE.FAILED_RECAPTCHA_VALIDATION);
+            return null;
+        }
+
+        return {
+            payload: text.trim(),
+            recaptchaToken,
+        };
+    }
 }
