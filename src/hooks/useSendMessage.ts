@@ -1,82 +1,38 @@
-import { useState, useRef, RefObject } from "react";
 import { useRecaptchaV3 } from "@/hooks/GoogleRecaptchaV3";
 import SapioConfig from "@/config/sapioConfig";
-import { ConsoleMessage, ConsoleResponse } from "@/types/chat";
+import { ConsoleResponse } from "@/types/chat";
 import createId from "@/lib/IdGenerator";
 import ERROR_MESSAGE from "@/lib/errorMessage";
-import prepareFetch from "@/service/preloadedFetch";
+import prepareFetch, { PreloadedFetch } from "@/service/preloadedFetch";
 import catchError from "@/lib/catchError";
+import { useEffect, useMemo, useRef } from "react";
 
 
-interface UseSendMessageParams {
-    conversationId: string | undefined;
-    setConversationId: (id: string | undefined) => void;
-    t: (key: string) => string;
-    setMessages: React.Dispatch<React.SetStateAction<ConsoleMessage[]>>;
-    setPendingAnimationId: (id: string | null) => void;
-}
+interface UseSendMessageParams { onSuccess: (data: ConsoleResponse) => void, onError: (message: string) => void }
+interface UseSendMessageResponse { sendMessage: (text: string) => Promise<void>; }
 
-interface UseSendMessageResponse {
-    sendMessage: (text: string) => Promise<void>;
-    isThinking: boolean;
-    inputRef: RefObject<HTMLInputElement | null>;
-}
+export function useSendMessage({ onSuccess, onError }: UseSendMessageParams): UseSendMessageResponse {
 
-export function useSendMessage({
-                                   conversationId,
-                                   setConversationId,
-                                   t,
-                                   setMessages,
-                                   setPendingAnimationId,
-                               }: UseSendMessageParams): UseSendMessageResponse {
+    const { executeRecaptcha, isLoaded } = useRecaptchaV3(SapioConfig.SAPIO_RECAPTCHA_SITE_KEY);
+    const fetchRef = useRef<PreloadedFetch | null>(null);
 
-    const onSuccess = (data: ConsoleResponse) => {
-        const assistantMessage: ConsoleMessage = {
-            id: createId(),
-            role: "assistant",
-            content: data.response,
-        };
-
-        setMessages(prev => [...prev, assistantMessage]);
-        setConversationId(data.conversation_id);
-        setPendingAnimationId(assistantMessage.id);
-    }
-    const onError = (message?: string) => {
-        const errorMessage: ConsoleMessage = {
-            id: createId(),
-            role: "assistant",
-            content: t("home.sapioConsole.errorMessage"),
-            tone: "error",
-        };
-
-        setMessages(prev => [...prev, errorMessage]);
-        setPendingAnimationId(errorMessage.id);
-    }
-
-
-    const [isThinking, setIsThinking] = useState(false);
-    const inputRef = useRef<HTMLInputElement>(null);
-    const {executeRecaptcha, isLoaded: isRecaptchaLoaded} = useRecaptchaV3(SapioConfig.SAPIO_RECAPTCHA_SITE_KEY);
-
+    useEffect(() => {
+        prepareFetch().then((fn) => {
+            fetchRef.current = fn;
+        });
+    }, []);
 
     const sendMessage = async (text: string) => {
-        const preloadedFetch = await prepareFetch()
 
-        if (!text.trim() || isThinking) return;
+        if (!fetchRef.current) {
+            onError("Chat service is not ready yet.");
+            return;
+        }
 
-        setIsThinking(true);
+        if (!text || !text.trim()) return;
+        const payload = text.trim()
 
-        const trimmed = text.trim();
-
-        const userMessage: ConsoleMessage = {
-            id: createId(),
-            role: "user",
-            content: trimmed,
-        };
-        setMessages(prev => [...prev, userMessage]);
-
-
-        if (!isRecaptchaLoaded) {
+        if (!isLoaded) {
             onError(ERROR_MESSAGE.RECAPTCHA_NOT_READY)
             return
         }
@@ -87,7 +43,7 @@ export function useSendMessage({
             return
         }
 
-        return preloadedFetch(trimmed, conversationId!, recaptchaToken!)
+        return fetchRef.current(payload, createId(), recaptchaToken!)
             .then(async response => {
                 if (!response.ok) {
                     throw new Error(`${ERROR_MESSAGE.SAPIO_API_ERROR} ${response.status}`);
@@ -97,16 +53,8 @@ export function useSendMessage({
             })
             .catch(err => {
                 onError(err instanceof Error ? err.message : String(err))
-            })
-            .finally(() => {
-                setIsThinking(false);
-                inputRef.current?.focus();
             });
     };
 
-    return {
-        sendMessage,
-        isThinking,
-        inputRef,
-    };
+    return { sendMessage };
 }

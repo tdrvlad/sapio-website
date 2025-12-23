@@ -16,6 +16,8 @@ import {
 import type { InputState, CLIMessage } from "./types";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { CLIErrorBoundary } from "./ErrorBoundary";
+import { ConsoleMessage, ConsoleResponse } from "@/types/chat";
+import createId from "@/lib/IdGenerator";
 
 function CLIContent() {
 
@@ -31,6 +33,32 @@ function CLIContent() {
   const [conversationId, setConversationId] = useState<string | undefined>();
   const [pendingAnimationId, setPendingAnimationId] = useState<string | null>(null);
   const [hasError, setHasError] = useState(false);
+
+
+
+      const onSuccess = (data: ConsoleResponse) => {
+        const assistantMessage: ConsoleMessage = {
+            id: createId(),
+            role: "assistant",
+            content: data.response,
+        };
+
+        setConversationMessages(prev => [...prev, assistantMessage]);
+        setConversationId(data.conversation_id);
+        setPendingAnimationId(assistantMessage.id);
+    }
+    const onError = (_:string) => {
+        const errorMessage: ConsoleMessage = {
+            id: createId(),
+            role: "assistant",
+            content: t("home.sapioConsole.errorMessage"),
+            tone: "error",
+        };
+
+        setConversationMessages(prev => [...prev, errorMessage]);
+        setPendingAnimationId(errorMessage.id);
+    }
+
 
 
   const triggerInactive = useCallback(() => {
@@ -67,17 +95,11 @@ function CLIContent() {
         content: t("home.sapioConsole.systemMessage"),
       },
     ]);
-  }, []); // Empty deps - only run once
+  }, []);
 
 
   // Send message hook
-  const { sendMessage, isThinking } = useSendMessage({
-    conversationId,
-    setConversationId,
-    t,
-    setMessages: setConversationMessages,
-    setPendingAnimationId,
-  });
+  const { sendMessage } = useSendMessage({ onSuccess, onError });
 
   // Input state
   const [inputState, setInputState] = useState<InputState>({
@@ -133,17 +155,22 @@ function CLIContent() {
 
   // Handle send command
   const handleCommand = useCallback(async (command: string) => {
-    if (!command.trim() || isThinking) return;
+    if (!command.trim()) return;
     try {
       setHasError(false);
+
+        const userMessage: ConsoleMessage = {
+            id: createId(),
+            role: "user",
+            content: command,
+        };
+        setConversationMessages(prev => [...prev,userMessage ]);
+
       await sendMessage(command);
-      //throw Error("afasdf")
 
     } catch (error) {
-      console.error('Failed to send message:', error);
       setHasError(true);
 
-      // Add error message to conversation
       setConversationMessages(prev => [...prev, {
         id: `error-${Date.now()}`,
         role: 'assistant',
@@ -151,7 +178,7 @@ function CLIContent() {
         tone: 'error',
       }]);
     }
-  }, [sendMessage, isThinking]);
+  }, [sendMessage]);
 
   // Input handlers
   const updateInputState = useCallback((updates: Partial<InputState>) => {
