@@ -49,7 +49,7 @@ export function useGhostTyping(
       currentSuggestion,
       state.isDeleting
     );
-  }, [state.text, state.isDeleting, state.index, state.phase, suggestions, inputState.isFocused, inputState.value]);
+  }, [state.text, state.isDeleting, state.index, state.phase, suggestions, inputState.isFocused, inputState.value, inputState]);
 
   return state;
 }

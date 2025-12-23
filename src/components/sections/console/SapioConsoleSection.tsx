@@ -3,7 +3,7 @@
  */
 "use client";
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -161,11 +161,6 @@ export function SapioConsoleSection() {
     };
 
     const handleBlur = () => setIsInputFocused(false);
-
-    const scrollToConsole = () => {
-        sectionRef.current?.scrollIntoView({behavior: "smooth", block: "center"});
-        setTimeout(() => inputRef.current?.focus(), 520);
-    };
 
 
     const statusLine = `${t("home.sapioConsole.systemPrefix")} ${t("home.sapioConsole.statusLinePrefix")} ${t("home.sapioConsole.statusLine")}`;

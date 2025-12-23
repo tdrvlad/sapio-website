@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo, useEffect, useRef } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
 import { TitleBar } from "./components/TitleBar";
 import { MessageItem } from "./components/MessageItem";
 import { InputArea } from "./components/InputArea";
@@ -44,11 +44,12 @@ function CLIContent() {
   }
 
   const INACTIVITY_DELAY = 10000; 
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
 
   const inactivityTimer = useRef<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const suggestions = useMemo(() => t<string[]>("cli.suggestions"), [language]);
+  const suggestions = useMemo(() => t<string[]>("cli.suggestions"), [ t]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [conversationMessages, setConversationMessages] = useState<any[]>(() => [
     {
       id: 'banner',
@@ -166,7 +167,7 @@ function CLIContent() {
     }
 
     setInputState((prev) => ({ ...prev, isFocused: false }));
-  }, [updateInputState]);
+  }, []);
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {

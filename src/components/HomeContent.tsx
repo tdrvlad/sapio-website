@@ -2,7 +2,7 @@
 
 import './comp.css';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
@@ -19,7 +19,7 @@ type HomeContentProps = {
 };
 
 // Horizontal Scroll Projects Component
-function HorizontalScrollProjects({ t }: { t: any }) {
+function HorizontalScrollProjects({ t }: { t:  <T = string>(key: string) => T }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isInView, setIsInView] = useState(false);
@@ -319,7 +319,7 @@ export default function HomeContent({
   clientLogos,
   techLogos,
 }: HomeContentProps) {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
 
   const toAlt = (src: string) => {
     const base = src.split("/").pop() || "logo";

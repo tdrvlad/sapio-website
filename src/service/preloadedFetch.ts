@@ -5,7 +5,6 @@ export type PreloadedFetch = (_message: string, _conversationId: string, _recapt
 async function prepareFetch(): Promise<PreloadedFetch> {
 
     if (SapioConfig.isLocal()) {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         return async (_message: string, _conversationId: string, _recaptchaToken: string) => {
             const mockResponse: ConsoleResponse = {
                 conversation_id: _conversationId,
