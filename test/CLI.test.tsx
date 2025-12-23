@@ -25,27 +25,11 @@ jest.mock('@/config/sapioConfig', () => ({
     SAPIO_RECAPTCHA_SITE_KEY: 'test-recaptcha-key',
     SAPIO_API_URL: 'http://test-api.local',
     PUBLIC_SITE: 'http://localhost:3000',
-    ENV: 'test',
-    isLocal: () => true, // Force local mode to use mock responses
+    ENV: 'local',
+    isLocal: () => true,
   },
 }));
 
-jest.mock('@/service/preloadedFetch', () => ({
-  __esModule: true,
-  default: jest.fn(() => {
-    return Promise.resolve(async (_message: string, _conversationId: string, _recaptchaToken: string) => {
-      const mockResponse = {
-        conversation_id: _conversationId,
-        response: "Mock content for development.",
-      };
-      
-      return new Response(JSON.stringify(mockResponse), {
-        status: 200,
-        headers: { "Content-Type": "application/json" }
-      });
-    });
-  }),
-}));
 
 jest.mock('@/hooks/useAutoScroll', () => ({
   useAutoScroll: jest.fn(),
@@ -91,8 +75,6 @@ describe('CLI Component - Comprehensive Tests', () => {
   beforeEach(async () => {
     jest.clearAllMocks();
     
-    
-    
     global.MutationObserver = class MutationObserver {
       observe = jest.fn();
       disconnect = jest.fn();
@@ -115,7 +97,6 @@ describe('CLI Component - Comprehensive Tests', () => {
 
     it('should render all main components', async () => {
       renderCLI();
-      
       expect(screen.getByRole('region', { name: /terminal interface/i })).toBeInTheDocument();
       
       expect(screen.getByRole('log')).toBeInTheDocument();
@@ -166,7 +147,6 @@ describe('CLI Component - Comprehensive Tests', () => {
 
   describe('2. Expected Error - Sapio Error Message Display', () => {
     it('should handle message sending with mocked prepareFetch', async () => {
-      // In unit tests, we mock prepareFetch which returns mock responses
       const user = userEvent.setup({ delay: null });
       renderCLI();
       
@@ -176,12 +156,10 @@ describe('CLI Component - Comprehensive Tests', () => {
 
       const input = screen.getByRole('textbox');
       
-      // Wait for prepareFetch to initialize
       await new Promise(resolve => setTimeout(resolve, 500));
       
       await user.type(input, 'Test message{Enter}');
       
-      // Should display the user message
       await waitFor(() => {
         expect(screen.getByText('Test message')).toBeInTheDocument();
       }, { timeout: 5000 });
@@ -217,14 +195,13 @@ describe('CLI Component - Comprehensive Tests', () => {
         expect(screen.getByRole('textbox')).toBeInTheDocument();
       }, { timeout: 3000 });
 
-      const input = screen.getByRole('textbox');
+      const input = screen.getByRole('textbox') as HTMLInputElement;
       await new Promise(resolve => setTimeout(resolve, 200));
       
       await user.type(input, 'First message{Enter}');
       await waitFor(() => {
         expect(screen.getByText('First message')).toBeInTheDocument();
       }, { timeout: 5000 });
-      
       expect(input.value).toBe('');
       
       await new Promise(resolve => setTimeout(resolve, 300));
@@ -260,7 +237,6 @@ describe('CLI Component - Comprehensive Tests', () => {
 
   describe('3. Unexpected Error - Error Boundary', () => {
     it('should render error boundary fallback when component throws error', () => {
-      // Mock the entire LanguageContext module to throw
       jest.doMock('@/contexts/LanguageContext', () => ({
         LanguageProvider: ({ children }: any) => children,
         useLanguage: () => {
@@ -268,10 +244,8 @@ describe('CLI Component - Comprehensive Tests', () => {
         },
       }));
 
-      // Suppress console.error for this test
       const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
 
-      // Clear module cache and re-require
       jest.resetModules();
       const { CLI: TestCLI } = require('@/components/mac_cli/CLI');
       const { LanguageProvider: TestProvider } = require('@/contexts/LanguageContext');
@@ -282,11 +256,9 @@ describe('CLI Component - Comprehensive Tests', () => {
         </TestProvider>
       );
 
-      // Should display the error boundary fallback with maintenance message
       const errorMessage = screen.getByText(/temporarily unavailable due to maintenance/i);
       expect(errorMessage).toBeInTheDocument();
       
-      // Should still have terminal interface structure
       expect(screen.getByRole('region', { name: /terminal interface.*error/i })).toBeInTheDocument();
       
       consoleError.mockRestore();
@@ -295,7 +267,6 @@ describe('CLI Component - Comprehensive Tests', () => {
     });
 
     it('should display maintenance message in error boundary with structured layout', () => {
-      // Just render the error boundary directly with the fallback
       const { CLIErrorBoundary } = require('@/components/mac_cli/ErrorBoundary');
       
       const ThrowError = () => {
@@ -323,12 +294,8 @@ describe('CLI Component - Comprehensive Tests', () => {
     });
   });
 
-  // ============================================
-  // 4. SUCCESS SCENARIO
-  // ============================================
   describe('4. Success - Message Sending and Response', () => {
     it('should successfully send message and display user input', async () => {
-      // Test message sending functionality
       const user = userEvent.setup({ delay: null });
       renderCLI();
       
@@ -336,22 +303,23 @@ describe('CLI Component - Comprehensive Tests', () => {
         expect(screen.getByRole('textbox')).toBeInTheDocument();
       }, { timeout: 3000 });
 
-      const input = screen.getByRole('textbox');
+      const input = screen.getByRole('textbox') as HTMLInputElement;
       const testMessage = 'What can you do?';
       
-      // Wait for prepareFetch to initialize in useEffect
-      await new Promise(resolve => setTimeout(resolve, 200));
+      await new Promise(resolve => setTimeout(resolve, 500));
       
       await user.type(input, testMessage + '{Enter}');
       
-      // Should display user message
       await waitFor(() => {
         expect(screen.getByText(testMessage)).toBeInTheDocument();
       }, { timeout: 5000 });
       
-      // Input should be cleared after sending
+      await waitFor(() => {
+        expect(screen.getByText('Mock content for development.')).toBeInTheDocument();
+      }, { timeout: 10000 });
+      
       expect(input.value).toBe('');
-    }, 10000);
+    }, 15000);
 
     it('should clear input after successful send', async () => {
       const user = userEvent.setup({ delay: null });
@@ -379,25 +347,20 @@ describe('CLI Component - Comprehensive Tests', () => {
 
       const input = screen.getByRole('textbox');
       
-      // Wait for prepareFetch to initialize
       await new Promise(resolve => setTimeout(resolve, 200));
       
-      // Send first message
       await user.type(input, 'Message 1{Enter}');
       await waitFor(() => {
         expect(screen.getByText('Message 1')).toBeInTheDocument();
       }, { timeout: 5000 });
       
-      // Wait for response
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      // Send second message
       await user.type(input, 'Message 2{Enter}');
       await waitFor(() => {
         expect(screen.getByText('Message 2')).toBeInTheDocument();
       }, { timeout: 5000 });
       
-      // Both user messages should be visible
       expect(screen.getByText('Message 1')).toBeInTheDocument();
       expect(screen.getByText('Message 2')).toBeInTheDocument();
     }, 15000);
@@ -409,14 +372,11 @@ describe('CLI Component - Comprehensive Tests', () => {
       await waitFor(() => {
         expect(screen.getByRole('textbox')).toBeInTheDocument();
       });
-      
       const input = screen.getByRole('textbox');
       
-      // Try to send empty message
       await user.type(input, '{Enter}');
       expect(global.fetch).not.toHaveBeenCalled();
       
-      // Try to send whitespace-only message
       await user.type(input, '   {Enter}');
       expect(global.fetch).not.toHaveBeenCalled();
     });
@@ -437,16 +397,12 @@ describe('CLI Component - Comprehensive Tests', () => {
       const input = screen.getByRole('textbox');
       await user.type(input, '  Hello World  {Enter}');
       
-      // User message should show trimmed version
       await waitFor(() => {
         expect(screen.getByText('Hello World')).toBeInTheDocument();
       });
     });
   });
 
-  // ============================================
-  // 5. TIMER - Inactivity Timer
-  // ============================================
   describe('5. Inactivity Timer', () => {
     beforeEach(() => {
       jest.useFakeTimers();
@@ -464,19 +420,15 @@ describe('CLI Component - Comprehensive Tests', () => {
       await waitFor(() => {
         expect(screen.getByRole('textbox')).toBeInTheDocument();
       });
-      
       const input = screen.getByRole('textbox');
       
-      // Focus the input
       await user.click(input);
       expect(input).toHaveFocus();
       
-      // Fast-forward time by 10 seconds (INACTIVITY_DELAY)
       act(() => {
         jest.advanceTimersByTime(10000);
       });
       
-      // Input should lose focus
       await waitFor(() => {
         expect(input).not.toHaveFocus();
       });
@@ -489,35 +441,27 @@ describe('CLI Component - Comprehensive Tests', () => {
       await waitFor(() => {
         expect(screen.getByRole('textbox')).toBeInTheDocument();
       });
-      
       const input = screen.getByRole('textbox');
       
-      // Focus the input
       await user.click(input);
       expect(input).toHaveFocus();
       
-      // Advance time partially (5 seconds)
       act(() => {
         jest.advanceTimersByTime(5000);
       });
       
-      // User types (should reset timer)
       await user.type(input, 'a');
       
-      // Advance another 5 seconds (only 5 seconds since last activity)
       act(() => {
         jest.advanceTimersByTime(5000);
       });
       
-      // Input should still have focus (timer was reset)
       expect(input).toHaveFocus();
       
-      // Advance final 5 seconds (now 10 seconds since typing)
       act(() => {
         jest.advanceTimersByTime(5000);
       });
       
-      // Now it should lose focus
       await waitFor(() => {
         expect(input).not.toHaveFocus();
       });
@@ -530,27 +474,21 @@ describe('CLI Component - Comprehensive Tests', () => {
       await waitFor(() => {
         expect(screen.getByRole('textbox')).toBeInTheDocument();
       });
-      
       const input = screen.getByRole('textbox');
       
-      // Focus and type
       await user.click(input);
       await user.type(input, 'Test message');
       
-      // Advance time partially
       act(() => {
         jest.advanceTimersByTime(5000);
       });
       
-      // Send message (should reset timer)
       await user.type(input, '{Enter}');
       
-      // Advance another 5 seconds
       act(() => {
         jest.advanceTimersByTime(5000);
       });
       
-      // Input should still have focus
       expect(input).toHaveFocus();
     });
 
@@ -561,23 +499,18 @@ describe('CLI Component - Comprehensive Tests', () => {
       await waitFor(() => {
         expect(screen.getByRole('textbox')).toBeInTheDocument();
       });
-      
       const input = screen.getByRole('textbox');
       
-      // Focus the input
       await user.click(input);
       expect(input).toHaveFocus();
       
-      // Manually blur (tab away)
       await user.tab();
       expect(input).not.toHaveFocus();
       
-      // The timer should be cleared, so advancing time should not affect anything
       act(() => {
         jest.advanceTimersByTime(15000);
       });
       
-      // Input should remain blurred (not changed by timer)
       expect(input).not.toHaveFocus();
     });
 
@@ -588,10 +521,8 @@ describe('CLI Component - Comprehensive Tests', () => {
       await waitFor(() => {
         expect(screen.getByRole('textbox')).toBeInTheDocument();
       });
-      
       const input = screen.getByRole('textbox');
       
-      // Focus and wait for inactivity
       await user.click(input);
       expect(input).toHaveFocus();
       
@@ -603,7 +534,6 @@ describe('CLI Component - Comprehensive Tests', () => {
       expect(input).not.toHaveFocus();
       });
       
-      // Should be able to refocus
       await user.click(input);
       expect(input).toHaveFocus();
     });
@@ -618,7 +548,6 @@ describe('CLI Component - Comprehensive Tests', () => {
 
       const input = screen.getByRole('textbox');
       
-      // First cycle: focus, wait, blur
       await user.click(input);
       expect(input).toHaveFocus();
       
@@ -630,7 +559,6 @@ describe('CLI Component - Comprehensive Tests', () => {
         expect(input).not.toHaveFocus();
       });
       
-      // Second cycle: refocus, type, wait, blur
       await user.click(input);
       expect(input).toHaveFocus();
       
@@ -646,17 +574,12 @@ describe('CLI Component - Comprehensive Tests', () => {
     });
   });
 
-  // ============================================
-  // INTEGRATION TESTS
-  // ============================================
   describe('Integration Tests', () => {
     it('should work correctly with LanguageProvider context', async () => {
       renderCLI();
       
-      // Should render without errors
       expect(screen.getByRole('region')).toBeInTheDocument();
       
-      // Should display translated content
       await waitFor(() => {
         const textElements = screen.queryAllByText(/Sapio/i);
         expect(textElements.length).toBeGreaterThan(0);
@@ -673,15 +596,12 @@ describe('CLI Component - Comprehensive Tests', () => {
 
       const input = screen.getByRole('textbox');
       
-      // Wait for prepareFetch to initialize
       await new Promise(resolve => setTimeout(resolve, 200));
       
-      // Send messages rapidly
       await user.type(input, 'Message A{Enter}');
       await user.type(input, 'Message B{Enter}');
       await user.type(input, 'Message C{Enter}');
       
-      // All user messages should be displayed
       await waitFor(() => {
         expect(screen.getByText('Message A')).toBeInTheDocument();
         expect(screen.getByText('Message B')).toBeInTheDocument();
@@ -699,27 +619,22 @@ describe('CLI Component - Comprehensive Tests', () => {
 
       const input = screen.getByRole('textbox');
       
-      // Wait for prepareFetch to initialize
       await new Promise(resolve => setTimeout(resolve, 200));
       
-      // Send first message
       await user.type(input, 'First query{Enter}');
       
       await waitFor(() => {
         expect(screen.getByText('First query')).toBeInTheDocument();
       }, { timeout: 5000 });
       
-      // Wait a bit before sending second message
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      // Send second message
       await user.type(input, 'Second query{Enter}');
       
       await waitFor(() => {
         expect(screen.getByText('Second query')).toBeInTheDocument();
       }, { timeout: 5000 });
       
-      // Both user messages should be present
       expect(screen.getByText('First query')).toBeInTheDocument();
       expect(screen.getByText('Second query')).toBeInTheDocument();
     }, 15000);
