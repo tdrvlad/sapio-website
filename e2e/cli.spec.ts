@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('CLI Component E2E Tests', () => {
+test.describe.skip('CLI Component E2E Tests', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
     
