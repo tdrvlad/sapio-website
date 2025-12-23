@@ -25,7 +25,7 @@ export const GHOST_TYPING_CONFIG = {
 } as const;
 
 export const MESSAGE_TYPING_CONFIG = {
-  TYPING_DELAY: 20,
+  TYPING_DELAY: 70,
   CURSOR_BLINK_CLASS: "animate-pulse",
 } as const;
 

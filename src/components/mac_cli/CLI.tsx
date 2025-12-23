@@ -29,7 +29,6 @@ function CLIContent() {
     };
 
     setConversationMessages(prev => [...prev, assistantMessage]);
-    setConversationId(data.conversation_id);
     setPendingAnimationId(assistantMessage.id);
   }
   const onError = (_: string) => {
@@ -44,14 +43,24 @@ function CLIContent() {
     setPendingAnimationId(errorMessage.id);
   }
 
-  const INACTIVITY_DELAY = 2000; 
+  const INACTIVITY_DELAY = 10000; 
   const { t, language } = useLanguage();
 
   const inactivityTimer = useRef<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestions = useMemo(() => t<string[]>("cli.suggestions"), [language]);
-  const [conversationMessages, setConversationMessages] = useState<any[]>([]);
-  const [conversationId, setConversationId] = useState<string | undefined>();
+  const [conversationMessages, setConversationMessages] = useState<any[]>(() => [
+    {
+      id: 'banner',
+      role: 'system',
+      content: "Sapio AI",
+    },
+    {
+      id: 'welcome',
+      role: 'system',
+      content: t("home.sapioConsole.systemMessage"),
+    },
+  ]);
   const [pendingAnimationId, setPendingAnimationId] = useState<string | null>(null);
   const [inputState, setInputState] = useState<InputState>({ value: "", isFocused: false, });
   const isMounted = useClientMount();
@@ -59,20 +68,6 @@ function CLIContent() {
   const { sendMessage } = useSendMessage({ onSuccess, onError });
   const ghostState = useGhostTyping(suggestions, inputState);
 
- useEffect(() => {
-    setConversationMessages([
-      {
-        id: 'banner',
-        role: 'system',
-        content: "Sapio AI",
-      },
-      {
-        id: 'welcome',
-        role: 'system',
-        content: t("home.sapioConsole.systemMessage"),
-      },
-    ]);
-  }, []);
 
   const triggerInactive = useCallback(() => {
     if (inputRef.current) {

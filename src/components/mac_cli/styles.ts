@@ -55,7 +55,7 @@ export const STYLES = {
         prompt: "select-none font-medium",
         text: "text-green-400",
       },
-      output: "text-gray-300 whitespace-pre-wrap text-sm leading-relaxed",
+      output: "text-white whitespace-pre-wrap text-sm leading-relaxed",
       error: "text-red-400 whitespace-pre-wrap text-sm leading-relaxed",
       info: "italic text-sm",
       banner: {

@@ -77,6 +77,9 @@ test.describe('CLI Component E2E Tests', () => {
       
       // User message should appear
       await expect(page.getByText(testMessage)).toBeVisible({ timeout: 5000 });
+      
+      // Mock response should appear in development mode
+      await expect(page.getByText('Mock content for development.')).toBeVisible({ timeout: 5000 });
     });
 
     test('should handle multiple messages in sequence', async ({ page }) => {
@@ -95,6 +98,9 @@ test.describe('CLI Component E2E Tests', () => {
         
         // Wait for message to appear
         await expect(page.getByText(msg)).toBeVisible({ timeout: 5000 });
+        
+        // Mock response should appear in development mode
+        await expect(page.getByText('Mock content for development.')).toBeVisible({ timeout: 5000 });
         
         // Small delay between messages
         await page.waitForTimeout(500);
@@ -268,6 +274,9 @@ test.describe('CLI Component E2E Tests', () => {
       
       // Message should appear
       await expect(page.getByText('Enter key test')).toBeVisible({ timeout: 5000 });
+      
+      // Mock response should appear in development mode
+      await expect(page.getByText('Mock content for development.')).toBeVisible({ timeout: 5000 });
     });
   });
 

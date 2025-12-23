@@ -41,7 +41,7 @@ export const MessageItem = memo(({ message, prompt, accentColor, showTimestamp }
         <div className={STYLES.messageItem.classes.output}>
           {contentToShow}
           {shouldAnimateContent && !isComplete && (
-            <span className="inline-block w-2 h-4 ml-1 bg-gray-300 animate-pulse" />
+            <span className="inline-block w-2 h-4 ml-1 bg-white animate-pulse" />
           )}
         </div>
       )}
