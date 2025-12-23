@@ -21,68 +21,45 @@ import createId from "@/lib/IdGenerator";
 
 function CLIContent() {
 
-  const INACTIVITY_DELAY = 2000; // ms (2 seconds)
+  const onSuccess = (data: ConsoleResponse) => {
+    const assistantMessage: ConsoleMessage = {
+      id: createId(),
+      role: "assistant",
+      content: data.response,
+    };
+
+    setConversationMessages(prev => [...prev, assistantMessage]);
+    setConversationId(data.conversation_id);
+    setPendingAnimationId(assistantMessage.id);
+  }
+  const onError = (_: string) => {
+    const errorMessage: ConsoleMessage = {
+      id: createId(),
+      role: "assistant",
+      content: t("home.sapioConsole.errorMessage"),
+      tone: "error",
+    };
+
+    setConversationMessages(prev => [...prev, errorMessage]);
+    setPendingAnimationId(errorMessage.id);
+  }
+
+  const INACTIVITY_DELAY = 2000; 
+  const { t, language } = useLanguage();
+
   const inactivityTimer = useRef<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
-
-  const { t, language } = useLanguage();
   const suggestions = useMemo(() => t<string[]>("cli.suggestions"), [language]);
-
   const [conversationMessages, setConversationMessages] = useState<any[]>([]);
   const [conversationId, setConversationId] = useState<string | undefined>();
   const [pendingAnimationId, setPendingAnimationId] = useState<string | null>(null);
-  const [hasError, setHasError] = useState(false);
+  const [inputState, setInputState] = useState<InputState>({ value: "", isFocused: false, });
+  const isMounted = useClientMount();
 
+  const { sendMessage } = useSendMessage({ onSuccess, onError });
+  const ghostState = useGhostTyping(suggestions, inputState);
 
-
-      const onSuccess = (data: ConsoleResponse) => {
-        const assistantMessage: ConsoleMessage = {
-            id: createId(),
-            role: "assistant",
-            content: data.response,
-        };
-
-        setConversationMessages(prev => [...prev, assistantMessage]);
-        setConversationId(data.conversation_id);
-        setPendingAnimationId(assistantMessage.id);
-    }
-    const onError = (_:string) => {
-        const errorMessage: ConsoleMessage = {
-            id: createId(),
-            role: "assistant",
-            content: t("home.sapioConsole.errorMessage"),
-            tone: "error",
-        };
-
-        setConversationMessages(prev => [...prev, errorMessage]);
-        setPendingAnimationId(errorMessage.id);
-    }
-
-
-
-  const triggerInactive = useCallback(() => {
-    // Actually blur the input element
-    if (inputRef.current) {
-      inputRef.current.blur();
-    }
-    setInputState((prev) => ({
-      ...prev,
-      isFocused: false,
-    }));
-  }, []);
-
-  const resetInactivityTimer = useCallback(() => {
-    if (inactivityTimer.current) {
-      window.clearTimeout(inactivityTimer.current);
-    }
-
-    inactivityTimer.current = window.setTimeout(() => {
-      triggerInactive();
-    }, INACTIVITY_DELAY);
-  }, [triggerInactive]);
-
-  useEffect(() => {
+ useEffect(() => {
     setConversationMessages([
       {
         id: 'banner',
@@ -97,26 +74,28 @@ function CLIContent() {
     ]);
   }, []);
 
+  const triggerInactive = useCallback(() => {
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
+    setInputState((prev) => ({
+      ...prev,
+      isFocused: false,
+    }));
+  }, []);
 
-  // Send message hook
-  const { sendMessage } = useSendMessage({ onSuccess, onError });
+  const resetInactivityTimer = useCallback(() => {
+    if (inactivityTimer.current) {
+      window.clearTimeout(inactivityTimer.current);
+    }
+    inactivityTimer.current = window.setTimeout(() => {
+      triggerInactive();
+    }, INACTIVITY_DELAY);
+  }, [triggerInactive]);
 
-  // Input state
-  const [inputState, setInputState] = useState<InputState>({
-    value: "",
-    isFocused: false,
-  });
 
-  const isMounted = useClientMount();
-  const ghostState = useGhostTyping(
-    suggestions as readonly string[],
-    inputState
-  );
-
-  // Convert conversation messages to CLI display format
   const cliMessages = useMemo<CLIMessage[]>(() => {
     return conversationMessages.map((msg) => {
-      // System messages (banner/welcome)
       if (msg.role === 'system') {
         return {
           type: msg.id === 'banner' ? 'banner' : 'info',
@@ -125,7 +104,6 @@ function CLIContent() {
         };
       }
 
-      // User messages
       if (msg.role === 'user') {
         return {
           type: 'command',
@@ -134,7 +112,6 @@ function CLIContent() {
         };
       }
 
-      // Assistant messages
       if (msg.role === 'assistant') {
         return {
           type: msg.tone === 'error' ? 'error' : 'output',
@@ -144,7 +121,6 @@ function CLIContent() {
         };
       }
 
-      // Fallback
       return {
         type: 'info',
         content: msg.content,
@@ -153,24 +129,19 @@ function CLIContent() {
     });
   }, [conversationMessages, pendingAnimationId]);
 
-  // Handle send command
   const handleCommand = useCallback(async (command: string) => {
     if (!command.trim()) return;
     try {
-      setHasError(false);
-
-        const userMessage: ConsoleMessage = {
-            id: createId(),
-            role: "user",
-            content: command,
-        };
-        setConversationMessages(prev => [...prev,userMessage ]);
+      const userMessage: ConsoleMessage = {
+        id: createId(),
+        role: "user",
+        content: command,
+      };
+      setConversationMessages(prev => [...prev, userMessage]);
 
       await sendMessage(command);
 
     } catch (error) {
-      setHasError(true);
-
       setConversationMessages(prev => [...prev, {
         id: `error-${Date.now()}`,
         role: 'assistant',
@@ -180,7 +151,6 @@ function CLIContent() {
     }
   }, [sendMessage]);
 
-  // Input handlers
   const updateInputState = useCallback((updates: Partial<InputState>) => {
     setInputState(prev => ({ ...prev, ...updates }));
   }, []);
@@ -273,60 +243,35 @@ function CLIContent() {
 
 CLIContent.displayName = "CLIContent";
 
-// Wrap with Error Boundary
 export function CLI() {
   return (
     <CLIErrorBoundary
-      fallback={(error, resetError) => (
+      fallback={() => (
         <div
-          style={{
-            padding: '20px',
-            backgroundColor: '#0a0a0a',
-            border: '2px solid #ff4444',
-            borderRadius: '8px',
-            color: '#ff4444',
-            fontFamily: 'monospace',
-            maxWidth: '100%',
-          }}
+          className={STYLES.cli.classes.container}
+          style={STYLES.cli.inline.container}
+          role="region"
+          aria-label="Terminal interface - Error state"
         >
-          <div style={{ marginBottom: '16px' }}>
-            <span style={{ fontSize: '24px', marginRight: '8px' }}>⚠️</span>
-            <span style={{ fontSize: '18px', fontWeight: 'bold' }}>CLI Error</span>
-          </div>
           <div
-            style={{
-              padding: '12px',
-              backgroundColor: '#1a0a0a',
-              borderRadius: '4px',
-              marginBottom: '16px',
-              fontSize: '14px',
-              lineHeight: '1.5',
-            }}
+            className={STYLES.cli.classes.shineOverlay}
+            style={STYLES.cli.inline.shineOverlay}
+            aria-hidden="true"
+          />
+
+          <TitleBar />
+
+          <div
+            className={STYLES.cli.classes.messagesContainer}
+            style={STYLES.cli.inline.messagesContainer("640px")}
+            role="status"
           >
-            {error.message}
+            <div className="space-y-4">
+              <div className="text-gray-400 text-sm font-mono leading-relaxed">
+                The Sapio assistant is temporarily unavailable due to maintenance. Please check back soon.
+              </div>
+            </div>
           </div>
-          <button
-            onClick={resetError}
-            style={{
-              padding: '10px 20px',
-              backgroundColor: '#ff4444',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              fontFamily: 'monospace',
-              fontSize: '14px',
-              fontWeight: 'bold',
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.backgroundColor = '#ff6666';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor = '#ff4444';
-            }}
-          >
-            Reset CLI
-          </button>
         </div>
       )}
     >
