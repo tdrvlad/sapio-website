@@ -23,36 +23,15 @@ function CLIContent() {
   const inactivityTimer = useRef<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+
   const { t, language } = useLanguage();
+  const suggestions = useMemo(() => t<string[]>("cli.suggestions"), [language]);
 
-  // Configuration
-  const prompt = DEFAULT_PROMPT;
-  const accentColor = DEFAULT_ACCENT_COLOR;
-  const showTimestamp = false;
-  const maxHeight = "640px";
-
-  // Suggestions based on language (memoized to prevent reset on every render)
-  const suggestions = useMemo(() => language === 'ro' ? [
-    "Cu ce tipuri de soluții AI lucrați?",
-    "Puteți integra soluții on-premise, fără cloud?",
-    "Arată-mi un proiect Sapio din zona legal tech.",
-    "Cât de repede poate fi dezvoltat un MVP?",
-    "Cum decurge un audit tehnic?",
-  ] : [
-    "What kind of AI solutions do you build?",
-    "Can you integrate with on-premise systems?",
-    "Show me a Sapio project in legal tech.",
-    "How fast can an MVP be developed?",
-    "How does a technical audit work?",
-  ], [language]);
-
-  // State management - Single array for all conversation messages
   const [conversationMessages, setConversationMessages] = useState<any[]>([]);
   const [conversationId, setConversationId] = useState<string | undefined>();
   const [pendingAnimationId, setPendingAnimationId] = useState<string | null>(null);
   const [hasError, setHasError] = useState(false);
 
-  // Initialize welcome messages once on mount
 
   const triggerInactive = useCallback(() => {
     // Actually blur the input element
@@ -158,12 +137,12 @@ function CLIContent() {
     try {
       setHasError(false);
       await sendMessage(command);
-          //throw Error("afasdf")
+      //throw Error("afasdf")
 
     } catch (error) {
       console.error('Failed to send message:', error);
       setHasError(true);
-      
+
       // Add error message to conversation
       setConversationMessages(prev => [...prev, {
         id: `error-${Date.now()}`,
@@ -230,7 +209,7 @@ function CLIContent() {
 
       <div
         className={STYLES.cli.classes.messagesContainer}
-        style={STYLES.cli.inline.messagesContainer(maxHeight)}
+        style={STYLES.cli.inline.messagesContainer("640px")}
         role="log"
         aria-live="polite"
         aria-relevant="additions"
@@ -240,9 +219,9 @@ function CLIContent() {
             <MessageItem
               key={`${message.type}-${index}`}
               message={message}
-              prompt={prompt}
-              accentColor={accentColor}
-              showTimestamp={showTimestamp}
+              prompt={DEFAULT_PROMPT}
+              accentColor={DEFAULT_ACCENT_COLOR}
+              showTimestamp={false}
             />
           ))}
         </div>
@@ -251,8 +230,8 @@ function CLIContent() {
           <InputArea
             ref={inputRef}
             inputState={inputState}
-            prompt={prompt}
-            accentColor={accentColor}
+            prompt={DEFAULT_PROMPT}
+            accentColor={DEFAULT_ACCENT_COLOR}
             ghostState={ghostState}
             onInputChange={handleInputChange}
             onFocus={handleFocus}
