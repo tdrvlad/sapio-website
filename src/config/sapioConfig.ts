@@ -10,7 +10,7 @@ const SapioConfig = {
 
 
     isLocal(): boolean {
-        return this.ENV === "development"
+        return ["development", "test"].includes(this.ENV)
     }
 };
 

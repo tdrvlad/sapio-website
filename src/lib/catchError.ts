@@ -35,7 +35,6 @@
  *   return;
  * }
  *
- * console.log("User:", data);
  * ```
  */
 function catchError<

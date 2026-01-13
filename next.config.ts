@@ -3,7 +3,6 @@ import SapioConfig from "@/config/sapioConfig";
 
 
 const missingKeys = Object.entries(SapioConfig)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     .filter(([_, value]) => value == null || value === '')
     .map(([key]) => key);
 

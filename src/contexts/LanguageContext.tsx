@@ -7,7 +7,7 @@ import ERROR_MESSAGE from "@/lib/errorMessage";
 interface LanguageContextType {
   language: Language
   setLanguage: (lang: Language) => void
-  t: (key: string) => string
+  t:  <T = string>(key: string) => T 
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
@@ -39,7 +39,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }
 
   // Translation function
-  const t = (key: string): string => {
+  const t = <T = string>(key: string): T => {
     // Use default language during SSR to prevent hydration mismatch
     const currentLanguage = isClient ? language : 'en'
     const keys = key.split('.')
@@ -49,11 +49,12 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       if (value && typeof value === 'object' && value !== null && k in value) {
         value = (value as Record<string, unknown>)[k]
       } else {
-        return key // Return key if translation not found
+        return key as unknown as T
+    
       }
     }
     
-    return typeof value === 'string' ? value : key
+  return (value as T) ?? (key as unknown as T)
   }
 
   return (

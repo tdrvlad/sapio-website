@@ -13,6 +13,15 @@ export const translations = {
 			contact: "Contact",
 			consultation: "Obține o consultare",
 		},
+		cli: {
+			suggestions: [
+				"Cu ce tipuri de soluții AI lucrați?",
+				"Puteți integra soluții on-premise, fără cloud?",
+				"Arată-mi un proiect Sapio din zona legal tech.",
+				"Cât de repede poate fi dezvoltat un MVP?",
+				"Cum decurge un audit tehnic?",
+			]
+		},
 		// Footer
 		footer: {
 			tagline: "Tehnologie AI adaptată pentru fiecare afacere.",
@@ -25,7 +34,7 @@ export const translations = {
 			connect: "Conectează-te",
 			linkedin: "LinkedIn",
 			github: "GitHub",
-            copyright: `© ${currentYear} Sapio AI Systems. Toate drepturile rezervate.`,
+			copyright: `© ${currentYear} Sapio AI Systems. Toate drepturile rezervate.`,
 			privacy: "Politica de confidențialitate",
 		},
 		// Hero Video Section
@@ -416,6 +425,15 @@ export const translations = {
 			contact: "Contact",
 			consultation: "Get a consultation",
 		},
+		cli: {
+			suggestions: [
+				"What kind of AI solutions do you build?",
+				"Can you integrate with on-premise systems?",
+				"Show me a Sapio project in legal tech.",
+				"How fast can an MVP be developed?",
+				"How does a technical audit work?",
+			]
+		},
 		// Footer
 		footer: {
 			tagline: "AI technology tailored for every business.",
@@ -428,7 +446,7 @@ export const translations = {
 			connect: "Connect",
 			linkedin: "LinkedIn",
 			github: "GitHub",
-            copyright: `© ${currentYear} Sapio AI Systems. All rights reserved.`,
+			copyright: `© ${currentYear} Sapio AI Systems. All rights reserved.`,
 			privacy: "Privacy Policy",
 		},
 		// Hero Video Section
@@ -664,31 +682,31 @@ export const translations = {
 				flavius: {
 					name: "Flavius Moldovan",
 					role: "AI Engineer",
-			},
-			values: {
-				title: "How we work",
-				items: [
-					{
-						title: "Applied first",
-						description: "Prototype fast, learn from real data, and measure impact at every stage.",
-					},
-					{
-						title: "Radical transparency",
-						description: "We share every hypothesis, limitation, and technical decision so you can steer with confidence.",
-					},
-					{
-						title: "Integrated teams",
-						description: "Embed alongside your people from day one to transfer knowledge and autonomy.",
-					},
-				],
-			},
-			cta: {
-				title: "Want to join the team?",
-				description: "We’re hiring problem-solvers who care about responsible AI. Tell us about yourself.",
-				button: "View open roles",
+				},
+				values: {
+					title: "How we work",
+					items: [
+						{
+							title: "Applied first",
+							description: "Prototype fast, learn from real data, and measure impact at every stage.",
+						},
+						{
+							title: "Radical transparency",
+							description: "We share every hypothesis, limitation, and technical decision so you can steer with confidence.",
+						},
+						{
+							title: "Integrated teams",
+							description: "Embed alongside your people from day one to transfer knowledge and autonomy.",
+						},
+					],
+				},
+				cta: {
+					title: "Want to join the team?",
+					description: "We’re hiring problem-solvers who care about responsible AI. Tell us about yourself.",
+					button: "View open roles",
+				},
 			},
 		},
-	},
 		projectsPage: {
 			hero: {
 				eyebrow: "Projects",
@@ -836,7 +854,7 @@ export const translations = {
 				},
 			},
 		},
-		
+
 		contactPage: {
 			hero: {
 				title: "Meet the Founder",
