@@ -1,3 +1,6 @@
-const createId = () => "6965fb33acb0d1090b90495d"
+const createId = () =>
+    typeof crypto !== "undefined" && crypto.randomUUID
+        ? crypto.randomUUID()
+        : Math.random().toString(36).slice(2);
 
 export default createId

@@ -9,7 +9,7 @@ import { useEffect, useRef } from "react";
 
 
 interface UseSendMessageParams { onSuccess: (data: ConsoleResponse) => void, onError: (message: string) => void }
-interface UseSendMessageResponse { sendMessage: (text: string) => Promise<void>; }
+interface UseSendMessageResponse { sendMessage: (text: string,  id? :string) => Promise<void>; }
 
 export function useSendMessage({ onSuccess, onError }: UseSendMessageParams): UseSendMessageResponse {
 
@@ -22,12 +22,12 @@ export function useSendMessage({ onSuccess, onError }: UseSendMessageParams): Us
         });
     }, []);
 
-    const sendMessage = async (text: string) => {
+    const sendMessage = async (text: string, id?: string) => {
         const prepared = await validateAndPrepareRequest(text);
         if (!prepared) return;
         const { payload, recaptchaToken } = prepared;
 
-        return fetchRef.current!(payload, createId(), recaptchaToken!)
+        return fetchRef.current!(payload, id, recaptchaToken!)
             .then(async response => {
                 if (!response.ok) {
                     onError(`${ERROR_MESSAGE.SAPIO_API_ERROR} ${response.status}`)
