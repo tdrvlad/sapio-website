@@ -5,315 +5,17 @@ import './comp.css';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
 
 import HeroVideo from '@/components/HeroVideo';
 import { CLI } from '@/components/mac_cli';
 import { SolutionFinder } from '@/components/sections/SolutionFinder';
 import { useLanguage } from '@/contexts/LanguageContext';
-import Transition from './Transition';
+import { Capabilities } from './sections/Capabilities';
 
 type HomeContentProps = {
   clientLogos: string[];
   techLogos: string[];
 };
-
-// Horizontal Scroll Projects Component
-function HorizontalScrollProjects({ t }: { t:  <T = string>(key: string) => T }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isInView, setIsInView] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const scrollAccumulator = useRef(0);
-
-  // Check if section is in view
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsInView(entry.isIntersecting);
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  // Handle horizontal scrolling with wheel with smooth accumulation
-  useEffect(() => {
-    if (!isInView) return;
-
-    let timeoutId: NodeJS.Timeout;
-
-    const handleWheel = (e: WheelEvent) => {
-      // If currently transitioning, ignore wheel events
-      if (isTransitioning) {
-        e.preventDefault();
-        return;
-      }
-
-      // If at the last project and scrolling down, allow normal scroll
-      if (currentIndex === 1 && e.deltaY > 20) {
-        scrollAccumulator.current = 0;
-        return;
-      }
-      
-      // If at the first project and scrolling up, allow normal scroll
-      if (currentIndex === 0 && e.deltaY < -20) {
-        scrollAccumulator.current = 0;
-        return;
-      }
-      
-      e.preventDefault();
-      
-      // Accumulate scroll delta for smoother feel
-      scrollAccumulator.current += e.deltaY;
-
-      // Clear existing timeout
-      clearTimeout(timeoutId);
-
-      // Threshold for triggering navigation (increased for smoother feel)
-      const threshold = 100;
-
-      if (Math.abs(scrollAccumulator.current) >= threshold) {
-        setIsTransitioning(true);
-        
-        if (scrollAccumulator.current > 0) {
-          // Scrolling down -> next project
-          setCurrentIndex((prev) => {
-            const next = Math.min(prev + 1, 1);
-            return next;
-          });
-        } else {
-          // Scrolling up -> previous project
-          setCurrentIndex((prev) => {
-            const next = Math.max(prev - 1, 0);
-            return next;
-          });
-        }
-
-        scrollAccumulator.current = 0;
-
-        // Allow new transitions after animation completes
-        setTimeout(() => {
-          setIsTransitioning(false);
-        }, 800);
-      } else {
-        // Reset accumulator if user stops scrolling
-        timeoutId = setTimeout(() => {
-          scrollAccumulator.current = 0;
-        }, 150);
-      }
-    };
-
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    return () => {
-      window.removeEventListener('wheel', handleWheel);
-      clearTimeout(timeoutId);
-    };
-  }, [isInView, currentIndex, isTransitioning]);
-
-  // Keyboard navigation
-  useEffect(() => {
-    if (!isInView || isTransitioning) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-        if (currentIndex < 1) {
-          setIsTransitioning(true);
-          setCurrentIndex(1);
-          setTimeout(() => setIsTransitioning(false), 800);
-        }
-      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-        if (currentIndex > 0) {
-          setIsTransitioning(true);
-          setCurrentIndex(0);
-          setTimeout(() => setIsTransitioning(false), 800);
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isInView, currentIndex, isTransitioning]);
-
-  const x1 = currentIndex === 0 ? "0%" : "-100%";
-  const x2 = currentIndex === 0 ? "100%" : "0%";
-
-  const projects = [
-    {
-      id: 1,
-      title: t("home.projects.aiAflat.title"),
-      description: t("home.projects.aiAflat.description"),
-      image: "/brand/ai-aflat_thumbnail.png",
-      visitLink: "https://ai-aflat.ro",
-      visitLabel: t("home.projects.aiAflat.visit"),
-      caseStudyLink: "/projects/ai-aflat",
-      caseStudyLabel: t("home.projects.aiAflat.caseStudy"),
-    },
-    {
-      id: 2,
-      title: t("home.projects.knowledgeAssistant.title"),
-      description: t("home.projects.knowledgeAssistant.description"),
-      image: "/brand/knowledge-assistant_thumbnail.png",
-      visitLink: "https://assistant.sapio.ro",
-      visitLabel: t("home.projects.knowledgeAssistant.explore"),
-      caseStudyLink: "/projects/knowledge-assistant",
-      caseStudyLabel: t("home.projects.knowledgeAssistant.caseStudy"),
-    }
-  ];
-
-  return (
-    <section
-      id="projects"
-      ref={containerRef}
-      className="relative h-screen bg-background"
-    >
-      <div className="h-screen overflow-hidden flex items-center">
-        {/* Scroll indicators */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3">
-          <div className="flex gap-2">
-            {[0, 1].map((index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`h-2 rounded-full transition-all ${
-                  currentIndex === index 
-                    ? 'w-8 bg-[#006beb]' 
-                    : 'w-2 bg-foreground/20 hover:bg-foreground/40'
-                }`}
-                aria-label={`Go to project ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-        
-        {/* Scroll hint */}
-        {isInView && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="absolute top-8 left-1/2 -translate-x-1/2 z-10 text-sm text-foreground/60 flex items-center gap-2"
-          >
-            <span>Scroll to navigate</span>
-            <span className="animate-bounce">↓</span>
-          </motion.div>
-        )}
-
-        <div className="relative w-full">
-          {/* Project 1 */}
-          <motion.div
-            animate={{ x: x1 }}
-            transition={{ 
-              type: "spring",
-              stiffness: 80,
-              damping: 20,
-              mass: 1
-            }}
-            className="absolute inset-0 w-full flex items-center justify-center px-4 sm:px-6"
-          >
-            <div className="mx-auto max-w-[1100px] w-full">
-              <div className="rounded-lg border border-black/10 dark:border-white/10 p-6 sm:p-8 shadow-lg bg-background">
-                <div className="grid md:grid-cols-2 gap-8 items-center">
-                  <div className="aspect-square rounded bg-foreground/10 relative overflow-hidden">
-                    <Image
-                      src={projects[0].image}
-                      alt={projects[0].title}
-                      fill
-                      className="object-contain"
-                      sizes="(min-width: 768px) 50vw, 100vw"
-                    />
-                  </div>
-                  <div className="space-y-4">
-                    <h3 className="text-2xl sm:text-3xl font-bold">
-                      {projects[0].title}
-                    </h3>
-                    <p className="text-base sm:text-lg text-foreground/70">
-                      {projects[0].description}
-                    </p>
-                    <div className="flex gap-4 text-sm">
-                      <a
-                        href={projects[0].visitLink}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="underline underline-offset-4 decoration-[#006beb] decoration-2 hover:text-[#006beb] transition-colors"
-                      >
-                        {projects[0].visitLabel} →
-                      </a>
-                      <Link
-                        href={projects[0].caseStudyLink}
-                        className="underline underline-offset-4 decoration-[#006beb] decoration-2 hover:text-[#006beb] transition-colors"
-                      >
-                        {projects[0].caseStudyLabel} →
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Project 2 */}
-          <motion.div
-            animate={{ x: x2 }}
-            transition={{ 
-              type: "spring",
-              stiffness: 80,
-              damping: 20,
-              mass: 1
-            }}
-            className="absolute inset-0 w-full flex items-center justify-center px-4 sm:px-6"
-          >
-            <div className="mx-auto max-w-[1100px] w-full">
-              <div className="rounded-lg border border-black/10 dark:border-white/10 p-6 sm:p-8 shadow-lg bg-background">
-                <div className="grid md:grid-cols-2 gap-8 items-center">
-                  <div className="aspect-square rounded bg-foreground/10 relative overflow-hidden">
-                    <Image
-                      src={projects[1].image}
-                      alt={projects[1].title}
-                      fill
-                      className="object-contain"
-                      sizes="(min-width: 768px) 50vw, 100vw"
-                    />
-                  </div>
-                  <div className="space-y-4">
-                    <h3 className="text-2xl sm:text-3xl font-bold">
-                      {projects[1].title}
-                    </h3>
-                    <p className="text-base sm:text-lg text-foreground/70">
-                      {projects[1].description}
-                    </p>
-                    <div className="flex gap-4 text-sm">
-                      <a
-                        href={projects[1].visitLink}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="underline underline-offset-4 decoration-[#006beb] decoration-2 hover:text-[#006beb] transition-colors"
-                      >
-                        {projects[1].visitLabel} →
-                      </a>
-                      <Link
-                        href={projects[1].caseStudyLink}
-                        className="underline underline-offset-4 decoration-[#006beb] decoration-2 hover:text-[#006beb] transition-colors"
-                      >
-                        {projects[1].caseStudyLabel} →
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 export default function HomeContent({
   clientLogos,
@@ -330,10 +32,6 @@ export default function HomeContent({
   return (
     <div className="font-sans">
       <HeroVideo />
-
-      <Transition></Transition>
-      
-      {/* CLI Section */}
       <section className="bg-background px-4 py-12 sm:px-6 sm:py-20">
         <div className="mx-auto w-full max-w-[1100px] space-y-8">
           <div className="space-y-3 text-center">
@@ -347,9 +45,112 @@ export default function HomeContent({
           <CLI />
         </div>
       </section>
-
-      {/* Flagship projects - Horizontal Scroll */}
-      <HorizontalScrollProjects t={t} />
+      {/* Flagship projects */}
+      <section
+        id="projects"
+        className="mx-auto max-w-[1280px] px-4 sm:px-6 py-12 sm:py-20 grid gap-6 sm:gap-10 md:grid-cols-2"
+      >
+        <motion.div
+          initial={{
+            opacity: 0,
+            x: -30,
+          }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+          }}
+          transition={{
+            duration: 0.5,
+            scale: { type: "spring", stiffness: 280, damping: 24 },
+          }}
+          viewport={{ once: true }}
+          whileHover={{ scale: 1.04 }}
+        >
+          <div className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition">
+            <div className="aspect-square rounded bg-foreground/10 mb-5 relative overflow-hidden">
+              <Image
+                src="/brand/ai-aflat_thumbnail.png"
+                alt="ai-aflat thumbnail"
+                fill
+                className="object-contain"
+                sizes="(min-width: 1280px) 600px, 100vw"
+              />
+            </div>
+            <h3 className="text-xl font-semibold">
+              {t("home.projects.aiAflat.title")}
+            </h3>
+            <p className="text-foreground/70 mt-2">
+              {t("home.projects.aiAflat.description")}
+            </p>
+            <div className="mt-4 flex gap-4 text-sm">
+              <a
+                href="https://ai-aflat.ro"
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-4"
+              >
+                {t("home.projects.aiAflat.visit")}
+              </a>
+              <Link
+                href="/projects/ai-aflat"
+                className="underline underline-offset-4"
+              >
+                {t("home.projects.aiAflat.caseStudy")}
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+        <motion.div
+          initial={{
+            opacity: 0,
+            x: 30,
+          }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+          }}
+          transition={{
+            duration: 0.5,
+            scale: { type: "spring", stiffness: 280, damping: 24 },
+          }}
+          viewport={{ once: true }}
+          whileHover={{ scale: 1.04 }}
+        >
+          <div className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition">
+            <div className="aspect-square rounded bg-foreground/10 mb-5 relative overflow-hidden">
+              <Image
+                src="/brand/knowledge-assistant_thumbnail.png"
+                alt="Knowledge Assistant thumbnail"
+                fill
+                className="object-contain"
+                sizes="(min-width: 1280px) 600px, 100vw"
+              />
+            </div>
+            <h3 className="text-xl font-semibold">
+              {t("home.projects.knowledgeAssistant.title")}
+            </h3>
+            <p className="text-foreground/70 mt-2">
+              {t("home.projects.knowledgeAssistant.description")}
+            </p>
+            <div className="mt-4 flex gap-4 text-sm">
+              <a
+                href="https://assistant.sapio.ro"
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-4"
+              >
+                {t("home.projects.knowledgeAssistant.explore")}
+              </a>
+              <Link
+                href="/projects/knowledge-assistant"
+                className="underline underline-offset-4"
+              >
+                {t("home.projects.knowledgeAssistant.caseStudy")}
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+      </section>
 
       {/* Clients logos */}
       {clientLogos.length > 0 && (
@@ -413,6 +214,7 @@ export default function HomeContent({
           </motion.div>
         </section>
       )}
+      <Capabilities />
       <motion.div
         initial={{ opacity: 0, y: -25 }}
         whileInView={{ opacity: 1, y: 0 }}
