@@ -16,6 +16,7 @@
 ### Fixes
  - Fixed variouse typos in code 
  - Removed console logs and debuggers
+ - Fixed Next Js vulnerabilities by updating outdated depenndency version
 
 ### Features
  - Redesigned cli to new mac interface
