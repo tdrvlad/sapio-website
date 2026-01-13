@@ -147,7 +147,7 @@ function CLIContent() {
         tone: 'error',
       }]);
     }
-  }, [sendMessage]);
+  }, [sendMessage, conversationId]);
 
   const updateInputState = useCallback((updates: Partial<InputState>) => {
     setInputState(prev => ({ ...prev, ...updates }));

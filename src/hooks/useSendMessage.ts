@@ -1,7 +1,6 @@
 import { useRecaptchaV3 } from "@/hooks/GoogleRecaptchaV3";
 import SapioConfig from "@/config/sapioConfig";
 import { ConsoleResponse } from "@/types/chat";
-import createId from "@/lib/IdGenerator";
 import ERROR_MESSAGE from "@/lib/errorMessage";
 import prepareFetch, { PreloadedFetch } from "@/service/preloadedFetch";
 import catchError from "@/lib/catchError";
