@@ -30,6 +30,7 @@ function CLIContent() {
 
     setConversationMessages(prev => [...prev, assistantMessage]);
     setPendingAnimationId(assistantMessage.id);
+    setConversationId(data.conversation_id)
   }
   const onError = (_: string) => {
     const errorMessage: ConsoleMessage = {
@@ -65,6 +66,7 @@ function CLIContent() {
   const [pendingAnimationId, setPendingAnimationId] = useState<string | null>(null);
   const [inputState, setInputState] = useState<InputState>({ value: "", isFocused: false, });
   const isMounted = useClientMount();
+  const [conversationId, setConversationId] = useState<string | undefined>();
 
   const { sendMessage } = useSendMessage({ onSuccess, onError });
   const ghostState = useGhostTyping(suggestions, inputState);
@@ -135,7 +137,7 @@ function CLIContent() {
       };
       setConversationMessages(prev => [...prev, userMessage]);
 
-      await sendMessage(command);
+      await sendMessage(command, conversationId);
 
     } catch (error) {
       setConversationMessages(prev => [...prev, {
@@ -145,7 +147,7 @@ function CLIContent() {
         tone: 'error',
       }]);
     }
-  }, [sendMessage]);
+  }, [sendMessage, conversationId]);
 
   const updateInputState = useCallback((updates: Partial<InputState>) => {
     setInputState(prev => ({ ...prev, ...updates }));

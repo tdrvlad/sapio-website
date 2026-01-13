@@ -1,7 +1,6 @@
 import { useRecaptchaV3 } from "@/hooks/GoogleRecaptchaV3";
 import SapioConfig from "@/config/sapioConfig";
 import { ConsoleResponse } from "@/types/chat";
-import createId from "@/lib/IdGenerator";
 import ERROR_MESSAGE from "@/lib/errorMessage";
 import prepareFetch, { PreloadedFetch } from "@/service/preloadedFetch";
 import catchError from "@/lib/catchError";
@@ -9,7 +8,7 @@ import { useEffect, useRef } from "react";
 
 
 interface UseSendMessageParams { onSuccess: (data: ConsoleResponse) => void, onError: (message: string) => void }
-interface UseSendMessageResponse { sendMessage: (text: string) => Promise<void>; }
+interface UseSendMessageResponse { sendMessage: (text: string,  id? :string) => Promise<void>; }
 
 export function useSendMessage({ onSuccess, onError }: UseSendMessageParams): UseSendMessageResponse {
 
@@ -22,12 +21,12 @@ export function useSendMessage({ onSuccess, onError }: UseSendMessageParams): Us
         });
     }, []);
 
-    const sendMessage = async (text: string) => {
+    const sendMessage = async (text: string, id?: string) => {
         const prepared = await validateAndPrepareRequest(text);
         if (!prepared) return;
         const { payload, recaptchaToken } = prepared;
 
-        return fetchRef.current!(payload, createId(), recaptchaToken!)
+        return fetchRef.current!(payload, id, recaptchaToken!)
             .then(async response => {
                 if (!response.ok) {
                     onError(`${ERROR_MESSAGE.SAPIO_API_ERROR} ${response.status}`)
