@@ -33,7 +33,6 @@ const config: Config = {
     '/e2e/',
     // Ignore Vitest test files
     'test/lib/CatchError.test.ts',
-    'test/SapioConsoleSection.test.tsx',
     'test/ConsoleBootLoader.test.tsx',
     'test/ConsoleLine.test.tsx',
     'test/GhostLine.test.tsx',
