@@ -17,6 +17,7 @@
  - Fixed variouse typos in code 
  - Removed console logs and debuggers
  - Fixed Next Js vulnerabilities by updating outdated depenndency version
+ - Made recaptcha tag invisble and  moved it to the bottom of the page to preserve visuals
 
 ### Features
  - Redesigned cli to new mac interface
