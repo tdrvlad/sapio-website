@@ -31,7 +31,6 @@ const config: Config = {
     '/node_modules/',
     '/.next/',
     '/e2e/',
-    // Ignore Vitest test files
     'test/lib/CatchError.test.ts',
     'test/ConsoleBootLoader.test.tsx',
     'test/ConsoleLine.test.tsx',

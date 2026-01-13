@@ -29,6 +29,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env*.local
 
 # vercel
@@ -40,3 +41,7 @@ next-env.d.ts
 
 # storybook
 storybook-static
+
+.idea
+.swc
+.
