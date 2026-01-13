@@ -1,3 +1,3 @@
-const createId = () => Math.random().toString(36).slice(2);
+const createId = () => "6965fb33acb0d1090b90495d"
 
 export default createId
