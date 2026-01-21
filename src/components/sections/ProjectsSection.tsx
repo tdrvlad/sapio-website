@@ -17,41 +17,107 @@ const getProjects = (t: (key: string) => string) => [
         shortDescription: t('projectsPage.projects.aiAflat.shortDescription'),
         fullDescription: t('projectsPage.projects.aiAflat.fullDescription'),
         technologies: ["Azure OpenAI", "Python", "Next.js", "PostgreSQL"],
-        metrics: ["500k+ documents", "<2s response time", "70% time saved"],
+        metrics: ["500k+ documents", "<2s response time", "Tech for Good"],
         link: "/projects/ai-aflat"
-    },
-    {
-        id: "healthcare",
-        title: t('projectsPage.projects.healthcare.title'),
-        subtitle: t('projectsPage.projects.healthcare.subtitle'),
-        logo: "/videos/processed/face_detection-poster.jpg",
-        shortDescription: t('projectsPage.projects.healthcare.shortDescription'),
-        fullDescription: t('projectsPage.projects.healthcare.fullDescription'),
-        technologies: ["TensorFlow", "Python", "React", "AWS"],
-        metrics: ["95% accuracy", "HIPAA compliant", "10k+ records/day"],
-        link: "#"
-    },
-    {
-        id: "personal-assistant",
-        title: t('projectsPage.projects.personalAssistant.title'),
-        subtitle: t('projectsPage.projects.personalAssistant.subtitle'),
-        logo: "/videos/processed/gpt_agent-poster.jpg",
-        shortDescription: t('projectsPage.projects.personalAssistant.shortDescription'),
-        fullDescription: t('projectsPage.projects.personalAssistant.fullDescription'),
-        technologies: ["GPT-4", "LangChain", "React Native", "Firebase"],
-        metrics: ["50% productivity gain", "Natural language", "Multi-platform"],
-        link: "#"
     },
     {
         id: "public-tenders",
         title: t('projectsPage.projects.publicTenders.title'),
         subtitle: t('projectsPage.projects.publicTenders.subtitle'),
-        logo: "/videos/processed/traffic_detection-poster.jpg",
+        logo: "/projectsPhotos/public_tenders_project_hero.jpg",
         shortDescription: t('projectsPage.projects.publicTenders.shortDescription'),
         fullDescription: t('projectsPage.projects.publicTenders.fullDescription'),
         technologies: ["Python", "BeautifulSoup", "FastAPI", "MongoDB"],
         metrics: ["100+ sources", "Real-time alerts", "85% match accuracy"],
-        link: "#"
+        link: "/projects/public-tenders"
+    },
+    {
+        id: "healthcare",
+        title: t('projectsPage.projects.healthcare.title'),
+        subtitle: t('projectsPage.projects.healthcare.subtitle'),
+        logo: "/projectsPhotos/medtech_hero.jpg",
+        shortDescription: t('projectsPage.projects.healthcare.shortDescription'),
+        fullDescription: t('projectsPage.projects.healthcare.fullDescription'),
+        technologies: ["TensorFlow", "Python", "React", "AWS"],
+        metrics: ["95% accuracy", "HIPAA compliant", "10k+ records/day"],
+        link: "/projects/healthcare"
+    },
+    {
+        id: "legaltech",
+        title: t('projectsPage.projects.legaltech.title'),
+        subtitle: t('projectsPage.projects.legaltech.subtitle'),
+        logo: "/projectsPhotos/legaltech_hero.jpg",
+        shortDescription: t('projectsPage.projects.legaltech.shortDescription'),
+        fullDescription: t('projectsPage.projects.legaltech.fullDescription'),
+        technologies: ["NLP", "Transformers", "Python", "Elasticsearch"],
+        metrics: ["Contract Analysis", "Compliance Checking", "Risk Assessment"],
+        link: "/projects/legaltech"
+    },
+    {
+        id: "media",
+        title: t('projectsPage.projects.media.title'),
+        subtitle: t('projectsPage.projects.media.subtitle'),
+        logo: "/videos/processed/retro_software_development-poster.jpg",
+        shortDescription: t('projectsPage.projects.media.shortDescription'),
+        fullDescription: t('projectsPage.projects.media.fullDescription'),
+        technologies: ["Generative AI", "Avatar Synthesis", "TTS", "Video Processing"],
+        metrics: ["Automated News", "Virtual Presenters", "Content Generation"],
+        link: "/projects/media"
+    },
+    {
+        id: "audio",
+        title: t('projectsPage.projects.audio.title'),
+        subtitle: t('projectsPage.projects.audio.subtitle'),
+        logo: "/videos/processed/turing_machine-poster.jpg",
+        shortDescription: t('projectsPage.projects.audio.shortDescription'),
+        fullDescription: t('projectsPage.projects.audio.fullDescription'),
+        technologies: ["Audio Analysis", "Signal Processing", "Deep Learning"],
+        metrics: ["Music Recognition", "Genre Classification", "Audio Fingerprinting"],
+        link: "/projects/audio"
+    },
+    {
+        id: "customer-support",
+        title: t('projectsPage.projects.customerSupport.title'),
+        subtitle: t('projectsPage.projects.customerSupport.subtitle'),
+        logo: "/videos/processed/gpt_agent-poster.jpg",
+        shortDescription: t('projectsPage.projects.customerSupport.shortDescription'),
+        fullDescription: t('projectsPage.projects.customerSupport.fullDescription'),
+        technologies: ["LLMs", "RAG", "Conversational AI", "Integration"],
+        metrics: ["24/7 Support", "Instant Responses", "Ticket Automation"],
+        link: "/projects/customer-support"
+    },
+    {
+        id: "robotics",
+        title: t('projectsPage.projects.robotics.title'),
+        subtitle: t('projectsPage.projects.robotics.subtitle'),
+        logo: "/videos/processed/writing_and_robot-poster.jpg",
+        shortDescription: t('projectsPage.projects.robotics.shortDescription'),
+        fullDescription: t('projectsPage.projects.robotics.fullDescription'),
+        technologies: ["ROS", "Computer Vision", "Reinforcement Learning"],
+        metrics: ["Autonomous Navigation", "Object Manipulation", "Real-time Control"],
+        link: "/projects/robotics"
+    },
+    {
+        id: "voice",
+        title: t('projectsPage.projects.voice.title'),
+        subtitle: t('projectsPage.projects.voice.subtitle'),
+        logo: "/videos/processed/andrew_ng-poster.jpg",
+        shortDescription: t('projectsPage.projects.voice.shortDescription'),
+        fullDescription: t('projectsPage.projects.voice.fullDescription'),
+        technologies: ["ASR", "Custom Models", "Speech-to-Text"],
+        metrics: ["High Accuracy", "Custom Vocabulary", "Accent Adaptation"],
+        link: "/projects/voice"
+    },
+    {
+        id: "semantic-rag",
+        title: t('projectsPage.projects.semanticRAG.title'),
+        subtitle: t('projectsPage.projects.semanticRAG.subtitle'),
+        logo: "/videos/processed/digit_neural_net-poster.jpg",
+        shortDescription: t('projectsPage.projects.semanticRAG.shortDescription'),
+        fullDescription: t('projectsPage.projects.semanticRAG.fullDescription'),
+        technologies: ["Vector Databases", "Embeddings", "Semantic Search"],
+        metrics: ["Contextual Search", "Knowledge Retrieval", "Information Extraction"],
+        link: "/projects/semantic-rag"
     }
 ];
 
@@ -79,7 +145,7 @@ export default function ProjectsSection() {
                     }}
                 >
                     <Image
-                        src="/projectHero.jpeg"
+                        src="/projectsPhotos/projectsHero.jpg"
                         alt="AI Infrastructure"
                         fill
                         className="object-cover"
@@ -138,7 +204,7 @@ export default function ProjectsSection() {
                 >
                     {t('projectsPage.caseStudies.title')}
                 </motion.h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {PROJECTS.map((project) => (
                         <motion.button
                             key={project.id}
@@ -148,9 +214,9 @@ export default function ProjectsSection() {
                             viewport={{ once: true }}
                             whileHover={{ scale: 1.03, y: -5 }}
                             onClick={() => setSelectedProject(project.id)}
-                            className="bg-white dark:bg-white/5 rounded-2xl shadow-lg  overflow-hidden border border-black/5 dark:border-white/10 text-left cursor-pointer"
+                            className="bg-white dark:bg-white/5 rounded-2xl shadow-lg  overflow-hidden border border-black/5 dark:border-white/10 text-left cursor-pointer flex flex-col h-full"
                         >
-                            <div className="relative h-48 bg-foreground/5">
+                            <div className="relative h-48 bg-foreground/5 w-full">
                                 <Image
                                     src={project.logo}
                                     alt={project.title}
@@ -159,10 +225,10 @@ export default function ProjectsSection() {
                                 />
                             </div>
                             
-                            <div className="p-6">
-                                <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
+                            <div className="p-6 flex-1 flex flex-col">
+                                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                                 <p className="text-sm text-foreground/60 mb-4">{project.subtitle}</p>
-                                <p className="text-base text-foreground/80 leading-relaxed">
+                                <p className="text-sm text-foreground/80 leading-relaxed flex-1">
                                     {project.shortDescription}
                                 </p>
                             </div>
