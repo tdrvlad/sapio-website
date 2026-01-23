@@ -18,21 +18,18 @@ async function prepareFetch(): Promise<PreloadedFetch> {
         };
     }
 
-    const endpoint = SapioConfig.SAPIO_API_URL
-    const key = SapioConfig.SAPIO_WIDGET_API_KEY
 
     return async (message: string, conversationId?: string, recaptchaToken?: string) =>
-        await fetch(`${endpoint}/widget/chat`, {
+        await fetch("api/v1/cht", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${key}`,
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                message: message,
-                conversation_id: conversationId,
-                recaptcha_token: recaptchaToken,
-            } as ConsoleRequest),
+                m: message,
+                c: conversationId,
+                r: recaptchaToken,
+            }),
         });
 }
 

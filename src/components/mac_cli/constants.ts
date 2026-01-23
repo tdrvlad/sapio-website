@@ -13,7 +13,7 @@ export const DEFAULT_SUGGESTIONS = [
 ] as const;
 
 export const GHOST_TYPING_CONFIG = {
-  TYPING_DELAY: 70,
+  TYPING_DELAY: 40,
   DELETING_DELAY: 40,
   HOLD_DURATION: 1800,
   NEXT_SUGGESTION_DELAY: 420,
@@ -25,7 +25,7 @@ export const GHOST_TYPING_CONFIG = {
 } as const;
 
 export const MESSAGE_TYPING_CONFIG = {
-  TYPING_DELAY: 70,
+  TYPING_DELAY: 40,
   CURSOR_BLINK_CLASS: "animate-pulse",
 } as const;
 
