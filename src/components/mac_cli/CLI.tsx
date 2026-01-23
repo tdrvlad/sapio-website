@@ -21,29 +21,6 @@ import createId from "@/lib/IdGenerator";
 
 function CLIContent() {
 
-  const onSuccess = (data: ConsoleResponse) => {
-    const assistantMessage: ConsoleMessage = {
-      id: createId(),
-      role: "assistant",
-      content: data.response,
-    };
-
-    setConversationMessages(prev => [...prev, assistantMessage]);
-    setPendingAnimationId(assistantMessage.id);
-    setConversationId(data.conversation_id)
-  }
-  const onError = (_: string) => {
-    const errorMessage: ConsoleMessage = {
-      id: createId(),
-      role: "assistant",
-      content: t("home.sapioConsole.errorMessage"),
-      tone: "error",
-    };
-
-    setConversationMessages(prev => [...prev, errorMessage]);
-    setPendingAnimationId(errorMessage.id);
-  }
-
   const INACTIVITY_DELAY = 10000; 
   const { t } = useLanguage();
 
@@ -65,8 +42,34 @@ function CLIContent() {
   ]);
   const [pendingAnimationId, setPendingAnimationId] = useState<string | null>(null);
   const [inputState, setInputState] = useState<InputState>({ value: "", isFocused: false, });
+  const [isLoading, setIsLoading] = useState(false);
   const isMounted = useClientMount();
   const [conversationId, setConversationId] = useState<string | undefined>();
+
+  const onSuccess = (data: ConsoleResponse) => {
+    const assistantMessage: ConsoleMessage = {
+      id: createId(),
+      role: "assistant",
+      content: data.response,
+    };
+
+    setConversationMessages(prev => [...prev, assistantMessage]);
+    setPendingAnimationId(assistantMessage.id);
+    setConversationId(data.conversation_id);
+    setIsLoading(false);
+  }
+  const onError = (_: string) => {
+    const errorMessage: ConsoleMessage = {
+      id: createId(),
+      role: "assistant",
+      content: t("home.sapioConsole.errorMessage"),
+      tone: "error",
+    };
+
+    setConversationMessages(prev => [...prev, errorMessage]);
+    setPendingAnimationId(errorMessage.id);
+    setIsLoading(false);
+  }
 
   const { sendMessage } = useSendMessage({ onSuccess, onError });
   const ghostState = useGhostTyping(suggestions, inputState);
@@ -128,7 +131,7 @@ function CLIContent() {
   }, [conversationMessages, pendingAnimationId]);
 
   const handleCommand = useCallback(async (command: string) => {
-    if (!command.trim()) return;
+    if (!command.trim() || isLoading) return;
     try {
       const userMessage: ConsoleMessage = {
         id: createId(),
@@ -136,6 +139,7 @@ function CLIContent() {
         content: command,
       };
       setConversationMessages(prev => [...prev, userMessage]);
+      setIsLoading(true);
 
       await sendMessage(command, conversationId);
 
@@ -146,8 +150,9 @@ function CLIContent() {
         content: error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.',
         tone: 'error',
       }]);
+      setIsLoading(false);
     }
-  }, [sendMessage, conversationId]);
+  }, [sendMessage, conversationId, isLoading]);
 
   const updateInputState = useCallback((updates: Partial<InputState>) => {
     setInputState(prev => ({ ...prev, ...updates }));
@@ -228,6 +233,7 @@ function CLIContent() {
             prompt={DEFAULT_PROMPT}
             accentColor={DEFAULT_ACCENT_COLOR}
             ghostState={ghostState}
+            disabled={isLoading}
             onInputChange={handleInputChange}
             onFocus={handleFocus}
             onBlur={handleBlur}

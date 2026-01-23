@@ -8,6 +8,7 @@ interface InputAreaProps {
   prompt: string;
   accentColor: string;
   ghostState: GhostTypingState;
+  disabled?: boolean;
   onInputChange: (value: string) => void;
   onFocus: () => void;
   onBlur: () => void;
@@ -19,6 +20,7 @@ export const InputArea = memo(forwardRef<HTMLInputElement, InputAreaProps>(({
   prompt,
   accentColor,
   ghostState,
+  disabled = false,
   onInputChange,
   onFocus,
   onBlur,
@@ -41,6 +43,7 @@ export const InputArea = memo(forwardRef<HTMLInputElement, InputAreaProps>(({
         onKeyDown={onKeyDown}
         onFocus={onFocus}
         onBlur={onBlur}
+        disabled={disabled}
         className={STYLES.inputArea.classes.input}
         aria-label="Terminal command input"
         placeholder=""
