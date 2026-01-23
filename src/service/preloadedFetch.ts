@@ -1,4 +1,4 @@
-import { ConsoleRequest, ConsoleResponse } from "@/types/chat";
+import { ConsoleResponse } from "@/types/chat";
 import SapioConfig from "@/config/sapioConfig";
 
 export type PreloadedFetch = (_message: string, _conversationId?: string, _recaptchaToken?: string) => Promise<Response>;
