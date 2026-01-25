@@ -13,9 +13,11 @@ export const getNextText = (
 
 export const shouldSkipAnimation = (
   inputState: InputState,
-  suggestions: readonly string[]
+  suggestions: readonly string[],
+  isLoading: boolean = false,
+  isMessageAnimating: boolean = false
 ): boolean => {
-  return inputState.isFocused || inputState.value.length > 0 || suggestions.length === 0;
+  return inputState.isFocused || inputState.value.length > 0 || suggestions.length === 0 || isLoading || isMessageAnimating;
 };
 
 export const getTypingDelay = (isDeleting: boolean): number => {

@@ -1,19 +1,20 @@
-import { memo } from "react";
+import { memo, type FC } from "react";
 import { useMessageTyping } from "../hooks/useMessageTyping";
 import { SAPIO_ASCII_LOGO } from "../constants";
 import { STYLES } from "../styles";
 import type { CLIMessage } from "../types";
 
-interface MessageItemProps {
+export interface MessageItemProps {
   message: CLIMessage;
   prompt: string;
   accentColor: string;
   showTimestamp: boolean;
+  onAnimationComplete?: () => void;
 }
 
-export const MessageItem = memo(({ message, prompt, accentColor, showTimestamp }: MessageItemProps) => {
+const MessageItemComponent: FC<MessageItemProps> = ({ message, prompt, accentColor, showTimestamp, onAnimationComplete }) => {
   const shouldAnimateContent = message.animated && (message.type === "output" || message.type === "error" || message.type === "info");
-  const { displayedText, isComplete } = useMessageTyping(message.content, shouldAnimateContent!);
+  const { displayedText, isComplete } = useMessageTyping(message.content, shouldAnimateContent!, onAnimationComplete);
   const contentToShow = shouldAnimateContent ? displayedText : message.content;
 
   return (
@@ -84,7 +85,8 @@ export const MessageItem = memo(({ message, prompt, accentColor, showTimestamp }
       )}
     </div>
   );
-});
+};
 
+export const MessageItem = memo<MessageItemProps>(MessageItemComponent);
 MessageItem.displayName = "MessageItem";
 

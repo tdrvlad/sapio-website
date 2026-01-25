@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useCallback, useMemo, useRef } from "react";
+import { useState, useCallback, useMemo, useRef, useEffect } from "react";
 import { TitleBar } from "./components/TitleBar";
 import { MessageItem } from "./components/MessageItem";
 import { InputArea } from "./components/InputArea";
 import { useClientMount } from "./hooks/useClientMount";
 import { useGhostTyping } from "./hooks/useGhostTyping";
+import { useAutoScroll } from "@/hooks/useAutoScroll";
 import { STYLES } from "./styles";
 import { useSendMessage } from '@/hooks/useSendMessage';
 
@@ -26,6 +27,7 @@ function CLIContent() {
 
   const inactivityTimer = useRef<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const suggestions = useMemo(() => t<string[]>("cli.suggestions"), [ t]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [conversationMessages, setConversationMessages] = useState<any[]>(() => [
@@ -41,6 +43,7 @@ function CLIContent() {
     },
   ]);
   const [pendingAnimationId, setPendingAnimationId] = useState<string | null>(null);
+  const [isAnimationComplete, setIsAnimationComplete] = useState(true);
   const [inputState, setInputState] = useState<InputState>({ value: "", isFocused: false, });
   const [isLoading, setIsLoading] = useState(false);
   const isMounted = useClientMount();
@@ -55,6 +58,7 @@ function CLIContent() {
 
     setConversationMessages(prev => [...prev, assistantMessage]);
     setPendingAnimationId(assistantMessage.id);
+    setIsAnimationComplete(false);
     setConversationId(data.conversation_id);
     setIsLoading(false);
   }
@@ -68,12 +72,26 @@ function CLIContent() {
 
     setConversationMessages(prev => [...prev, errorMessage]);
     setPendingAnimationId(errorMessage.id);
+    setIsAnimationComplete(false);
     setIsLoading(false);
   }
 
   const { sendMessage } = useSendMessage({ onSuccess, onError });
-  const ghostState = useGhostTyping(suggestions, inputState);
+  const isMessageAnimating = pendingAnimationId !== null && !isAnimationComplete;
+  const ghostState = useGhostTyping(suggestions, inputState, isLoading, isMessageAnimating);
 
+  const handleAnimationComplete = useCallback(() => {
+    setIsAnimationComplete(true);
+  }, []);
+
+  const [shouldAutoScroll, setShouldAutoScroll] = useState(false);
+  useAutoScroll(messagesContainerRef, shouldAutoScroll);
+
+  useEffect(() => {
+    setShouldAutoScroll(true);
+    const timer = setTimeout(() => setShouldAutoScroll(false), 100);
+    return () => clearTimeout(timer);
+  }, [conversationMessages.length, pendingAnimationId, isLoading]);
 
   const triggerInactive = useCallback(() => {
     if (inputRef.current) {
@@ -208,6 +226,7 @@ function CLIContent() {
       <TitleBar />
 
       <div
+        ref={messagesContainerRef}
         className={STYLES.cli.classes.messagesContainer}
         style={STYLES.cli.inline.messagesContainer("640px")}
         role="log"
@@ -222,6 +241,7 @@ function CLIContent() {
               prompt={DEFAULT_PROMPT}
               accentColor={DEFAULT_ACCENT_COLOR}
               showTimestamp={false}
+              onAnimationComplete={message.animated ? handleAnimationComplete : undefined}
             />
           ))}
         </div>
@@ -233,7 +253,7 @@ function CLIContent() {
             prompt={DEFAULT_PROMPT}
             accentColor={DEFAULT_ACCENT_COLOR}
             ghostState={ghostState}
-            disabled={isLoading}
+            disabled={!isAnimationComplete}
             onInputChange={handleInputChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
