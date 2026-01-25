@@ -253,7 +253,7 @@ function CLIContent() {
             prompt={DEFAULT_PROMPT}
             accentColor={DEFAULT_ACCENT_COLOR}
             ghostState={ghostState}
-            disabled={isLoading}
+            disabled={!isAnimationComplete}
             onInputChange={handleInputChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
