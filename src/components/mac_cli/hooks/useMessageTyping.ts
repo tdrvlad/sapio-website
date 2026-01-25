@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { MESSAGE_TYPING_CONFIG } from "../constants";
 
-export function useMessageTyping(fullText: string, shouldAnimate: boolean) {
+export function useMessageTyping(
+  fullText: string,
+  shouldAnimate: boolean,
+  onComplete?: () => void
+) {
   const [displayedText, setDisplayedText] = useState("");
   const [isComplete, setIsComplete] = useState(!shouldAnimate);
 
@@ -9,6 +13,7 @@ export function useMessageTyping(fullText: string, shouldAnimate: boolean) {
     if (!shouldAnimate) {
       setDisplayedText(fullText);
       setIsComplete(true);
+      onComplete?.();
       return;
     }
 
@@ -23,11 +28,12 @@ export function useMessageTyping(fullText: string, shouldAnimate: boolean) {
       } else {
         setIsComplete(true);
         clearInterval(timer);
+        onComplete?.();
       }
     }, MESSAGE_TYPING_CONFIG.TYPING_DELAY);
 
     return () => clearInterval(timer);
-  }, [fullText, shouldAnimate]);
+  }, [fullText, shouldAnimate, onComplete]);
 
   return { displayedText, isComplete };
 }

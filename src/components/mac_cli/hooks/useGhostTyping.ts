@@ -13,7 +13,9 @@ import type { InputState } from "../types";
 
 export function useGhostTyping(
   suggestions: readonly string[],
-  inputState: InputState
+  inputState: InputState,
+  isLoading: boolean = false,
+  isMessageAnimating: boolean = false
 ) {
   const [state, dispatch] = useReducer(ghostTypingReducer, INITIAL_GHOST_STATE);
 
@@ -22,7 +24,7 @@ export function useGhostTyping(
   }, [suggestions]);
 
   useEffect(() => {
-    if (shouldSkipAnimation(inputState, suggestions)) {
+    if (shouldSkipAnimation(inputState, suggestions, isLoading, isMessageAnimating)) {
       if (state.text !== "") {
         dispatch({ type: "RESET" });
       }
@@ -49,7 +51,7 @@ export function useGhostTyping(
       currentSuggestion,
       state.isDeleting
     );
-  }, [state.text, state.isDeleting, state.index, state.phase, suggestions, inputState.isFocused, inputState.value, inputState]);
+  }, [state.text, state.isDeleting, state.index, state.phase, suggestions, inputState.isFocused, inputState.value, inputState, isLoading, isMessageAnimating]);
 
   return state;
 }
