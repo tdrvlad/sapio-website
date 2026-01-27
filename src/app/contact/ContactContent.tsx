@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Linkedin } from "lucide-react";
 import "@/components/comp.css";
-import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ContactContent() {
@@ -29,7 +28,6 @@ export default function ContactContent() {
     
     return (
         <div className="font-sans">
-            {/* Hero Section */}
             <section className="relative isolate min-h-[70vh] overflow-hidden flex items-center">
                 <motion.div 
                     className="absolute inset-0"
