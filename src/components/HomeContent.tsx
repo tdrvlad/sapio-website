@@ -48,7 +48,7 @@ export default function HomeContent({
       {/* Flagship projects */}
       <section
         id="projects"
-        className="mx-auto max-w-[1280px] px-4 sm:px-6 py-12 sm:py-20 grid gap-6 sm:gap-10 md:grid-cols-2"
+        className="mx-auto max-w-[1280px] px-4 sm:px-6 py-12 sm:py-20 flex justify-center"
       >
         <motion.div
           initial={{
@@ -96,56 +96,6 @@ export default function HomeContent({
                 className="underline underline-offset-4"
               >
                 {t("home.projects.aiAflat.caseStudy")}
-              </Link>
-            </div>
-          </div>
-        </motion.div>
-        <motion.div
-          initial={{
-            opacity: 0,
-            x: 30,
-          }}
-          whileInView={{
-            opacity: 1,
-            x: 0,
-          }}
-          transition={{
-            duration: 0.5,
-            scale: { type: "spring", stiffness: 280, damping: 24 },
-          }}
-          viewport={{ once: true }}
-          whileHover={{ scale: 1.04 }}
-        >
-          <div className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition">
-            <div className="aspect-square rounded bg-foreground/10 mb-5 relative overflow-hidden">
-              <Image
-                src="/brand/knowledge-assistant_thumbnail.png"
-                alt="Knowledge Assistant thumbnail"
-                fill
-                className="object-contain"
-                sizes="(min-width: 1280px) 600px, 100vw"
-              />
-            </div>
-            <h3 className="text-xl font-semibold">
-              {t("home.projects.knowledgeAssistant.title")}
-            </h3>
-            <p className="text-foreground/70 mt-2">
-              {t("home.projects.knowledgeAssistant.description")}
-            </p>
-            <div className="mt-4 flex gap-4 text-sm">
-              <a
-                href="https://assistant.sapio.ro"
-                target="_blank"
-                rel="noreferrer"
-                className="underline underline-offset-4"
-              >
-                {t("home.projects.knowledgeAssistant.explore")}
-              </a>
-              <Link
-                href="/projects/knowledge-assistant"
-                className="underline underline-offset-4"
-              >
-                {t("home.projects.knowledgeAssistant.caseStudy")}
               </Link>
             </div>
           </div>
