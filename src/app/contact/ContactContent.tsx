@@ -24,14 +24,6 @@ export default function ContactContent() {
         },
     ];
     
-    const infoTitle = t('contactPage.infoTitle');
-    
-    const linkedin = {
-        title: t('contactPage.linkedin.title'),
-        description: t('contactPage.linkedin.description'),
-        cta: t('contactPage.linkedin.cta'),
-    };
-    
     const cta = {
         title: t('contactPage.cta.title'),
         description: t('contactPage.cta.description'),

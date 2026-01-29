@@ -1,5 +1,4 @@
 'use client'
-import { useLanguage } from "@/contexts/LanguageContext";
 import Link from "next/link";
 import Image from "next/image";
 import "@/components/comp.css";
@@ -66,7 +65,6 @@ const SERVICE_DATA = {
 };
 
 export default function ServicesPage({ techLogos }: ServicesPageProps) {
-    const { t } = useLanguage();
     const [selectedService, setSelectedService] = useState<ServiceType>('audit');
     const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
 

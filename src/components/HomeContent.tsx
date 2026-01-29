@@ -17,9 +17,7 @@ type HomeContentProps = {
 };
 
 export default function HomeContent({
-  clientLogos,
-  techLogos,
-}: HomeContentProps) {
+  clientLogos}: HomeContentProps) {
   const { t } = useLanguage();
 
   const toAlt = (src: string) => {
