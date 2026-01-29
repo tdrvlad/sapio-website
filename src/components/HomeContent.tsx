@@ -77,7 +77,7 @@ export default function HomeContent({
           <p className="text-foreground/70 mb-4">
             ai-aflat.ro is a flagship civic project launched by Sapio AI as part of our
             <span className="font-medium"> “Tech for Good” </span>
-            commitment. We built Romania's most advanced legal search platform,
+            commitment. We built Romania&apos;s most advanced legal search platform,
             offering free access to legislation through semantic search across over
             500,000 documents. The system democratizes access to complex legal
             information.

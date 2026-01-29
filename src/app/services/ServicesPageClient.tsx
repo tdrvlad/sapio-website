@@ -358,7 +358,7 @@ export default function ServicesPage({ techLogos }: ServicesPageProps) {
 
                             {/* Deliverables */}
                             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8">
-                                <h4 className="text-2xl font-bold mb-6 text-center">What You'll Get</h4>
+                                <h4 className="text-2xl font-bold mb-6 text-center">What You Will Get</h4>
                                 <div className="grid gap-4 md:grid-cols-2">
                                     {currentService.deliverables.map((deliverable, index) => (
                                         <motion.div
@@ -457,7 +457,7 @@ export default function ServicesPage({ techLogos }: ServicesPageProps) {
                             Ready to Transform Your Business with AI?
                         </h2>
                         <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                            Let's discuss how our AI services can help you achieve your goals and drive innovation.
+                           Let&apos;s discuss how our AI services can help you achieve your goals and drive innovation.
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                             <Link
