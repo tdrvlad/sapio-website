@@ -46,61 +46,52 @@ export default function HomeContent({
         </div>
       </section>
       {/* Flagship projects */}
-      <section
-        id="projects"
-        className="mx-auto max-w-[1280px] px-4 sm:px-6 py-12 sm:py-20 flex justify-center"
+<section
+  id="projects"
+  className="mx-auto max-w-[1280px] px-4 sm:px-6 py-12 sm:py-20 flex flex-col items-center gap-8"
+>
+  <h2 className="text-3xl font-semibold sm:text-4xl">
+    Our flagship project
+  </h2>
+
+  <div className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition max-w-md w-full">
+    <div className="aspect-square rounded bg-foreground/10 mb-5 relative overflow-hidden">
+      <Image
+        src="/brand/ai-aflat_thumbnail.png"
+        alt="ai-aflat thumbnail"
+        fill
+        className="object-contain"
+        sizes="(min-width: 1280px) 600px, 100vw"
+      />
+    </div>
+
+    <h3 className="text-xl font-semibold">
+      {t("home.projects.aiAflat.title")}
+    </h3>
+
+    <p className="text-foreground/70 mt-2">
+      {t("home.projects.aiAflat.description")}
+    </p>
+
+    <div className="mt-4 flex gap-4 text-sm">
+      <a
+        href="https://ai-aflat.ro"
+        target="_blank"
+        rel="noreferrer"
+        className="underline underline-offset-4"
       >
-        <motion.div
-          initial={{
-            opacity: 0,
-            x: -30,
-          }}
-          whileInView={{
-            opacity: 1,
-            x: 0,
-          }}
-          transition={{
-            duration: 0.5,
-            scale: { type: "spring", stiffness: 280, damping: 24 },
-          }}
-          viewport={{ once: true }}
-          whileHover={{ scale: 1.04 }}
-        >
-          <div className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition">
-            <div className="aspect-square rounded bg-foreground/10 mb-5 relative overflow-hidden">
-              <Image
-                src="/brand/ai-aflat_thumbnail.png"
-                alt="ai-aflat thumbnail"
-                fill
-                className="object-contain"
-                sizes="(min-width: 1280px) 600px, 100vw"
-              />
-            </div>
-            <h3 className="text-xl font-semibold">
-              {t("home.projects.aiAflat.title")}
-            </h3>
-            <p className="text-foreground/70 mt-2">
-              {t("home.projects.aiAflat.description")}
-            </p>
-            <div className="mt-4 flex gap-4 text-sm">
-              <a
-                href="https://ai-aflat.ro"
-                target="_blank"
-                rel="noreferrer"
-                className="underline underline-offset-4"
-              >
-                {t("home.projects.aiAflat.visit")}
-              </a>
-              <Link
-                href="/projects/ai-aflat"
-                className="underline underline-offset-4"
-              >
-                {t("home.projects.aiAflat.caseStudy")}
-              </Link>
-            </div>
-          </div>
-        </motion.div>
-      </section>
+        {t("home.projects.aiAflat.visit")}
+      </a>
+      <Link
+        href="/projects/ai-aflat"
+        className="underline underline-offset-4"
+      >
+        {t("home.projects.aiAflat.caseStudy")}
+      </Link>
+    </div>
+  </div>
+</section>
+
 
       {/* Clients logos */}
       {clientLogos.length > 0 && (
