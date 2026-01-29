@@ -1,17 +1,29 @@
 'use client'
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { Linkedin } from "lucide-react";
+import Image from "next/image";
 import "@/components/comp.css";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ContactContent() {
     const { t } = useLanguage();
     
-    const hero = {
-        title: t('contactPage.hero.title'),
-        subtitle: t('contactPage.hero.subtitle'),
-    };
+   
+    const TEAM_MEMBERS = [
+        {
+            id: "vlad",
+            name: t('teamPage.members.vlad.name'),
+            role: t('teamPage.members.vlad.role'),
+            image: "/team/pic-Vlad-Tudor.png",
+            bio: t('teamPage.members.vlad.bio'),
+            linkedin: "https://www.linkedin.com/in/vlad-tudor-18090a1a2/",
+            expertise: [
+                "Machine Learning", 
+                "Product Strategy", 
+                "Team Leadership"
+            ],
+        },
+    ];
     
     const infoTitle = t('contactPage.infoTitle');
     
@@ -31,44 +43,70 @@ export default function ContactContent() {
   
 
             {/* Contact Options */}
-            <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24">
-                <motion.h2
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                    className="text-3xl sm:text-4xl font-semibold mb-12 text-center"
-                >
-                    {infoTitle}
-                </motion.h2>
-
-                <div className="flex justify-center max-w-4xl mx-auto">
-                    {/* LinkedIn Card */}
-                    <motion.a
-                        href="https://www.linkedin.com/in/vlad-tudor-18090a1a2/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        viewport={{ once: true }}
-                        whileHover={{ y: -5, scale: 1.02 }}
-                        className="bg-white dark:bg-white/5 rounded-2xl shadow-lg hover:shadow-2xl transition-all hover:scale-105 duration-300 p-8 border border-black/5 dark:border-white/10 text-center max-w-md w-full"
-                    >
-                        <div className="h-16 w-16 rounded-full bg-[#0077B5] flex items-center justify-center mx-auto mb-4">
-                            <Linkedin className="h-8 w-8 text-white" />
-                        </div>
-                        <h3 className="text-2xl font-semibold mb-2">{linkedin.title}</h3>
-                        <p className="text-foreground/70 mb-4">
-                            {linkedin.description}
-                        </p>
-                        <span className="text-sm font-medium text-foreground/60">
-                            {linkedin.cta}
-                        </span>
-                    </motion.a>
-                </div>
-            </section>
-
+              <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24">
+                           <motion.h2
+                               initial={{ opacity: 0, y: -20 }}
+                               whileInView={{ opacity: 1, y: 0 }}
+                               transition={{ duration: 0.6 }}
+                               viewport={{ once: true }}
+                               className="text-3xl sm:text-4xl font-semibold mb-12 text-center"
+                           >
+                               {t('teamPage.membersTitle')}
+                           </motion.h2>
+           
+                           <div className="flex justify-center">
+                               {TEAM_MEMBERS.map((member, idx) => (
+                                   <motion.div
+                                       key={member.id}
+                                       initial={{ opacity: 0, y: 20 }}
+                                       whileInView={{ opacity: 1, y: 0 }}
+                                       transition={{ duration: 0.5, delay: idx * 0.1 }}
+                                       viewport={{ once: true }}
+                                       whileHover={{ y: -5 }}
+                                       className="bg-white dark:bg-white/5 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-black/5 dark:border-white/10 max-w-md w-full"
+                                   >
+                                       <div className="relative h-96 bg-foreground/5">
+                                           <Image
+                                               src={member.image}
+                                               alt={member.name}
+                                               fill
+                                               className="object-cover object-center"
+                                               style={{ objectPosition: 'center 20%' }}
+                                           />
+                                       </div>
+                                       
+                                       <div className="p-8">
+                                           <h3 className="text-2xl font-semibold mb-1">{member.name}</h3>
+                                           <p className="text-sm text-foreground/60 mb-4">{member.role}</p>
+                                           <p className="text-base text-foreground/80 leading-relaxed mb-6">
+                                               {member.bio}
+                                           </p>
+           
+                                           <div className="flex flex-wrap gap-2 mb-6">
+                                               {member.expertise.map((skill) => (
+                                                   <span
+                                                       key={skill}
+                                                       className="px-3 py-1 rounded-full bg-foreground/10 text-xs font-medium"
+                                                   >
+                                                       {skill}
+                                                   </span>
+                                               ))}
+                                           </div>
+           
+                                           <a
+                                               href={member.linkedin}
+                                               target="_blank"
+                                               rel="noopener noreferrer"
+                                               className="flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-foreground text-background text-sm font-medium hover:opacity-90 transition w-full"
+                                           >
+                                               <Linkedin className="h-4 w-4" />
+                                               Connect on LinkedIn
+                                           </a>
+                                       </div>
+                                   </motion.div>
+                               ))}
+                           </div>
+                       </section>
             <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 0.8}} viewport={{once: true}} className="section-divider" />
 
             {/* Additional Info */}

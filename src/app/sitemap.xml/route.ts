@@ -1,7 +1,7 @@
 import SapioConfig from "@/config/sapioConfig";
 
 export async function GET() {
-	const urls = ["/", "/projects", "/team", "/chatbot", "/contact", "/services"].map((p) => `${SapioConfig.PUBLIC_SITE}${p}`);
+	const urls = ["/", "/projects", "/chatbot", "/contact", "/services"].map((p) => `${SapioConfig.PUBLIC_SITE}${p}`);
 	const xml = `<?xml version="1.0" encoding="UTF-8"?>\n` +
 		`<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` +
 		urls.map((u) => `<url><loc>${u}</loc></url>`).join("") +
