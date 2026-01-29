@@ -48,47 +48,74 @@ export default function HomeContent({
       {/* Flagship projects */}
 <section
   id="projects"
-  className="mx-auto max-w-[1280px] px-4 sm:px-6 py-12 sm:py-20 flex flex-col items-center gap-8"
+  className="bg-background px-4 py-12 sm:px-6 sm:py-20"
 >
-  <h2 className="text-3xl font-semibold sm:text-4xl">
-    Our flagship project
-  </h2>
+  <div className="mx-auto w-full max-w-[1100px] space-y-8">
+    
+    {/* Section title (optional but recommended for parity) */}
+    <h2 className="text-3xl font-semibold sm:text-4xl text-center">
+      Our flagship project
+    </h2>
 
-  <div className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition max-w-md w-full">
-    <div className="aspect-square rounded bg-foreground/10 mb-5 relative overflow-hidden">
-      <Image
-        src="/brand/ai-aflat_thumbnail.png"
-        alt="ai-aflat thumbnail"
-        fill
-        className="object-contain"
-        sizes="(min-width: 1280px) 600px, 100vw"
-      />
+    <div className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+
+        {/* Left: Image */}
+        <div className="aspect-square rounded bg-foreground/10 relative overflow-hidden">
+          <Image
+            src="/brand/ai-aflat_thumbnail.png"
+            alt="ai-aflat thumbnail"
+            fill
+            className="object-contain"
+            sizes="(min-width: 768px) 500px, 100vw"
+          />
+        </div>
+
+        {/* Right: Content */}
+        <div>
+          <h3 className="text-xl font-semibold mb-3">
+            Key Metrics
+          </h3>
+
+          <p className="text-foreground/70 mb-4">
+            ai-aflat.ro is a flagship civic project launched by Sapio AI as part of our
+            <span className="font-medium"> “Tech for Good” </span>
+            commitment. We built Romania's most advanced legal search platform,
+            offering free access to legislation through semantic search across over
+            500,000 documents. The system democratizes access to complex legal
+            information.
+          </p>
+
+          <h4 className="text-sm font-semibold uppercase tracking-wide mb-2 text-foreground/80">
+            Overview
+          </h4>
+
+          <ul className="list-disc list-inside text-foreground/70 text-sm space-y-1">
+            <li>Flagship civic project: Free AI legal assistant</li>
+            <li>Romanian legislation coverage</li>
+            <li>Semantic search across ~500k legal texts</li>
+          </ul>
+
+          <div className="mt-4 flex gap-4 text-sm">
+            <a
+              href="https://ai-aflat.ro"
+              target="_blank"
+              rel="noreferrer"
+              className="underline underline-offset-4"
+            >
+              Visit website
+            </a>
+            <Link
+              href="/projects/ai-aflat"
+              className="underline underline-offset-4"
+            >
+              Case study
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <h3 className="text-xl font-semibold">
-      {t("home.projects.aiAflat.title")}
-    </h3>
-
-    <p className="text-foreground/70 mt-2">
-      {t("home.projects.aiAflat.description")}
-    </p>
-
-    <div className="mt-4 flex gap-4 text-sm">
-      <a
-        href="https://ai-aflat.ro"
-        target="_blank"
-        rel="noreferrer"
-        className="underline underline-offset-4"
-      >
-        {t("home.projects.aiAflat.visit")}
-      </a>
-      <Link
-        href="/projects/ai-aflat"
-        className="underline underline-offset-4"
-      >
-        {t("home.projects.aiAflat.caseStudy")}
-      </Link>
-    </div>
   </div>
 </section>
 
