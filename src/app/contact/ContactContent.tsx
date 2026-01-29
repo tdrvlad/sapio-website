@@ -28,48 +28,7 @@ export default function ContactContent() {
     
     return (
         <div className="font-sans">
-            <section className="relative isolate min-h-[70vh] overflow-hidden flex items-center">
-                <motion.div 
-                    className="absolute inset-0"
-                    initial={{ scale: 1.2 }}
-                    animate={{ scale: 1 }}
-                    transition={{ 
-                        duration: 3,
-                        ease: "easeOut",
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        repeatDelay: 0
-                    }}
-                >
-                    <Image
-                        src="/videos/processed/writing_and_robot-poster.jpg"
-                        alt="Contact"
-                        fill
-                        className="object-cover"
-                        priority
-                    />
-                </motion.div>
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
-                
-                <div className="relative z-10 mx-auto max-w-[1280px] px-4 sm:px-6 py-24 text-center w-full">
-                    <motion.h1
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-tight mb-8"
-                    >
-                        {hero.title}
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="text-lg sm:text-xl text-white/85 max-w-2xl mx-auto"
-                    >
-                        {hero.subtitle}
-                    </motion.p>
-                </div>
-            </section>
+  
 
             {/* Contact Options */}
             <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24">
