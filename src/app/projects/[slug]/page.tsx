@@ -67,7 +67,7 @@ export default function ProjectPage() {
                 <div className="absolute inset-0">
                     <Image
                         src={getProjectImage(slug)}
-                        alt={project.title}
+                        alt={"project.title"}
                         fill
                         className="object-cover"
                         priority
@@ -85,7 +85,7 @@ export default function ProjectPage() {
                             Case Study
                         </span>
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-tight mb-6">
-                            {project.title}
+                            {"project.title"}
                         </h1>
                         <p className="text-xl sm:text-2xl text-white/90 max-w-3xl mx-auto font-light">
                             {project.subtitle}
