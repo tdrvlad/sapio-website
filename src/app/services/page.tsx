@@ -1,6 +1,5 @@
 'use client'
 import { useLanguage } from "@/contexts/LanguageContext";
-import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import "@/components/comp.css";
@@ -56,12 +55,9 @@ export default function ServicesPage() {
                         const service = getServiceData(key);
                         const isActive = selectedService === key;
                         return (
-                            <motion.button
+                            <button
                                 key={key}
                                 onClick={() => setSelectedService(key)}
-                                whileHover={{ scale: 1.08 }}
-                                whileTap={{ scale: 0.95 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 20 }}
                                 className={`flex flex-col items-center text-center rounded-2xl border p-8 h-[180px] transition-all duration-300 ${
                                     isActive
                                         ? "border-foreground bg-foreground/10 shadow-2xl"
@@ -71,38 +67,24 @@ export default function ServicesPage() {
                                 <div className="flex-1 flex items-center justify-center">
                                     <h3 className="text-xl sm:text-2xl font-semibold">{service.title}</h3>
                                 </div>
-                            </motion.button>
+                            </button>
                         );
                     })}
                 </div>
                 
                 {/* Expanded Description Below - Centered */}
-                <AnimatePresence mode="wait">
-                    {selectedService && (
-                        <motion.div
-                            key={selectedService}
-                            initial={{ opacity: 0, y: -20, height: 0 }}
-                            animate={{ opacity: 1, y: 0, height: "auto" }}
-                            exit={{ opacity: 0, y: -20, height: 0 }}
-                            transition={{ duration: 0.4, ease: "easeInOut" }}
-                            className="mt-8 overflow-hidden"
-                        >
-                            <div className="max-w-3xl mx-auto text-center">
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ delay: 0.2, duration: 0.4 }}
-                                    className="rounded-2xl border border-foreground/20 bg-foreground/5 p-8"
-                                >
-                                    <h4 className="text-2xl font-semibold mb-4">{getServiceData(selectedService).title}</h4>
-                                    <p className="text-base sm:text-lg text-foreground/80 leading-relaxed">
-                                        {getServiceData(selectedService).description}
-                                    </p>
-                                </motion.div>
+                {selectedService && (
+                    <div className="mt-8 overflow-hidden">
+                        <div className="max-w-3xl mx-auto text-center">
+                            <div className="rounded-2xl border border-foreground/20 bg-foreground/5 p-8">
+                                <h4 className="text-2xl font-semibold mb-4">{getServiceData(selectedService).title}</h4>
+                                <p className="text-base sm:text-lg text-foreground/80 leading-relaxed">
+                                    {getServiceData(selectedService).description}
+                                </p>
                             </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                        </div>
+                    </div>
+                )}
             </section>
 
             <AIProductsSection/>
@@ -110,29 +92,17 @@ export default function ServicesPage() {
             <div className="section-divider"/>
             {/* CTA */}
             <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24 text-center">
-                <motion.h2
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
+                <h2
                     className="text-2xl sm:text-3xl font-semibold"
                 >
                     {t('servicesPage.cta.title')}
-                </motion.h2>
-                <motion.p
-                    initial={{ opacity: 0, y: 20, scale: 0.60 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1.00 }}
-                    transition={{ duration: 0.6, delay: 0.15 }}
-                    viewport={{ once: true }}
+                </h2>
+                <p
                     className="text-foreground/70 mt-3 text-sm sm:text-base"
                 >
                     {t('servicesPage.cta.description')}
-                </motion.p>
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.25, duration: 0.3 }}
-                    viewport={{ once: true }}
+                </p>
+                <div
                     className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
                     <Link
@@ -149,7 +119,7 @@ export default function ServicesPage() {
                     >
                         {t('servicesPage.cta.linkedin')}
                     </a>
-                </motion.div>
+                </div>
             </section>
         </div>
     );

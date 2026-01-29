@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import "@/components/comp.css"
@@ -132,24 +131,15 @@ export default function ProjectsSection() {
         <div className="font-sans">
             {/* Case Studies Section */}
             <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24">
-                <motion.h2
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
+                <h2
                     className="text-3xl sm:text-4xl font-semibold mb-12 text-center"
                 >
                     {t('projectsPage.caseStudies.title')}
-                </motion.h2>
+                </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {PROJECTS.map((project) => (
-                        <motion.button
+                        <button
                             key={project.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.3}}
-                            viewport={{ once: true }}
-                            whileHover={{ scale: 1.03, y: -5 }}
                             onClick={() => setSelectedProject(project.id)}
                             className="bg-white dark:bg-white/5 rounded-2xl shadow-lg  overflow-hidden border border-black/5 dark:border-white/10 text-left cursor-pointer flex flex-col h-full"
                         >
@@ -169,147 +159,125 @@ export default function ProjectsSection() {
                                     {project.shortDescription}
                                 </p>
                             </div>
-                        </motion.button>
+                        </button>
                     ))}
                 </div>
             </section>
 
             {/* Modal Popup */}
-            <AnimatePresence>
-                {selectedProject && selectedProjectData && (
-                    <>
-                        {/* Dark Overlay */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50"
-                            onClick={() => setSelectedProject(null)}
-                        />
-                        
-                        {/* Modal Content */}
-                        <div 
-                            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-                            onClick={() => setSelectedProject(null)}
+            {selectedProject && selectedProjectData && (
+                <>
+                    {/* Dark Overlay */}
+                    <div
+                        className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50"
+                        onClick={() => setSelectedProject(null)}
+                    />
+                    
+                    {/* Modal Content */}
+                    <div 
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+                        onClick={() => setSelectedProject(null)}
+                    >
+                        <div
+                            onClick={(e) => e.stopPropagation()}
+                            className="bg-background rounded-2xl shadow-2xl max-w-2xl w-full border border-foreground/10 relative max-h-[85vh] overflow-auto"
                         >
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                                animate={{ opacity: 1, scale: 1, y: 0 }}
-                                exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                                transition={{ type: "spring", duration: 0.5 }}
-                                onClick={(e) => e.stopPropagation()}
-                                className="bg-background rounded-2xl shadow-2xl max-w-2xl w-full border border-foreground/10 relative max-h-[85vh] overflow-auto"
-                            >
-                                {/* Project Image */}
-                                <div className="relative h-48 sm:h-56 rounded-t-2xl overflow-hidden bg-foreground/5">
-                                    {/* Close Button - Top Left - Above Image */}
-                                    <button
-                                        onClick={() => setSelectedProject(null)}
-                                        className="absolute top-4 left-4 h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm flex items-center justify-center transition-all z-20 text-white"
-                                    >
-                                        <X className="h-5 w-5" />
-                                    </button>
-                                    <Image
-                                        src={selectedProjectData.logo}
-                                        alt={selectedProjectData.title}
-                                        fill
-                                        className="object-cover"
-                                    />
+                            {/* Project Image */}
+                            <div className="relative h-48 sm:h-56 rounded-t-2xl overflow-hidden bg-foreground/5">
+                                {/* Close Button - Top Left - Above Image */}
+                                <button
+                                    onClick={() => setSelectedProject(null)}
+                                    className="absolute top-4 left-4 h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm flex items-center justify-center transition-all z-20 text-white"
+                                >
+                                    <X className="h-5 w-5" />
+                                </button>
+                                <Image
+                                    src={selectedProjectData.logo}
+                                    alt={selectedProjectData.title}
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
+
+                            {/* Content */}
+                            <div className="p-6 sm:p-8">
+                                <h2 className="text-2xl sm:text-3xl font-semibold mb-2">{selectedProjectData.title}</h2>
+                                <p className="text-base text-foreground/60 mb-4">{selectedProjectData.subtitle}</p>
+                                
+                                <div className="mb-6">
+                                    <p className="text-sm sm:text-base text-foreground/80 leading-relaxed">
+                                        {selectedProjectData.fullDescription}
+                                    </p>
                                 </div>
 
-                                {/* Content */}
-                                <div className="p-6 sm:p-8">
-                                    <h2 className="text-2xl sm:text-3xl font-semibold mb-2">{selectedProjectData.title}</h2>
-                                    <p className="text-base text-foreground/60 mb-4">{selectedProjectData.subtitle}</p>
-                                    
-                                    <div className="mb-6">
-                                        <p className="text-sm sm:text-base text-foreground/80 leading-relaxed">
-                                            {selectedProjectData.fullDescription}
-                                        </p>
-                                    </div>
-
-                                    {/* Technologies */}
-                                    <div className="mb-6">
-                                        <h3 className="text-base font-semibold mb-2">{t('projectsPage.modal.technologies')}</h3>
-                                        <div className="flex flex-wrap gap-2">
-                                            {selectedProjectData.technologies.map((tech) => (
-                                                <span
-                                                    key={tech}
-                                                    className="px-3 py-1 rounded-full bg-foreground/10 text-xs sm:text-sm font-medium"
-                                                >
-                                                    {tech}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Metrics */}
-                                    <div className="mb-6">
-                                        <h3 className="text-base font-semibold mb-2">{t('projectsPage.modal.metrics')}</h3>
-                                        <div className="grid grid-cols-3 gap-3">
-                                            {selectedProjectData.metrics.map((metric) => (
-                                                <div
-                                                    key={metric}
-                                                    className="p-3 rounded-lg bg-foreground/5 border border-foreground/10 text-center"
-                                                >
-                                                    <p className="text-xs sm:text-sm font-semibold">{metric}</p>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Action Buttons */}
-                                    <div className="flex flex-col sm:flex-row gap-3">
-                                        {selectedProjectData.link !== "#" && (
-                                            <Link
-                                                href={selectedProjectData.link}
-                                                className="flex-1 rounded-full bg-foreground text-background px-5 py-2.5 text-sm text-center font-medium hover:opacity-90 transition"
+                                {/* Technologies */}
+                                <div className="mb-6">
+                                    <h3 className="text-base font-semibold mb-2">{t('projectsPage.modal.technologies')}</h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        {selectedProjectData.technologies.map((tech) => (
+                                            <span
+                                                key={tech}
+                                                className="px-3 py-1 rounded-full bg-foreground/10 text-xs sm:text-sm font-medium"
                                             >
-                                                {t('projectsPage.modal.viewButton')}
-                                            </Link>
-                                        )}
-                                        <Link
-                                            href="/contact"
-                                            className="flex-1 rounded-full border border-foreground px-5 py-2.5 text-sm text-center font-medium hover:bg-foreground/10 transition"
-                                        >
-                                            {t('projectsPage.modal.startButton')}
-                                        </Link>
+                                                {tech}
+                                            </span>
+                                        ))}
                                     </div>
                                 </div>
-                            </motion.div>
+
+                                {/* Metrics */}
+                                <div className="mb-6">
+                                    <h3 className="text-base font-semibold mb-2">{t('projectsPage.modal.metrics')}</h3>
+                                    <div className="grid grid-cols-3 gap-3">
+                                        {selectedProjectData.metrics.map((metric) => (
+                                            <div
+                                                key={metric}
+                                                className="p-3 rounded-lg bg-foreground/5 border border-foreground/10 text-center"
+                                            >
+                                                <p className="text-xs sm:text-sm font-semibold">{metric}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Action Buttons */}
+                                <div className="flex flex-col sm:flex-row gap-3">
+                                    {selectedProjectData.link !== "#" && (
+                                        <Link
+                                            href={selectedProjectData.link}
+                                            className="flex-1 rounded-full bg-foreground text-background px-5 py-2.5 text-sm text-center font-medium hover:opacity-90 transition"
+                                        >
+                                            {t('projectsPage.modal.viewButton')}
+                                        </Link>
+                                    )}
+                                    <Link
+                                        href="/contact"
+                                        className="flex-1 rounded-full border border-foreground px-5 py-2.5 text-sm text-center font-medium hover:bg-foreground/10 transition"
+                                    >
+                                        {t('projectsPage.modal.startButton')}
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
-                    </>
-                )}
-            </AnimatePresence>
+                    </div>
+                </>
+            )}
             
             <div className="section-divider"/>
 
             {/* CTA */}
             <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24 text-center">
-                <motion.h2
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
+                <h2
                     className="text-2xl sm:text-3xl font-semibold"
                 >
                     {t('projectsPage.cta.title')}
-                </motion.h2>
-                <motion.p
-                    initial={{ opacity: 0, y: 20, scale: 0.60 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1.00 }}
-                    transition={{ duration: 0.6, delay: 0.15 }}
-                    viewport={{ once: true }}
+                </h2>
+                <p
                     className="text-foreground/70 mt-3 text-sm sm:text-base"
                 >
                     {t('projectsPage.cta.description')}
-                </motion.p>
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.25, duration: 0.3 }}
-                    viewport={{ once: true }}
+                </p>
+                <div
                     className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
                     <Link
@@ -326,7 +294,7 @@ export default function ProjectsSection() {
                     >
                         {t('projectsPage.cta.linkedin')}
                     </a>
-                </motion.div>
+                </div>
             </section>
         </div>
     );

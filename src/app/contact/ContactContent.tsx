@@ -1,5 +1,4 @@
 'use client'
-import { motion } from "framer-motion";
 import { Linkedin } from "lucide-react";
 import Image from "next/image";
 import "@/components/comp.css";
@@ -44,25 +43,16 @@ export default function ContactContent() {
 
             {/* Contact Options */}
               <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24">
-                           <motion.h2
-                               initial={{ opacity: 0, y: -20 }}
-                               whileInView={{ opacity: 1, y: 0 }}
-                               transition={{ duration: 0.6 }}
-                               viewport={{ once: true }}
+                           <h2
                                className="text-3xl sm:text-4xl font-semibold mb-12 text-center"
                            >
                                {t('teamPage.membersTitle')}
-                           </motion.h2>
+                           </h2>
            
                            <div className="flex justify-center">
-                               {TEAM_MEMBERS.map((member, idx) => (
-                                   <motion.div
+                               {TEAM_MEMBERS.map((member) => (
+                                   <div
                                        key={member.id}
-                                       initial={{ opacity: 0, y: 20 }}
-                                       whileInView={{ opacity: 1, y: 0 }}
-                                       transition={{ duration: 0.5, delay: idx * 0.1 }}
-                                       viewport={{ once: true }}
-                                       whileHover={{ y: -5 }}
                                        className="bg-white dark:bg-white/5 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-black/5 dark:border-white/10 max-w-md w-full"
                                    >
                                        <div className="relative h-96 bg-foreground/5">
@@ -103,32 +93,24 @@ export default function ContactContent() {
                                                Connect on LinkedIn
                                            </a>
                                        </div>
-                                   </motion.div>
+                                   </div>
                                ))}
                            </div>
                        </section>
-            <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 0.8}} viewport={{once: true}} className="section-divider" />
+            <div className="section-divider" />
 
             {/* Additional Info */}
             <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24 text-center">
-                <motion.h2
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
+                <h2
                     className="text-2xl sm:text-3xl font-semibold mb-4"
                 >
                     {cta.title}
-                </motion.h2>
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.15 }}
-                    viewport={{ once: true }}
+                </h2>
+                <div
                     className="text-foreground/70 text-sm sm:text-base max-w-2xl mx-auto"
                 >
                     {cta.description}
-                </motion.div>
+                </div>
                 
             </section>  
         </div>
