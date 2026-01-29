@@ -8,7 +8,6 @@ import Link from 'next/link';
 
 import HeroVideo from '@/components/HeroVideo';
 import { CLI } from '@/components/mac_cli';
-import { SolutionFinder } from '@/components/sections/SolutionFinder';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Capabilities } from './sections/Capabilities';
 
@@ -183,69 +182,6 @@ export default function HomeContent({
         </section>
       )}
       <Capabilities />
-      <motion.div
-        initial={{ opacity: 0, y: -25 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
-      >
-        <SolutionFinder />
-      </motion.div>
-      {/* Technologies logos */}
-      {techLogos.length > 0 && (
-        <section className="py-8 sm:py-12">
-          <div className="mx-auto max-w-[1280px] px-4 sm:px-6">
-            <div className="mb-3 text-xs sm:text-sm uppercase tracking-wide text-foreground/60 text-center">
-              {t("home.technologies.heading")}
-            </div>
-            <div className="relative rounded-2xl bg-white/95 shadow-sm ring-1 ring-black/5 px-2 sm:px-4 py-3 sm:py-4">
-              <div className="pointer-events-none absolute left-0 top-0 h-full w-8 sm:w-16 bg-gradient-to-r from-white to-transparent rounded-l-2xl" />
-              <div className="pointer-events-none absolute right-0 top-0 h-full w-8 sm:w-16 bg-gradient-to-l from-white to-transparent rounded-r-2xl" />
-              <div className="overflow-hidden">
-                <div
-                  className="marquee-track-reverse flex items-center gap-6 sm:gap-10 md:gap-14"
-                  style={{ width: "max-content" }}
-                >
-                  <div className="flex items-center">
-                    {techLogos.map((src, i) => (
-                      <a
-                        key={`tech-a-${i}`}
-                        href="#tech"
-                        className="inline-flex items-center justify-center mr-6 sm:mr-10 md:mr-14"
-                      >
-                        <Image
-                          src={src}
-                          alt={`Technology: ${toAlt(src)}`}
-                          width={200}
-                          height={80}
-                          className="h-16 sm:h-20 md:h-28 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300"
-                        />
-                      </a>
-                    ))}
-                  </div>
-                  <div className="flex items-center">
-                    {techLogos.map((src, i) => (
-                      <a
-                        key={`tech-b-${i}`}
-                        href="#tech"
-                        className="inline-flex items-center justify-center mr-6 sm:mr-10 md:mr-14"
-                      >
-                        <Image
-                          src={src}
-                          alt={`Technology: ${toAlt(src)}`}
-                          width={200}
-                          height={80}
-                          className="h-16 sm:h-20 md:h-28 w-auto grayscale hover:grayscale-0 hover:scale-105 transition duration-300"
-                        />
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Final CTA */}
       <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24 text-center">
