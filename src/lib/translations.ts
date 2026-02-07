@@ -50,7 +50,7 @@ export const translations = {
 				title: "Proiecte",
 				aiAflat: {
 					title: "ai-aflat.ro",
-					description: "Asistent juridic alimentat de AI pentru legislația română. Căutare semantică în ~500k texte cu surse verificabile.",
+					description: "Proiect civic flagship: Asistent juridic gratuit pentru legislația română. Tech for Good.",
 					visit: "Vizitează ai-aflat.ro",
 					caseStudy: "Vezi studiul de caz",
 				},
@@ -203,43 +203,13 @@ export const translations = {
 				title: "Cunoaște echipa",
 				subtitle: "Construim soluții AI care fac diferența",
 			},
-			membersTitle: "Echipa noastră",
+			membersTitle: "Fondator",
 			members: {
 				vlad: {
 					name: "Vlad Tudor",
 					role: "Fondator & CEO",
-					bio: "Cercetător AI și antreprenor cu peste 10 ani de experiență în construirea sistemelor AI de producție. Pasionat de a face AI accesibil și practic pentru afaceri.",
+					bio: "Cercetător AI și antreprenor, recunoscut în Forbes 30 under 30. O voce proeminentă în inovația tehnologică, dedicat transformării afacerilor prin inteligență artificială.",
 					expertise: ["Machine Learning", "Strategie Produs", "Leadership Echipă"],
-				},
-				mihai: {
-					name: "Mihai Marinescu",
-					role: "Produs & Design",
-					bio: "Designer de produs cu experiență în crearea interfețelor intuitive pentru aplicații AI complexe. Specializat în UX research și design de sisteme.",
-					expertise: ["UX Design", "Design de Produs", "Prototipare"],
-				},
-				andrei: {
-					name: "Andrei Pata",
-					role: "Frontend & Apps",
-					bio: "Dezvoltator frontend specializat în aplicații web moderne și mobile. Expert în React, Next.js și arhitecturi scalabile.",
-					expertise: ["React", "Next.js", "Mobile Development"],
-				},
-				ana: {
-					name: "Ana-Maria Stanescu",
-					role: "Community Manager",
-					bio: "Specialist în comunicare și construirea comunității. Gestionează relațiile cu clienții și coordonează inițiativele de outreach.",
-					expertise: ["Comunicare", "Community Building", "Content Strategy"],
-				},
-				luminita: {
-					name: "Luminița Ștefan",
-					role: "UX Designer",
-					bio: "Designer UX cu focus pe accesibilitate și design centrat pe utilizator. Creează experiențe care simplifică tehnologia complexă.",
-					expertise: ["UX Design", "Accesibilitate", "User Research"],
-				},
-				flavius: {
-					name: "Flavius Moldovan",
-					role: "AI Engineer",
-					bio: "Inginer AI specializat în modele lingvistice și sisteme RAG. Experiență în implementarea soluțiilor AI la scară.",
-					expertise: ["NLP", "RAG", "Model Training"],
 				},
 			},
 			cta: {
@@ -267,51 +237,80 @@ export const translations = {
 			},
 			projects: {
 				aiAflat: {
-					subtitle: "Cel mai bun sistem de căutare juridică din România",
-					shortDescription: "Asistent juridic alimentat de AI cu căutare semantică în peste 500k documente legislative românești.",
-					fullDescription: "Am construit cea mai avansată platformă de căutare juridică din România, cu capabilități de căutare semantică în peste 500.000 de documente legislative. Sistemul folosește RAG (Retrieval-Augmented Generation) pentru a oferi răspunsuri precise și citate la întrebări juridice, reducând dramatic timpul de cercetare pentru profesioniștii din domeniul juridic. Actualizări automate zilnice asigură că baza de date rămâne actualizată cu noua legislație.",
-				},
-				healthcare: {
-					title: "AI pentru Sănătate",
-					subtitle: "Analiză și Insights din Date Medicale",
-					shortDescription: "Analiză avansată și extragere de insights din date complexe de sănătate folosind machine learning.",
-					fullDescription: "Am dezvoltat o platformă comprehensivă de analiză pentru sănătate care procesează și analizează dosare medicale, date despre pacienți și rezultate clinice. Sistemul folosește procesare limbaj natural pentru a extrage insights semnificative din notițe medicale nestructurate, identifică pattern-uri în îngrijirea pacienților și oferă recomandări acționabile pentru furnizorii de servicii medicale. Arhitectura conformă HIPAA asigură securitatea și confidențialitatea datelor.",
-				},
-				personalAssistant: {
-					title: "Asistent AI Personal",
-					subtitle: "Manager de Sarcini Adaptiv",
-					shortDescription: "Asistent personal inteligent care învață din comportamentul utilizatorului și se adaptează la workflow-uri individuale.",
-					fullDescription: "Am creat un asistent AI adaptiv alimentat de modele lingvistice mari care gestionează sarcini, programări și workflow-uri personale. Sistemul învață din interacțiunile utilizatorului pentru a oferi recomandări din ce în ce mai personalizate și automatizează sarcinile de rutină. Funcționalitățile includ crearea de sarcini în limbaj natural, programare inteligentă cu detectare conflicte și integrare cu instrumente populare de productivitate.",
+					subtitle: "Tech for Good: Legislația României accesibilă tuturor",
+					shortDescription: "Proiect civic flagship: Asistent juridic gratuit pentru legislația română. Căutare semantică în ~500k texte.",
+					fullDescription: "ai-aflat.ro este un proiect civic flagship lansat de Sapio AI ca parte a angajamentului nostru 'Tech for Good'. Am construit cea mai avansată platformă de căutare juridică din România, oferind acces gratuit la legislație prin căutare semantică în peste 500.000 de documente. Sistemul democratizează accesul la informații juridice complexe.",
 				},
 				publicTenders: {
 					title: "AI pentru Licitații Publice",
-					subtitle: "Monitorizare Automată Licitații",
-					shortDescription: "Sistem automat de monitorizare și raportare pentru licitații publice relevante pentru industrii specifice.",
-					fullDescription: "Am construit un sistem inteligent de monitorizare care urmărește oportunitățile de achiziții publice pe multiple platforme guvernamentale. AI-ul analizează documentele de licitație, extrage cerințele cheie și le potrivește cu profilurile clienților pentru a identifica oportunitățile relevante. Alertele automate și rapoartele detaliate ajută afacerile să rămână informate despre oportunitățile de licitare fără monitorizare manuală.",
+					subtitle: "Monitorizare și Selecție Automată",
+					shortDescription: "AI care verifică listările publice și selectează proiecte relevante bazate pe activitatea anterioară.",
+					fullDescription: "Un sistem inteligent care monitorizează și filtrează licitațiile publice, identificând oportunitățile cele mai relevante pentru clienți pe baza istoricului și preferințelor lor.",
+				},
+				healthcare: {
+					title: "Healthtech AI",
+					subtitle: "Analiză Conversații Medicale",
+					shortDescription: "Pipeline de procesare pentru analiza și extragerea de insights din conversații medicale.",
+					fullDescription: "Platformă avansată care analizează conversațiile medicale, generând rapoarte structurate și insights valoroase pentru profesioniștii din domeniul sănătății.",
+				},
+				legaltech: {
+					title: "Legaltech AI",
+					subtitle: "Analiză Contracte și Conformitate",
+					shortDescription: "Analiza contractelor și documentelor legale pentru asigurarea conformității.",
+					fullDescription: "Soluție AI pentru analiza automată a documentelor juridice, identificarea clauzelor critice și asigurarea conformității cu reglementările în vigoare.",
+				},
+				media: {
+					title: "Media AI",
+					subtitle: "Generare Avatar pentru Știri",
+					shortDescription: "Generare de avatare pentru segmente de știri și prezentări media.",
+					fullDescription: "Tehnologie de ultimă oră pentru crearea de prezentatori virtuali și conținut video automatizat pentru industria media.",
+				},
+				audio: {
+					title: "Analiză Audio",
+					subtitle: "Recunoaștere Muzică și Gen",
+					shortDescription: "Sistem de analiză audio pentru recunoașterea muzicii și clasificarea genurilor.",
+					fullDescription: "Algoritmi avansați de procesare a semnalului audio pentru identificarea, clasificarea și analiza conținutului muzical.",
+				},
+				customerSupport: {
+					title: "Asistenți Suport Clienți",
+					subtitle: "Automatizare și Eficiență",
+					shortDescription: "Asistenți inteligenți pentru automatizarea suportului clienți.",
+					fullDescription: "Sisteme conversaționale care preiau și rezolvă solicitările clienților, îmbunătățind timpul de răspuns și satisfacția utilizatorilor.",
+				},
+				robotics: {
+					title: "Control Robotic AI",
+					subtitle: "Inteligență pentru Roboți",
+					shortDescription: "Sisteme AI pentru controlul și coordonarea roboților.",
+					fullDescription: "Soluții de inteligență artificială aplicate în robotică pentru navigație, manipulare și luarea deciziilor în timp real.",
+				},
+				voice: {
+					title: "Transcriere Voce",
+					subtitle: "Modele Customizate",
+					shortDescription: "Software de transcriere voce antrenat pe date personalizate.",
+					fullDescription: "Sisteme de recunoaștere vocală de înaltă precizie, adaptate la terminologia și accentele specifice domeniului clientului.",
+				},
+				semanticRAG: {
+					title: "Baze de Date Semantice",
+					subtitle: "Motor de Căutare Inteligent (RAG)",
+					shortDescription: "Baze de date semantice cu motor de căutare inteligent (Retrieval-Augmented Generation).",
+					fullDescription: "Sisteme avansate de căutare și regăsire a informațiilor care înțeleg contextul și sensul interogărilor, oferind răspunsuri precise din baze de date vaste.",
 				},
 			},
 			featured: [
 				{
 					slug: "ai-aflat",
 					title: "ai-aflat.ro",
-					description: "Asistent juridic cu căutare semantică peste legislația românească și surse verificate.",
-					tags: ["NLP", "RAG", "Azure"],
+					description: "Asistent juridic cu căutare semantică peste legislația românească. Proiect Civic.",
+					tags: ["NLP", "RAG", "Tech for Good"],
 					href: "/projects/ai-aflat",
-				},
-				{
-					slug: "knowledge-assistant",
-					title: "Sapio Knowledge Assistant",
-					description: "Platformă multi-lingvă de suport conversațional conectată la procesele interne de business.",
-					tags: ["LLM", "Automatizare", "Enterprise"],
-					href: "/projects/knowledge-assistant",
 				},
 			],
 			stats: {
 				title: "Indicatori",
 				items: [
-					{ label: "Documente procesate", value: "500k+" },
-					{ label: "Utilizatori lunari", value: "50k" },
-					{ label: "Rate de automatizare", value: "85%" },
+					{ label: "Proiecte Livrate", value: "50+" },
+					{ label: "Industrii", value: "10+" },
+					{ label: "Impact", value: "Maxim" },
 				],
 			},
 			cta: {
@@ -324,75 +323,31 @@ export const translations = {
 			aiAflat: {
 				hero: {
 					title: "ai-aflat.ro",
-					subtitle: "Asistent juridic pentru profesioniști",
-					description: "Platformă de căutare semantică peste 500k de documente legislative, cu citări exacte și actualizări zilnice.",
+					subtitle: "Tech for Good: Legislația României accesibilă tuturor",
+					description: "Proiect civic flagship oferind acces gratuit la legislație prin AI.",
 				},
 				overview: {
 					challengeTitle: "Provocarea",
-					challengeDescription: "Avocații și consilierii juridici pierdeau ore întregi căutând manual articole de lege actualizate și jurisprudență relevantă.",
+					challengeDescription: "Accesul la legislație era dificil și costisitor pentru cetățeni și profesioniști.",
 					solutionTitle: "Soluția",
-					solutionDescription: "Pipeline RAG cu extragere automată din Monitorul Oficial, normalizare semantică și motor de căutare cu ranking contextual.",
+					solutionDescription: "O platformă gratuită, alimentată de AI, care indexează și explică legislația.",
 					impactTitle: "Impact",
-					impactDescription: "Timpul de documentare a scăzut cu 70%, iar utilizatorii pot exporta citările complete direct în documentele de lucru.",
+					impactDescription: "Democratizarea accesului la informații juridice pentru toți românii.",
 				},
 				metrics: [
-					"500k+ acte normative indexate",
-					"<2 secunde timp mediu de răspuns",
-					"Flux zilnic de actualizare automată",
+					"500k+ documente",
+					"Acces Gratuit",
+					"Tech for Good",
 				],
-				sections: [
-					{
-						title: "Colectarea și pregătirea datelor",
-						description: "Conectori pentru Monitorul Oficial și portalurile Ministerului Justiției normalizează documentele într-un format unitar.",
-					},
-					{
-						title: "Căutare semantică cu citări",
-						description: "Îmbinăm embedding-uri lingvistice cu reguli de business pentru a returna paragrafe exacte și sursa oficială.",
-					},
-				],
+				sections: [],
 				techTitle: "Tehnologii",
 				tech: ["Azure Cognitive Search", "Azure OpenAI", "Python", "Next.js"],
 				cta: {
-					title: "Vrei ceva similar pentru organizația ta?",
-					button: "Programează o întâlnire",
+					title: "Vrei să susții proiecte similare?",
+					button: "Contactează-ne",
 				},
 			},
-			knowledgeAssistant: {
-				hero: {
-					title: "Sapio Knowledge Assistant",
-					subtitle: "Suport conversațional pentru echipe de customer success",
-					description: "Asistent multi-lingv conectat la procese interne, care oferă răspunsuri cu citări și propune acțiuni automate.",
-				},
-				overview: {
-					challengeTitle: "Provocarea",
-					challengeDescription: "Echipele de suport aveau nevoie de un mod rapid de a găsi procese și politici actualizate fără a părăsi instrumentele curente.",
-					solutionTitle: "Soluția",
-					solutionDescription: "Aplicație web și widget integrat în Slack ce folosește RAG peste baza de cunoștințe, CRM și instrumentele interne, cu audit trail complet.",
-					impactTitle: "Impact",
-					impactDescription: "Timpul de rezolvare a tichetelor a scăzut cu 45%, iar acuratețea răspunsurilor a crescut datorită citărilor automate.",
-				},
-				metrics: [
-					"15 integrări API",
-					"9 limbi suportate",
-					"<1 săptămână pentru onboarding-ul noilor agenți",
-				],
-				sections: [
-					{
-						title: "Orchestrare de surse",
-						description: "Conectori programabili păstrează baza de cunoștințe actualizată și răspunsurile fundamentate în ultimele politici.",
-					},
-					{
-						title: "Asistent cu acțiuni",
-						description: "Agenții pot genera răspunsuri, task-uri și automatizări direct din conversație, cu aprobări rapide.",
-					},
-				],
-				techTitle: "Tehnologii",
-				tech: ["OpenAI GPT-4", "LangChain", "PostgreSQL", "Vercel"],
-				cta: {
-					title: "Hai să construim asistentul tău",
-					button: "Discută cu noi",
-				},
-			},
+			// Generic fallback for others in RO
 		},
 		contactPage: {
 			hero: {
@@ -406,12 +361,12 @@ export const translations = {
 				cta: "Click pentru a te conecta →",
 			},
 			email: {
-				title: "Email",
-				description: "Trimite-ne un email direct",
+				title: "",
+				description: "",
 			},
 			cta: {
 				title: "Pregătit să începi călătoria ta AI?",
-				description: "Fie că ai un proiect specific în minte sau doar vrei să explorezi posibilitățile, suntem aici să te ajutăm. Contactează-ne și hai să construim ceva extraordinar împreună.",
+				description: "Fie că ai un proiect specific în minte sau doar vrei să explorezi posibilitățile, suntem aici să te ajutăm.",
 			},
 		},
 	},
@@ -462,7 +417,7 @@ export const translations = {
 				title: "Projects",
 				aiAflat: {
 					title: "ai-aflat.ro",
-					description: "AI-powered legal assistant for Romanian legislation. Semantic search across ~500k texts with verifiable sources.",
+					description: "Flagship civic project: Free AI legal assistant for Romanian legislation. Tech for Good.",
 					visit: "Visit ai-aflat.ro",
 					caseStudy: "View case study",
 				},
@@ -647,64 +602,19 @@ export const translations = {
 				title: "Meet the Team",
 				subtitle: "Building AI solutions that make a difference",
 			},
-			membersTitle: "Our Team",
+			membersTitle: "Founder",
 			members: {
 				vlad: {
 					name: "Vlad Tudor",
 					role: "Founder & CEO",
-					bio: "AI researcher and entrepreneur with 10+ years of experience building production AI systems. Passionate about making AI accessible and practical for businesses.",
+					bio: "AI researcher and entrepreneur, featured in Forbes 30 under 30. A prominent voice in technological innovation, dedicated to transforming businesses through artificial intelligence.",
 					expertise: ["Machine Learning", "Product Strategy", "Team Leadership"],
 				},
-				mihai: {
-					name: "Mihai Marinescu",
-					role: "Product & Design",
-					bio: "Product designer with experience creating intuitive interfaces for complex AI applications. Specialized in UX research and systems design.",
-					expertise: ["UX Design", "Product Design", "Prototyping"],
-				},
-				andrei: {
-					name: "Andrei Pata",
-					role: "Frontend & Apps",
-					bio: "Frontend developer specialized in modern web and mobile applications. Expert in React, Next.js, and scalable architectures.",
-					expertise: ["React", "Next.js", "Mobile Development"],
-				},
-				ana: {
-					name: "Ana-Maria Stanescu",
-					role: "Community Manager",
-					bio: "Communication specialist and community builder. Manages client relationships and coordinates outreach initiatives.",
-					expertise: ["Communication", "Community Building", "Content Strategy"],
-				},
-				luminita: {
-					name: "Luminița Ștefan",
-					role: "UX Designer",
-					bio: "UX designer focused on accessibility and user-centered design. Creates experiences that simplify complex technology.",
-					expertise: ["UX Design", "Accessibility", "User Research"],
-				},
-				flavius: {
-					name: "Flavius Moldovan",
-					role: "AI Engineer",
-				},
-				values: {
-					title: "How we work",
-					items: [
-						{
-							title: "Applied first",
-							description: "Prototype fast, learn from real data, and measure impact at every stage.",
-						},
-						{
-							title: "Radical transparency",
-							description: "We share every hypothesis, limitation, and technical decision so you can steer with confidence.",
-						},
-						{
-							title: "Integrated teams",
-							description: "Embed alongside your people from day one to transfer knowledge and autonomy.",
-						},
-					],
-				},
-				cta: {
-					title: "Want to join the team?",
-					description: "We’re hiring problem-solvers who care about responsible AI. Tell us about yourself.",
-					button: "View open roles",
-				},
+			},
+			cta: {
+				title: "Want to join the team?",
+				description: "We’re hiring problem-solvers who care about responsible AI. Tell us about yourself.",
+				button: "View open roles",
 			},
 		},
 		projectsPage: {
@@ -726,51 +636,80 @@ export const translations = {
 			},
 			projects: {
 				aiAflat: {
-					subtitle: "Romania's Best Legal Search System",
-					shortDescription: "AI-powered legal assistant with semantic search across 500k+ Romanian legislative documents.",
-					fullDescription: "We built Romania's most advanced legal search platform, featuring semantic search capabilities across over 500,000 legislative documents. The system uses RAG (Retrieval-Augmented Generation) to provide accurate, cited answers to legal queries, dramatically reducing research time for legal professionals. Daily automated updates ensure the database stays current with new legislation.",
-				},
-				healthcare: {
-					title: "Healthcare AI",
-					subtitle: "Medical Data Analysis & Insights",
-					shortDescription: "Advanced analysis and insights extraction from complex healthcare data using machine learning.",
-					fullDescription: "Developed a comprehensive healthcare analytics platform that processes and analyzes medical records, patient data, and clinical outcomes. The system employs natural language processing to extract meaningful insights from unstructured medical notes, identifies patterns in patient care, and provides actionable recommendations for healthcare providers. HIPAA-compliant architecture ensures data security and privacy.",
-				},
-				personalAssistant: {
-					title: "Personal AI Assistant",
-					subtitle: "Adaptive Task Manager",
-					shortDescription: "Intelligent personal assistant that learns from user behavior and adapts to individual workflows.",
-					fullDescription: "Created an adaptive AI assistant powered by large language models that manages tasks, schedules, and personal workflows. The system learns from user interactions to provide increasingly personalized recommendations and automates routine tasks. Features include natural language task creation, smart scheduling with conflict detection, and integration with popular productivity tools.",
+					subtitle: "Tech for Good: Romania's Legislation Accessible to All",
+					shortDescription: "Flagship civic project: Free AI legal assistant for Romanian legislation. Semantic search across ~500k texts.",
+					fullDescription: "ai-aflat.ro is a flagship civic project launched by Sapio AI as part of our 'Tech for Good' commitment. We built Romania's most advanced legal search platform, offering free access to legislation through semantic search across over 500,000 documents. The system democratizes access to complex legal information.",
 				},
 				publicTenders: {
 					title: "Public Tenders AI",
 					subtitle: "Automated Tender Monitoring",
-					shortDescription: "Automated monitoring and reporting system for public tenders relevant to specific industries.",
-					fullDescription: "Built an intelligent monitoring system that tracks public procurement opportunities across multiple government platforms. The AI analyzes tender documents, extracts key requirements, and matches them against client profiles to identify relevant opportunities. Automated alerts and detailed reports help businesses stay informed about bidding opportunities without manual monitoring.",
+					shortDescription: "AI that checks public listings and selects relevant projects based on past activity and preferences.",
+					fullDescription: "An intelligent system that monitors and filters public tenders, identifying the most relevant opportunities for clients based on their history and preferences.",
+				},
+				healthcare: {
+					title: "Healthtech AI",
+					subtitle: "Medical Conversation Analysis",
+					shortDescription: "Processing pipeline for analyzing and inferring insights from medical conversations.",
+					fullDescription: "Advanced platform that analyzes medical conversations, generating structured reports and valuable insights for healthcare professionals.",
+				},
+				legaltech: {
+					title: "Legaltech AI",
+					subtitle: "Contract Analysis & Compliance",
+					shortDescription: "Analyzing contracts and legal documents to ensure compliance.",
+					fullDescription: "AI solution for automated analysis of legal documents, identifying critical clauses and ensuring compliance with current regulations.",
+				},
+				media: {
+					title: "Media AI",
+					subtitle: "Avatar Generation for News",
+					shortDescription: "Avatar generation for news segments and media presentations.",
+					fullDescription: "State-of-the-art technology for creating virtual presenters and automated video content for the media industry.",
+				},
+				audio: {
+					title: "Audio Analysis",
+					subtitle: "Music & Genre Recognition",
+					shortDescription: "Audio analysis system for music recognition and genre classification.",
+					fullDescription: "Advanced signal processing algorithms for identifying, classifying, and analyzing musical content.",
+				},
+				customerSupport: {
+					title: "Customer Support Assistants",
+					subtitle: "Automation & Efficiency",
+					shortDescription: "Intelligent assistants for customer support automation.",
+					fullDescription: "Conversational systems that handle and resolve customer inquiries, improving response times and user satisfaction.",
+				},
+				robotics: {
+					title: "Robotics Control AI",
+					subtitle: "Intelligence for Robots",
+					shortDescription: "AI systems for robot control and coordination.",
+					fullDescription: "Artificial intelligence solutions applied in robotics for navigation, manipulation, and real-time decision making.",
+				},
+				voice: {
+					title: "Voice Transcription",
+					subtitle: "Custom Models",
+					shortDescription: "Voice transcription software trained on custom data.",
+					fullDescription: "High-precision voice recognition systems, adapted to the client's specific terminology and accents.",
+				},
+				semanticRAG: {
+					title: "Semantic Databases",
+					subtitle: "Intelligent Search Engine (RAG)",
+					shortDescription: "Semantic databases with intelligent search engine (Retrieval-Augmented Generation).",
+					fullDescription: "Advanced information retrieval systems that understand context and meaning, providing precise answers from vast databases.",
 				},
 			},
 			featured: [
 				{
 					slug: "ai-aflat",
 					title: "ai-aflat.ro",
-					description: "Legal assistant with semantic search across Romanian legislation and official citations.",
-					tags: ["NLP", "RAG", "Azure"],
+					description: "Legal assistant with semantic search across Romanian legislation. Civic Project.",
+					tags: ["NLP", "RAG", "Tech for Good"],
 					href: "/projects/ai-aflat",
-				},
-				{
-					slug: "knowledge-assistant",
-					title: "Sapio Knowledge Assistant",
-					description: "Multi-lingual conversational support platform connected to internal processes.",
-					tags: ["LLM", "Automation", "Enterprise"],
-					href: "/projects/knowledge-assistant",
 				},
 			],
 			stats: {
 				title: "By the numbers",
 				items: [
-					{ label: "Documents processed", value: "500k+" },
-					{ label: "Monthly users", value: "50k" },
-					{ label: "Automation rate", value: "85%" },
+					{ label: "Projects Delivered", value: "50+" },
+					{ label: "Industries", value: "10+" },
+					{ label: "Impact", value: "Maximized" },
 				],
 			},
 			cta: {
@@ -784,77 +723,32 @@ export const translations = {
 			aiAflat: {
 				hero: {
 					title: "ai-aflat.ro",
-					subtitle: "Legal assistant for professionals",
-					description: "Semantic search platform over 500k legal documents with precise citations and daily updates.",
+					subtitle: "Tech for Good: Romania's Legislation Accessible to All",
+					description: "Flagship civic project offering free access to legislation through AI.",
 				},
 				overview: {
 					challengeTitle: "Challenge",
-					challengeDescription: "Legal teams spent hours manually searching for updated legislation and relevant case law.",
+					challengeDescription: "Access to legislation was difficult and costly for citizens and professionals.",
 					solutionTitle: "Solution",
-					solutionDescription: "RAG pipeline with automated ingestion from official gazettes, semantic normalisation, and a search engine tuned for contextual relevance.",
+					solutionDescription: "A free, AI-powered platform that indexes and explains legislation.",
 					impactTitle: "Impact",
-					impactDescription: "Research time dropped by 70% and users export full citations directly into their documents.",
+					impactDescription: "Democratizing access to legal information for all Romanians.",
 				},
 				metrics: [
-					"500k+ legal texts indexed",
-					"<2s average response time",
-					"Automated daily refresh pipeline",
+					"500k+ documents",
+					"Free Access",
+					"Tech for Good",
 				],
-				sections: [
-					{
-						title: "Data acquisition & preparation",
-						description: "Connectors for official gazettes normalise raw documents into a consistent schema ready for indexing.",
-					},
-					{
-						title: "Semantic search with citations",
-						description: "Combined embeddings with business rules to return exact paragraphs and highlight the authoritative source.",
-					},
-				],
+				sections: [],
 				techTitle: "Tech stack",
 				tech: ["Azure Cognitive Search", "Azure OpenAI", "Python", "Next.js"],
 				cta: {
-					title: "Need a similar solution?",
-					button: "Book a meeting",
+					title: "Want to support similar projects?",
+					button: "Contact us",
 				},
 			},
-			knowledgeAssistant: {
-				hero: {
-					title: "Sapio Knowledge Assistant",
-					subtitle: "Conversational support for customer teams",
-					description: "Multi-lingual assistant connected to internal knowledge, CRMs, and tooling with full audit trail.",
-				},
-				overview: {
-					challengeTitle: "Challenge",
-					challengeDescription: "Support teams needed instant access to up-to-date processes without leaving their workflow tools.",
-					solutionTitle: "Solution",
-					solutionDescription: "Web app and Slack widget using RAG over knowledge bases, CRM, and internal tools, with permissions-aware controls.",
-					impactTitle: "Impact",
-					impactDescription: "Ticket resolution time decreased by 45% and answer accuracy improved with automatic citations.",
-				},
-				metrics: [
-					"15 API integrations",
-					"9 supported languages",
-					"<1 week onboarding for new agents",
-				],
-				sections: [
-					{
-						title: "Source orchestration",
-						description: "Programmable connectors keep the knowledge base fresh and responses grounded in the latest policies.",
-					},
-					{
-						title: "Actionable assistant",
-						description: "Agents can draft replies, create tasks, and trigger automations directly within the conversation.",
-					},
-				],
-				techTitle: "Tech stack",
-				tech: ["OpenAI GPT-4", "LangChain", "PostgreSQL", "Vercel"],
-				cta: {
-					title: "Build your assistant with us",
-					button: "Talk to Sapio",
-				},
-			},
+			// Generic fallback for others
 		},
-
 		contactPage: {
 			hero: {
 				title: "Meet the Founder",
@@ -867,8 +761,8 @@ export const translations = {
 				cta: "Click to talk →",
 			},
 			email: {
-				title: "Email",
-				description: "Send us a direct Email",
+				title: "",
+				description: "",
 			},
 			cta: {
 				title: "Ready to start your jorney with AI?",
@@ -878,5 +772,3 @@ export const translations = {
 		},
 	},
 } as const;
-
-
