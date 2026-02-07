@@ -6,6 +6,7 @@ import "@/components/comp.css"
 import { useState } from "react";
 import { X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { motion, AnimatePresence } from "framer-motion";
 
 const getProjects = (t: (key: string) => string) => [
     {
@@ -131,17 +132,24 @@ export default function ProjectsSection() {
         <div className="font-sans">
             {/* Case Studies Section */}
             <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24">
-                <h2
+                <motion.h2
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
                     className="text-3xl sm:text-4xl font-semibold mb-12 text-center"
                 >
                     {t('projectsPage.caseStudies.title')}
-                </h2>
+                </motion.h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {PROJECTS.map((project) => (
-                        <button
+                    {PROJECTS.map((project, index) => (
+                        <motion.button
                             key={project.id}
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.1 }}
+                            whileHover={{ scale: 1.05, y: -5 }}
                             onClick={() => setSelectedProject(project.id)}
-                            className="bg-white dark:bg-white/5 rounded-2xl shadow-lg  overflow-hidden border border-black/5 dark:border-white/10 text-left cursor-pointer flex flex-col h-full"
+                            className="bg-white dark:bg-white/5 rounded-2xl shadow-lg overflow-hidden border border-black/5 dark:border-white/10 text-left cursor-pointer flex flex-col h-full"
                         >
                             <div className="relative h-48 bg-foreground/5 w-full">
                                 <Image
@@ -159,26 +167,38 @@ export default function ProjectsSection() {
                                     {project.shortDescription}
                                 </p>
                             </div>
-                        </button>
+                        </motion.button>
                     ))}
                 </div>
             </section>
 
             {/* Modal Popup */}
-            {selectedProject && selectedProjectData && (
-                <>
-                    {/* Dark Overlay */}
-                    <div
-                        className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50"
-                        onClick={() => setSelectedProject(null)}
-                    />
+            <AnimatePresence>
+                {selectedProject && selectedProjectData && (
+                    <>
+                        {/* Dark Overlay */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50"
+                            onClick={() => setSelectedProject(null)}
+                        />
                     
                     {/* Modal Content */}
-                    <div 
+                    <motion.div 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 0.3 }}
                         className="fixed inset-0 z-50 flex items-center justify-center p-4"
                         onClick={() => setSelectedProject(null)}
                     >
-                        <div
+                        <motion.div
+                            initial={{ y: 20 }}
+                            animate={{ y: 0 }}
+                            exit={{ y: -20 }}
+                            transition={{ duration: 0.3 }}
                             onClick={(e) => e.stopPropagation()}
                             className="bg-background rounded-2xl shadow-2xl max-w-2xl w-full border border-foreground/10 relative max-h-[85vh] overflow-auto"
                         >
@@ -258,43 +278,50 @@ export default function ProjectsSection() {
                                     </Link>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </motion.div>
+                    </motion.div>
                 </>
-            )}
+                )}
+            </AnimatePresence>
             
             <div className="section-divider"/>
 
             {/* CTA */}
             <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24 text-center">
-                <h2
-                    className="text-2xl sm:text-3xl font-semibold"
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-6"
                 >
-                    {t('projectsPage.cta.title')}
-                </h2>
-                <p
-                    className="text-foreground/70 mt-3 text-sm sm:text-base"
-                >
-                    {t('projectsPage.cta.description')}
-                </p>
-                <div
-                    className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4"
-                >
-                    <Link
-                        href="/contact"
-                        className="inline-block rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:scale-110 hover:opacity-90 transition duration-300"
+                    <h2
+                        className="text-2xl sm:text-3xl font-semibold"
                     >
-                        {t('projectsPage.cta.button')}
-                    </Link>
-                    <a
-                        href="https://linkedin.com/company/sapio-ai"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block rounded-full border border-foreground px-6 py-3 text-sm font-medium hover:scale-110 hover:bg-foreground/10 transition duration-300"
+                        {t('projectsPage.cta.title')}
+                    </h2>
+                    <p
+                        className="text-foreground/70 mt-3 text-sm sm:text-base"
                     >
-                        {t('projectsPage.cta.linkedin')}
-                    </a>
-                </div>
+                        {t('projectsPage.cta.description')}
+                    </p>
+                    <div
+                        className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4"
+                    >
+                        <Link
+                            href="/contact"
+                            className="inline-block rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:scale-110 hover:opacity-90 transition duration-300"
+                        >
+                            {t('projectsPage.cta.button')}
+                        </Link>
+                        <a
+                            href="https://linkedin.com/company/sapio-ai"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block rounded-full border border-foreground px-6 py-3 text-sm font-medium hover:scale-110 hover:bg-foreground/10 transition duration-300"
+                        >
+                            {t('projectsPage.cta.linkedin')}
+                        </a>
+                    </div>
+                </motion.div>
             </section>
         </div>
     );

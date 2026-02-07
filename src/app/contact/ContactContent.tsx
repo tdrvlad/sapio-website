@@ -3,6 +3,7 @@ import { Linkedin } from "lucide-react";
 import Image from "next/image";
 import "@/components/comp.css";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { motion } from "framer-motion";
 
 export default function ContactContent() {
     const { t } = useLanguage();
@@ -35,11 +36,14 @@ export default function ContactContent() {
 
             {/* Contact Options */}
               <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24">
-                           <h2
+                           <motion.h2
+                               initial={{ opacity: 0, y: -20 }}
+                               animate={{ opacity: 1, y: 0 }}
+                               transition={{ duration: 0.8 }}
                                className="text-3xl sm:text-4xl font-semibold mb-12 text-center"
                            >
                                {t('teamPage.membersTitle')}
-                           </h2>
+                           </motion.h2>
            
                            <div className="flex justify-center">
                                {TEAM_MEMBERS.map((member) => (
@@ -93,17 +97,22 @@ export default function ContactContent() {
 
             {/* Additional Info */}
             <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24 text-center">
-                <h2
-                    className="text-2xl sm:text-3xl font-semibold mb-4"
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-4"
                 >
-                    {cta.title}
-                </h2>
-                <div
-                    className="text-foreground/70 text-sm sm:text-base max-w-2xl mx-auto"
-                >
-                    {cta.description}
-                </div>
-                
+                    <h2
+                        className="text-2xl sm:text-3xl font-semibold mb-4"
+                    >
+                        {cta.title}
+                    </h2>
+                    <div
+                        className="text-foreground/70 text-sm sm:text-base max-w-2xl mx-auto"
+                    >
+                        {cta.description}
+                    </div>
+                </motion.div>
             </section>  
         </div>
     );
