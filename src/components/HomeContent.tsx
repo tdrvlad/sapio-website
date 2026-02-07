@@ -10,6 +10,7 @@ import HeroVideo from '@/components/HeroVideo';
 import { CLI } from '@/components/mac_cli';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Capabilities } from './sections/Capabilities';
+import AIProductsSection from "@/components/sections/AIProductsSection";
 
 type HomeContentProps = {
   clientLogos: string[];
@@ -180,6 +181,94 @@ export default function HomeContent({
         </section>
       )}
       <Capabilities />
+
+      {/* Our Process Section */}
+      <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-12 sm:py-20">
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 text-center"
+        >
+          Our Process
+        </motion.h2>
+        <div className="relative">
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-foreground/10 transform -translate-x-1/2" />
+          <div className="space-y-8">
+            {["Discovery", "Analysis", "Design", "Development", "Deployment"].map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * index }}
+                className={`flex items-center gap-8 ${
+                  index % 2 === 0 ? 'flex-row-reverse' : ''
+                }`}
+              >
+                <div className="flex-1" />
+                <div className="relative">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold shadow-lg">
+                    {index + 1}
+                  </div>
+                </div>
+                <div className="flex-1 bg-background/50 backdrop-blur-sm border border-foreground/10 rounded-xl p-6">
+                  <h5 className="font-semibold text-lg mb-2">{step}</h5>
+                  <p className="text-foreground/60">
+                    {step === "Discovery" && "We understand your business goals and current challenges"}
+                    {step === "Analysis" && "Deep dive into your existing systems and requirements"}
+                    {step === "Design" && "Architecture and user experience design"}
+                    {step === "Development" && "Building and testing your custom AI solution"}
+                    {step === "Deployment" && "Seamless integration and go-live support"}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* What You Will Get Section */}
+      <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-12 sm:py-20">
+        <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-center"
+          >
+            What You Will Get
+          </motion.h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            {[
+              "Production-ready AI solution",
+              "Comprehensive documentation", 
+              "Training materials",
+              "Ongoing support plan",
+              "Technical audit report",
+              "Risk assessment",
+              "Optimization roadmap",
+              "Implementation guide"
+            ].map((deliverable, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * index }}
+                className="flex items-center gap-3 bg-background/50 backdrop-blur-sm rounded-lg p-4"
+              >
+                <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="font-medium">{deliverable}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+                    <AIProductsSection/>
+        
+      </section>
 
       {/* Final CTA */}
       <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-24 text-center">
