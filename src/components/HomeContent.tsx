@@ -37,7 +37,7 @@ export default function HomeContent({
               {t("home.sapioConsole.title")}
             </h2>
             <p className="text-base sm:text-lg text-foreground/70 max-w-2xl mx-auto">
-              {t("home.sapioConsole.subtitle") || "Get instant answers about our services, pricing, and technical capabilities"}
+              {t("home.sapioConsole.subtitle")}
             </p>
           </div>
           <CLI />
@@ -52,7 +52,7 @@ export default function HomeContent({
     
     {/* Section title (optional but recommended for parity) */}
     <h2 className="text-3xl font-semibold sm:text-4xl text-center">
-      Our flagship project
+      {t("home.flagshipTitle")}
     </h2>
 
     <div className="rounded-lg border border-black/10 dark:border-white/10 p-6 hover:shadow-lg transition">
@@ -190,12 +190,12 @@ export default function HomeContent({
           viewport={{ once: true }}
           className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 text-center"
         >
-          Our Process
+          {t("home.process.title")}
         </motion.h2>
         <div className="relative">
           <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-foreground/10 transform -translate-x-1/2" />
           <div className="space-y-8">
-            {["Discovery", "Analysis", "Design", "Development", "Deployment"].map((step, index) => (
+            {(t("home.process.steps") as unknown as {title: string; description: string}[]).map((step, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
@@ -213,14 +213,8 @@ export default function HomeContent({
                   </div>
                 </div>
                 <div className="flex-1 bg-background/50 backdrop-blur-sm border border-foreground/10 rounded-xl p-6">
-                  <h5 className="font-semibold text-lg mb-2">{step}</h5>
-                  <p className="text-foreground/60">
-                    {step === "Discovery" && "We understand your business goals and current challenges"}
-                    {step === "Analysis" && "Deep dive into your existing systems and requirements"}
-                    {step === "Design" && "Architecture and user experience design"}
-                    {step === "Development" && "Building and testing your custom AI solution"}
-                    {step === "Deployment" && "Seamless integration and go-live support"}
-                  </p>
+                  <h5 className="font-semibold text-lg mb-2">{step.title}</h5>
+                  <p className="text-foreground/60">{step.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -237,19 +231,10 @@ export default function HomeContent({
             viewport={{ once: true }}
             className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-center"
           >
-            What You Will Get
+            {t("home.deliverables.title")}
           </motion.h2>
           <div className="grid gap-4 md:grid-cols-2">
-            {[
-              "Production-ready AI solution",
-              "Comprehensive documentation", 
-              "Training materials",
-              "Ongoing support plan",
-              "Technical audit report",
-              "Risk assessment",
-              "Optimization roadmap",
-              "Implementation guide"
-            ].map((deliverable, index) => (
+            {(t("home.deliverables.items") as unknown as string[]).map((deliverable, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}

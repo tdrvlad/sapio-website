@@ -7,8 +7,9 @@ export const translations = {
 		// Navigation
 		navbar: {
 			home: "Acasă",
-			solutions: "Soluții",
+			solutions: "Servicii",
 			projects: "Proiecte",
+			media: "Media",
 			team: "Echipă",
 			contact: "Contact",
 			consultation: "Obține o consultare",
@@ -39,13 +40,14 @@ export const translations = {
 		},
 		// Hero Video Section
 		heroVideo: {
-			title: "Suntem în afacerea rezolvării problemelor",
-			description: "Transformă-ți ideile în soluții de ultimă oră de inteligență artificială.",
-			button: "Începe-ți proiectul",
+			title: "Business-ul nostru e rezolvarea problemelor",
+			description: "Transformă-ți ideile în soluții AI personalizate.",
+			button: "Începe",
 			see_work: "Vezi proiectele noastre",
 		},
 		// Home Page
 		home: {
+			flagshipTitle: "Proiectul nostru emblematic",
 			projects: {
 				title: "Proiecte",
 				aiAflat: {
@@ -62,7 +64,7 @@ export const translations = {
 				},
 			},
 			clients: {
-				heading: "Încrederea echipelor cu viziune",
+				heading: "Clienții noștri",
 			},
 			capabilities: {
 				title: "Ce putem construi",
@@ -75,7 +77,7 @@ export const translations = {
 			sapioConsole: {
 				eyebrow: "",
 				title: "Întreabă-ne orice – direct!",
-				subtitle: "",
+				subtitle: "Obține răspunsuri instant despre serviciile, prețurile și capabilitățile noastre tehnice.",
 				consoleLabel: "Sapio Assistant v0.1",
 				systemPrefix: "[SISTEM]",
 				statusOnline: "activ",
@@ -101,6 +103,29 @@ export const translations = {
 			},
 			chat: {
 				question: "Ai o întrebare?",
+			},
+		process: {
+				title: "Procesul nostru",
+				steps: [
+					{ title: "Descoperire", description: "Înțelegem obiectivele de afaceri și provocările actuale" },
+					{ title: "Analiză", description: "Analizăm în profunzime sistemele și cerințele existente" },
+					{ title: "Design", description: "Arhitectură și design de experiență utilizator" },
+					{ title: "Dezvoltare", description: "Construim și testăm soluția AI personalizată" },
+					{ title: "Lansare", description: "Integrare fără fricțiuni și suport la go-live" },
+				],
+			},
+			deliverables: {
+				title: "Ce vei obține",
+				items: [
+					"Soluție AI gata de producție",
+					"Documentație completă",
+					"Materiale de training",
+					"Plan de suport continuu",
+					"Raport de audit tehnic",
+					"Evaluare a riscurilor",
+					"Foaie de parcurs de optimizare",
+					"Ghid de implementare",
+				],
 			},
 			cta: {
 				title: "Hai să construim soluția ta",
@@ -163,23 +188,83 @@ export const translations = {
 		},
 		servicesPage: {
 			hero: {
-				eyebrow: "Ce facem",
-				title: "Soluții AI personalizate",
-				subtitle: "De la audit tehnic la software personalizat și training — construim soluții practice care rezolvă provocările tale specifice.",
+				title: "Servicii AI Care Transformă Afacerile",
+				description: "De la audituri AI strategice la soluții personalizate și training — oferim servicii complete care generează rezultate măsurabile și creștere sustenabilă.",
+				startButton: "Începe Acum",
+				exploreButton: "Explorează Serviciile",
+			},
+			chooseService: {
+				title: "Alege Calea Ta AI",
+				subtitle: "Selectează serviciul care se potrivește cel mai bine nevoilor și obiectivelor tale actuale",
 			},
 			services: {
 				audit: {
-					title: "Audit Tehnic",
-					description: "Brainstorm de idei și descoperă cum AI poate rezolva blocajele din pipeline-ul tău. Discutăm soluții practice și eficiente pentru piața și contextul tău specific sau oferim o evaluare a performanței setup-ului actual.",
+					title: "Audit Tehnic AI",
+					subtitle: "Evaluare Completă a Infrastructurii AI",
+					description: "Echipa noastră de experți realizează o evaluare aprofundată a capabilităților, infrastructurii și proceselor AI actuale. Identificăm oportunități de optimizare, evaluăm riscurile și oferim recomandări concrete pentru îmbunătățirea inițiativelor AI.",
+					features: [
+						"Analiză și optimizare infrastructură",
+						"Evaluarea performanței modelelor",
+						"Evaluarea pipeline-ului de date",
+						"Revizuire securitate și conformitate",
+						"Analiză ROI și recomandări",
+					],
+					process: ["Descoperire", "Analiză", "Evaluare", "Recomandări", "Foaie de parcurs"],
+					duration: "2-4 săptămâni",
+					deliverables: ["Raport de audit tehnic", "Evaluare riscuri", "Foaie de parcurs de optimizare", "Ghid de implementare"],
 				},
 				software: {
-					title: "Software AI Personalizat",
-					description: "Dezvoltăm soluții personalizate pentru nevoile afacerii tale, acoperind o gamă largă de aplicații de la viziune computerizată la procesare limbaj natural și asistenți inteligenți.",
+					title: "Soluții AI Personalizate",
+					subtitle: "Dezvoltare Software AI La Comandă",
+					description: "Proiectăm și construim soluții AI personalizate care abordează provocările specifice ale afacerii tale. De la concept la deployment, echipa noastră livrează aplicații AI de ultimă generație care creează valoare reală și avantaj competitiv.",
+					features: [
+						"Dezvoltare modele personalizate",
+						"Design soluție end-to-end",
+						"Integrare cu sisteme existente",
+						"Arhitectură scalabilă",
+						"Optimizare și suport continuu",
+					],
+					process: ["Cerințe", "Design", "Dezvoltare", "Testare", "Lansare"],
+					duration: "3-6 luni",
+					deliverables: ["Soluție AI gata de producție", "Documentație", "Materiale de training", "Plan de suport"],
 				},
 				workshops: {
-					title: "Workshop-uri și Training",
-					description: "Ridică echipa ta în era AI cu workshop-uri practice care vor ajuta afacerea ta să crească și să se adapteze alături de tehnologia de ultimă oră. Învață cum să valorifici tehnologia cea mai recentă în avantajul tău.",
+					title: "Training & Workshop-uri AI",
+					subtitle: "Echipează-ți Echipa cu Cunoștințe AI",
+					description: "Transformă-ți organizația cu programe complete de training AI. Workshop-urile și cursurile noastre practice sunt concepute pentru a upskill-iza echipele tale, de la directori la practicieni tehnici, asigurând adoptarea AI de succes.",
+					features: [
+						"Sesiuni de strategie AI pentru executivi",
+						"Training echipă tehnică",
+						"Workshop-uri practice",
+						"Design curriculum personalizat",
+						"Suport post-training",
+					],
+					process: ["Evaluare", "Design Curriculum", "Training", "Practică", "Evaluare finală"],
+					duration: "1-2 săptămâni per program",
+					deliverables: ["Materiale de training", "Certificat de absolvire", "Planuri de acțiune", "Resurse"],
 				},
+			},
+			serviceDetail: {
+				duration: "Durată",
+				processSteps: "Pași de Proces",
+				phases: "faze",
+				keyFeatures: "Caracteristici & Beneficii Cheie",
+				featureDescription: "Soluție completă concepută să maximizeze investiția ta AI și să genereze creștere în afaceri.",
+			},
+			techSection: {
+				title: "Tehnologii cu Care Lucrăm",
+				description: "Instrumente și framework-uri de ultimă generație pentru soluții AI puternice",
+			},
+			cta: {
+				title: "Gata să Transformi Afacerea cu AI?",
+				description: "Hai să discutăm cum serviciile noastre AI te pot ajuta să îți atingi obiectivele și să conduci inovarea.",
+				startButton: "Începe Acum",
+				linkedinButton: "Urmărește-ne pe LinkedIn",
+				stats: [
+					{ value: "50+", label: "Proiecte AI Livrate" },
+					{ value: "95%", label: "Satisfacția Clienților" },
+					{ value: "24/7", label: "Suport Disponibil" },
+				],
 			},
 			industries: {
 				title: "Tipuri de produse și industrii",
@@ -191,12 +276,16 @@ export const translations = {
 					"Baze de Date Semantice / RAG",
 				],
 			},
-			cta: {
-				title: "Hai să discutăm despre proiectul tău",
-				description: "Contactează-ne pentru a afla cum putem ajuta afacerea ta cu soluții AI personalizate.",
-				button: "Contactează-ne",
-				linkedin: "Conectează-te pe LinkedIn",
-			},
+		},
+		aiProducts: {
+			title: "Produse & Soluții AI",
+			products: [
+				{ title: "Agenți AI & Asistenți", description: "Agenți conversaționali care înțeleg contextul, asistenți orientați spre sarcini ce simplifică fluxurile de lucru și ajutoare AI adaptive care învață din interacțiuni pentru suport personalizat." },
+				{ title: "Viziune Computerizată, Detectare Obiecte", description: "Sisteme avansate de recunoaștere a imaginilor, detectare în timp real pentru securitate și control calitate, și analize video complete pentru insights acționabile." },
+				{ title: "Automatizări și Fluxuri de Lucru", description: "Automatizare inteligentă care reduce sarcinile manuale, optimizare a proceselor care identifică blocajele și îmbunătățiri de eficiență care scalează cu nevoile afacerii tale." },
+				{ title: "Integrare cu Platforme Legacy", description: "Conectează fără fricțiuni sistemele AI moderne cu infrastructura existentă, asigurând continuitatea datelor și perturbarea minimă a fluxurilor de lucru stabilite." },
+				{ title: "Baze de Date Semantice / RAG", description: "Sisteme de regăsire a cunoștințelor care înțeleg sensul, căutare bazată pe context și înțelegere a datelor bazată pe AI pentru insights inteligente." },
+			],
 		},
 		teamPage: {
 			hero: {
@@ -260,13 +349,13 @@ export const translations = {
 					fullDescription: "Soluție AI pentru analiza automată a documentelor juridice, identificarea clauzelor critice și asigurarea conformității cu reglementările în vigoare.",
 				},
 				media: {
-					title: "Media AI",
-					subtitle: "Generare Avatar pentru Știri",
+					title: "AI Avatars",
+					subtitle: "Avatare Video Generate prin AI",
 					shortDescription: "Generare de avatare pentru segmente de știri și prezentări media.",
 					fullDescription: "Tehnologie de ultimă oră pentru crearea de prezentatori virtuali și conținut video automatizat pentru industria media.",
 				},
 				audio: {
-					title: "Analiză Audio",
+					title: "Analiză Muzicală",
 					subtitle: "Recunoaștere Muzică și Gen",
 					shortDescription: "Sistem de analiză audio pentru recunoașterea muzicii și clasificarea genurilor.",
 					fullDescription: "Algoritmi avansați de procesare a semnalului audio pentru identificarea, clasificarea și analiza conținutului muzical.",
@@ -349,6 +438,18 @@ export const translations = {
 			},
 			// Generic fallback for others in RO
 		},
+		mediaPage: {
+			eyebrow: "Media",
+			title: "Apariții & Prezentări",
+			subtitle: "Podcast-uri, workshop-uri și prezentări susținute de echipa Sapio.",
+			filters: {
+				all: "Toate",
+				podcast: "Podcast",
+				workshop: "Workshop",
+				presentation: "Prezentare",
+				award: "Premiu",
+			},
+		},
 		contactPage: {
 			hero: {
 				title: "Contactează-ne",
@@ -374,8 +475,9 @@ export const translations = {
 		// Navigation
 		navbar: {
 			home: "Home",
-			solutions: "Solutions",
+			solutions: "Services",
 			projects: "Projects",
+			media: "Media",
 			team: "Team",
 			contact: "Contact",
 			consultation: "Get a consultation",
@@ -408,11 +510,12 @@ export const translations = {
 		heroVideo: {
 			title: "We're in the business of problem-solving",
 			description: "Transform your ideas into state-of-the-art AI solutions.",
-			button: "Start your project",
+			button: "Get Started",
 			see_work: "See our work",
 		},
 		// Home Page
 		home: {
+			flagshipTitle: "Our flagship project",
 			projects: {
 				title: "Projects",
 				aiAflat: {
@@ -442,7 +545,7 @@ export const translations = {
 			sapioConsole: {
 				eyebrow: "",
 				title: "Ask us anything - directly!",
-				subtitle: "",
+				subtitle: "Get instant answers about our services, pricing, and technical capabilities.",
 				consoleLabel: "Sapio Assistant v0.1",
 				systemPrefix: "[SYSTEM]",
 				statusOnline: "online",
@@ -468,6 +571,29 @@ export const translations = {
 			},
 			chat: {
 				question: "Got a question?",
+			},
+		process: {
+				title: "Our Process",
+				steps: [
+					{ title: "Discovery", description: "We understand your business goals and current challenges" },
+					{ title: "Analysis", description: "Deep dive into your existing systems and requirements" },
+					{ title: "Design", description: "Architecture and user experience design" },
+					{ title: "Development", description: "Building and testing your custom AI solution" },
+					{ title: "Deployment", description: "Seamless integration and go-live support" },
+				],
+			},
+			deliverables: {
+				title: "What You Will Get",
+				items: [
+					"Production-ready AI solution",
+					"Comprehensive documentation",
+					"Training materials",
+					"Ongoing support plan",
+					"Technical audit report",
+					"Risk assessment",
+					"Optimization roadmap",
+					"Implementation guide",
+				],
 			},
 			cta: {
 				title: "Let's build your solution",
@@ -530,23 +656,83 @@ export const translations = {
 		},
 		servicesPage: {
 			hero: {
-				eyebrow: "What can we do",
-				title: "What can we do",
-				subtitle: "and how we can help you",
+				title: "AI Services That Transform Business",
+				description: "From strategic AI audits to custom solution development and team training, we provide comprehensive AI services that drive measurable results and sustainable growth.",
+				startButton: "Start Your AI Journey",
+				exploreButton: "Explore Services",
+			},
+			chooseService: {
+				title: "Choose Your AI Service Path",
+				subtitle: "Select the service that best matches your current needs and goals",
 			},
 			services: {
 				audit: {
-					title: "Technical Audit",
-					description: "Brainstorm ideas and find out how AI can solve bottlenecks in your pipeline. We discuss solutions that are practical and efficient for your specific market and context or provide an assessment of the current setup's performance.",
+					title: "AI Technical Audit",
+					subtitle: "Comprehensive AI Infrastructure Assessment",
+					description: "Our expert team conducts a thorough evaluation of your current AI capabilities, infrastructure, and processes. We identify opportunities for optimization, assess risks, and provide actionable recommendations to enhance your AI initiatives.",
+					features: [
+						"Infrastructure analysis & optimization",
+						"Model performance evaluation",
+						"Data pipeline assessment",
+						"Security & compliance review",
+						"ROI analysis & recommendations",
+					],
+					process: ["Discovery", "Analysis", "Assessment", "Recommendations", "Roadmap"],
+					duration: "2-4 weeks",
+					deliverables: ["Technical audit report", "Risk assessment", "Optimization roadmap", "Implementation guide"],
 				},
 				software: {
-					title: "Custom AI Software",
-					description: "We develop tailor-made solutions for your business needs, spanning a wide range of applications from computer vision to natural language processing and intelligent assistants.",
+					title: "Custom AI Solutions",
+					subtitle: "Tailor-Made AI Software Development",
+					description: "We design and build bespoke AI solutions that address your specific business challenges. From concept to deployment, our team delivers cutting-edge AI applications that drive real business value and competitive advantage.",
+					features: [
+						"Custom model development",
+						"End-to-end solution design",
+						"Integration with existing systems",
+						"Scalable architecture",
+						"Ongoing optimization & support",
+					],
+					process: ["Requirements", "Design", "Development", "Testing", "Deployment"],
+					duration: "3-6 months",
+					deliverables: ["Production-ready AI solution", "Documentation", "Training materials", "Support plan"],
 				},
 				workshops: {
-					title: "Workshops and Training",
-					description: "Elevate your team into the age of AI with practical workshops that will help your business grow and adapt alongside state-of-the-art technology. Learn how to leverage the latest technology to your advantage.",
+					title: "AI Training & Workshops",
+					subtitle: "Empowering Your Team with AI Knowledge",
+					description: "Transform your organization with comprehensive AI training programs. Our hands-on workshops and courses are designed to upskill your teams, from executives to technical practitioners, ensuring successful AI adoption and innovation.",
+					features: [
+						"Executive AI strategy sessions",
+						"Technical team training",
+						"Hands-on workshops",
+						"Custom curriculum design",
+						"Post-training support",
+					],
+					process: ["Assessment", "Curriculum Design", "Training", "Practice", "Evaluation"],
+					duration: "1-2 weeks per program",
+					deliverables: ["Training materials", "Certificate of completion", "Action plans", "Resources"],
 				},
+			},
+			serviceDetail: {
+				duration: "Duration",
+				processSteps: "Process Steps",
+				phases: "phases",
+				keyFeatures: "Key Features & Benefits",
+				featureDescription: "Comprehensive solution designed to maximize your AI investment and drive business growth.",
+			},
+			techSection: {
+				title: "Technologies We Work With",
+				description: "Cutting-edge tools and frameworks for powerful AI solutions",
+			},
+			cta: {
+				title: "Ready to Transform Your Business with AI?",
+				description: "Let's discuss how our AI services can help you achieve your goals and drive innovation.",
+				startButton: "Get Started Today",
+				linkedinButton: "Follow Us on LinkedIn",
+				stats: [
+					{ value: "50+", label: "AI Projects Delivered" },
+					{ value: "95%", label: "Client Satisfaction" },
+					{ value: "24/7", label: "Support Available" },
+				],
 			},
 			industries: {
 				title: "Product Types & Industries",
@@ -558,44 +744,16 @@ export const translations = {
 					"Semantic Databases / RAG",
 				],
 			},
-			highlightsTitle: "How we partner",
-			highlights: [
-				{
-					title: "Discovery & strategy",
-					description: "Audit data, interview stakeholders, and define success metrics before writing a single line of code.",
-				},
-				{
-					title: "Product & engineering",
-					description: "Design end-to-end workflows, integrations, and interfaces that plug into your existing stack.",
-				},
-				{
-					title: "Operations & enablement",
-					description: "Train your team, monitor performance, and iterate safely with human-in-the-loop controls.",
-				},
+		},
+		aiProducts: {
+			title: "AI Products & Solutions",
+			products: [
+				{ title: "AI Agents & Assistants", description: "Conversational agents that understand context, task-oriented assistants that streamline workflows, and adaptive AI helpers that learn from interactions to provide personalized support." },
+				{ title: "Computer Vision, Object Detection", description: "Advanced image recognition systems, real-time object detection for security and quality control, and comprehensive video analytics for actionable insights." },
+				{ title: "Automations and Workflows", description: "Intelligent automation that reduces manual tasks, process optimization that identifies bottlenecks, and efficiency improvements that scale with your business needs." },
+				{ title: "Integration with Legacy Platforms", description: "Seamlessly connect modern AI systems with your existing business infrastructure, ensuring data continuity and minimal disruption to established workflows." },
+				{ title: "Semantic Databases / RAG", description: "Knowledge retrieval systems that understand meaning, context-based search that finds relevant information, and AI-driven data understanding for intelligent insights." },
 			],
-			approach: {
-				title: "Our delivery playbook",
-				steps: [
-					{
-						title: "Foundations week",
-						description: "Executive workshops, stakeholder interviews, and data readiness evaluation to align on goals and constraints.",
-					},
-					{
-						title: "Build sprints",
-						description: "Iterative delivery: prototype, integrate, test, and release with continuous feedback from users.",
-					},
-					{
-						title: "Transfer & scale",
-						description: "Documentation, training, monitoring, and a roadmap so your team can operate and extend the solution confidently.",
-					},
-				],
-			},
-			cta: {
-				title: "Ready to build together?",
-				description: "Share your challenge and we’ll outline a functional MVP concept within days.",
-				button: "Get in touch",
-				linkedin: "Connect on LinkedIn",
-			},
 		},
 		teamPage: {
 			hero: {
@@ -659,13 +817,13 @@ export const translations = {
 					fullDescription: "AI solution for automated analysis of legal documents, identifying critical clauses and ensuring compliance with current regulations.",
 				},
 				media: {
-					title: "Media AI",
-					subtitle: "Avatar Generation for News",
+					title: "AI Avatars",
+					subtitle: "AI-Generated Video Avatars",
 					shortDescription: "Avatar generation for news segments and media presentations.",
 					fullDescription: "State-of-the-art technology for creating virtual presenters and automated video content for the media industry.",
 				},
 				audio: {
-					title: "Audio Analysis",
+					title: "Music Analysis",
 					subtitle: "Music & Genre Recognition",
 					shortDescription: "Audio analysis system for music recognition and genre classification.",
 					fullDescription: "Advanced signal processing algorithms for identifying, classifying, and analyzing musical content.",
@@ -748,6 +906,18 @@ export const translations = {
 				},
 			},
 			// Generic fallback for others
+		},
+		mediaPage: {
+			eyebrow: "Media",
+			title: "Appearances & Talks",
+			subtitle: "Podcasts, workshops, and presentations from the Sapio team.",
+			filters: {
+				all: "All",
+				podcast: "Podcast",
+				workshop: "Workshop",
+				presentation: "Presentation",
+				award: "Award",
+			},
 		},
 		contactPage: {
 			hero: {
