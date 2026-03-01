@@ -9,6 +9,7 @@ export const translations = {
 			home: "Acasă",
 			solutions: "Soluții",
 			projects: "Proiecte",
+			media: "Media",
 			team: "Echipă",
 			contact: "Contact",
 			consultation: "Obține o consultare",
@@ -349,6 +350,18 @@ export const translations = {
 			},
 			// Generic fallback for others in RO
 		},
+		mediaPage: {
+			eyebrow: "Media",
+			title: "Apariții & Prezentări",
+			subtitle: "Podcast-uri, workshop-uri și prezentări susținute de echipa Sapio.",
+			filters: {
+				all: "Toate",
+				podcast: "Podcast",
+				workshop: "Workshop",
+				presentation: "Prezentare",
+				award: "Premiu",
+			},
+		},
 		contactPage: {
 			hero: {
 				title: "Contactează-ne",
@@ -376,6 +389,7 @@ export const translations = {
 			home: "Home",
 			solutions: "Solutions",
 			projects: "Projects",
+			media: "Media",
 			team: "Team",
 			contact: "Contact",
 			consultation: "Get a consultation",
@@ -748,6 +762,18 @@ export const translations = {
 				},
 			},
 			// Generic fallback for others
+		},
+		mediaPage: {
+			eyebrow: "Media",
+			title: "Appearances & Talks",
+			subtitle: "Podcasts, workshops, and presentations from the Sapio team.",
+			filters: {
+				all: "All",
+				podcast: "Podcast",
+				workshop: "Workshop",
+				presentation: "Presentation",
+				award: "Award",
+			},
 		},
 		contactPage: {
 			hero: {

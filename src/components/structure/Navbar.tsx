@@ -93,7 +93,10 @@ export function Navbar() {
 						<span>{t("navbar.projects")}</span>
 						<span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#006beb] group-hover:w-full transition-all duration-300 ease-out" style={{ transform: 'translateY(4px)' }}></span>
 					</Link>
-					
+					<Link href="/media" className="relative group transition-colors">
+						<span>{t("navbar.media")}</span>
+						<span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#006beb] group-hover:w-full transition-all duration-300 ease-out" style={{ transform: 'translateY(4px)' }}></span>
+					</Link>
 					<Link href="/contact" className="relative group transition-colors">
 						<span>{t("navbar.contact")}</span>
 						<span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#006beb] group-hover:w-full transition-all duration-300 ease-out" style={{ transform: 'translateY(4px)' }}></span>
@@ -149,7 +152,14 @@ export function Navbar() {
 								<span>{t("navbar.projects")}</span>
 								<span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#006beb] group-hover:w-full transition-all duration-300 ease-out" style={{ transform: 'translateY(4px)' }}></span>
 							</Link>
-							
+							<Link 
+								href="/media" 
+								className="relative group text-base py-2 transition-colors inline-block"
+								onClick={() => setMobileMenuOpen(false)}
+							>
+								<span>{t("navbar.media")}</span>
+								<span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#006beb] group-hover:w-full transition-all duration-300 ease-out" style={{ transform: 'translateY(4px)' }}></span>
+							</Link>
 							<Link 
 								href="/contact" 
 								className="relative group text-base py-2 transition-colors inline-block"
