@@ -13,7 +13,7 @@ export function DarkToggle() {
     setIsClient(true);
     const stored = window.localStorage.getItem("theme") as Theme | null;
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const initial = stored ?? (prefersDark ? "dark" : "light");
+    const initial = stored ?? "dark";
     applyTheme(initial);
     setTheme(initial);
   }, []);
